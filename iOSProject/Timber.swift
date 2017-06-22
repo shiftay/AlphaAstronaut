@@ -18,12 +18,13 @@ class Timber: SKScene {
     
     var tree = Tree()
     var playerPosition: Int = 0
-    
-    
+    var amountCut: Int = 0
+
     
     override func didMove(to view: SKView) {
         print("hello")
-    
+        
+        
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
                 eventListenerNode.sceneLoaded()
@@ -31,6 +32,7 @@ class Timber: SKScene {
         })
         
         playerPosition = -1 // left
+        tree.BuildTree(scene: scene!)
         // TODO: Place player next to tree
         
         
@@ -51,11 +53,41 @@ class Timber: SKScene {
         if playerPosition == 1 {
             
         }
-        
+        cutTree()
         print("left / test")
     }
     
-
+    
+    func cutTree() {
+        // CHECK IF PLAYER IS SQUISHED
+        
+        
+        
+        
+        if (amountCut + 1) != tree.treeSize {
+            if let node = childNode(withName: "tree\(amountCut)") {
+                node.removeFromParent()
+            }
+            
+            for i in amountCut+1...tree.treeSize-1 {
+                
+                if let node = childNode(withName: "tree\(i)") as? SKSpriteNode {
+                    let x = SKAction.moveTo(y: node.position.y - (node.size.height * 0.9), duration: 0)
+                    node.run(x)
+                }
+            }
+            
+            
+            
+            
+            tree.treeLayout.remove(at: 0)
+            
+            amountCut += 1
+        } else {
+            print("GameOver")
+        }
+    }
+    
     
     
 }
