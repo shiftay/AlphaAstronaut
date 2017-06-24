@@ -14,20 +14,16 @@ class CustomSlider: SKSpriteNode, InteractiveNode {
     
     var currentSize: Int = 1
     var maxSize: CGFloat = 0
-    
 
     func interact() {
         return
     }
     
     func sceneLoaded() {
-        print("slider")
-        
         guard let scene = scene else {
             return
         }
-        
-        
+
         size = CGSize(width: 5, height: 30)
         position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height - size.height)
         zPosition = 100
@@ -42,19 +38,8 @@ class CustomSlider: SKSpriteNode, InteractiveNode {
         }
         
         currentSize += 2
-        if hasActions() {
-            removeAllActions()
-        }
-        run(SKAction.sequence([SKAction.fadeOut(withDuration: 0.5),
-                               SKAction.fadeIn(withDuration: 0.5)]))
-        
 
-//        run(SKAction.sequence([
-//                SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 1.0),
-//                SKAction.colorize(withColorBlendFactor: 0.0, duration: 1.0)
-//                ]))
-        
-        
+        // TODO: Add Animations?
         
         xScale = CGFloat(currentSize)
     }
