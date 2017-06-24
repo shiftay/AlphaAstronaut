@@ -11,25 +11,33 @@ import SpriteKit
 class Tree {
     var treeLayout: [Int] = []
     var treeSize: Int = 50
-    let middle = SKSpriteNode(imageNamed: "Tree_Middle")
+    let middle = SKSpriteNode(imageNamed: "Tree_middle")
     
     init() {
-        middle.size = CGSize(width: middle.size.width, height: 28)
         middle.setScale(5)
         CreateTree()
     }
     
     func CreateTree() {
         for i in 0...treeSize-1 {
-            treeLayout.insert(Int.random(min: -1, max: 1), at: i)
-//            treeLayout.append(Int.random(min:-1, max:1))
-//            treeLayout[i] = Int.random(min: -1, max: 1)
+            if i == 0 {
+               treeLayout.insert(Int.random(min: -1, max: 1), at: i)
+            } else {
+                switch treeLayout[i - 1] {
+                case -1:
+                    treeLayout.insert(Int.random(min: -1, max: 0), at: i)
+                case 0:
+                    treeLayout.insert(Int.random(min: -1, max: 1), at: i)
+                case 1:
+                    treeLayout.insert(Int.random(min: 0, max: 1), at: i)
+                default:
+                    break
+                }
+            }
         }
     }
   
     func BuildTree(scene: SKScene) {
-
-        
         for i in 0...treeSize-1 {
             switch treeLayout[i] {
             case -1:
@@ -48,33 +56,29 @@ class Tree {
     // TODO: 
     //      Set anchor point of left / right branches independantly so they line up.
     
-    
     func setLeft(pos: Int, scene: SKScene) {
-        let left = SKSpriteNode(imageNamed: "Tree_Left")
+        let left = SKSpriteNode(imageNamed: "Tree_left")
         left.name = "tree\(pos)"
-        left.size = CGSize(width: left.size.width, height: 28)
+        left.anchorPoint = CGPoint(x: 0.74, y: 0.5)
         left.setScale(5)
-        left.position = CGPoint(x: scene.size.width * 0.5 - left.size.width / 6,
+        left.position = CGPoint(x: scene.size.width * 0.5,
                                 y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)))
         scene.addChild(left)
     }
     
     func setMiddle(pos: Int, scene: SKScene) {
-        let mid = SKSpriteNode(imageNamed: "Tree_Middle")
+        let mid = SKSpriteNode(imageNamed: "Tree_middle")
         mid.name = "tree\(pos)"
-        mid.size = CGSize(width: mid.size.width, height: 28)
-        
         mid.setScale(5)
-        
         mid.position = CGPoint(x: scene.size.width * 0.5,
                                y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)) )
         scene.addChild(mid)
     }
     
     func setRight(pos: Int, scene: SKScene) {
-        let right = SKSpriteNode(imageNamed: "Tree_Right")
+        let right = SKSpriteNode(imageNamed: "Tree_right")
         right.name = "tree\(pos)"
-        right.size = CGSize(width: right.size.width, height: 28)
+        right.anchorPoint = CGPoint(x: 0.26, y: 0.5)
         right.setScale(5)
         right.position = CGPoint(x: scene.size.width * 0.5,
                                  y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)))

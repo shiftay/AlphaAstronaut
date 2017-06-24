@@ -32,6 +32,7 @@
 		EC02F7AA1EFA25530063663C /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79A1EFA25530063663C /* SKTEffects.swift */; };
 		EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */; };
 		EC02F7AC1EFA25530063663C /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79C1EFA25530063663C /* Vector3.swift */; };
+		EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */; };
 		F44153FA1EFC76FC009CA19F /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44153F91EFC76FC009CA19F /* Runner.swift */; };
 		F44153FC1EFC770B009CA19F /* RunnerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F44153FB1EFC770B009CA19F /* RunnerScene.sks */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		EC02F79A1EFA25530063663C /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		EC02F79C1EFA25530063663C /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		F44153F91EFC76FC009CA19F /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		F44153FB1EFC770B009CA19F /* RunnerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RunnerScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				EC02F7861EFA1BB10063663C /* LeftTile.swift */,
 				EC02F7881EFA1D520063663C /* RightTile.swift */,
 				EC02F78A1EFA20490063663C /* Tree.swift */,
+				EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */,
 			);
 			name = Timber;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				EC02F7701EFA16CA0063663C /* GameViewController.swift in Sources */,
 				EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */,
 				EC02F7A71EFA25530063663C /* SKColor+Extensions.swift in Sources */,
+				EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */,
 				EC02F7A11EFA25530063663C /* Int+Extensions.swift in Sources */,
 				EC02F7891EFA1D520063663C /* RightTile.swift in Sources */,
 				EC02F7A91EFA25530063663C /* SKTAudio.swift in Sources */,

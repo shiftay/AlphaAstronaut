@@ -8,6 +8,8 @@
 
 import SpriteKit
 import GameplayKit
+import UIKit
+
 
 protocol InteractiveNode {
     func sceneLoaded()
@@ -16,13 +18,56 @@ protocol InteractiveNode {
 
 class Timber: SKScene {
     
+//    var sliderDemo: CustomSlider!
+    
+    var test: CustomSlider?
+    static let resizeSlider = "Resize"
     var tree = Tree()
-    var playerPosition: Int = 0
+    var playerPosition: Int = 0 {
+        didSet {
+            if playerPosition == -1 {
+                playerSprite.position = leftPos
+            } else {
+                playerSprite.position = rightPos
+            }
+        }
+    }
+    
     var amountCut: Int = 0
-
+    var playerSprite = SKSpriteNode(imageNamed: "Spaceship")
+    
+    var leftPos = CGPoint.zero
+    var rightPos = CGPoint.zero
+    var playable: Bool = true
     
     override func didMove(to view: SKView) {
         print("hello")
+        leftPos = CGPoint(x: size.width * 0.25, y: playerSprite.size.height * 2)
+        rightPos = CGPoint(x: size.width * 0.75, y: playerSprite.size.height * 2)
+
+        
+        
+    
+        
+        
+        
+        
+//        sliderDemo = UISlider(frame: CGRect(x: 0, y: 0, width: 200, height: 20))
+//        sliderDemo = CustomSlider(rect: CGRect(x: 0 + 110,
+//                                               y: 0,
+//                                               width: 100,
+//                                               height: 20))
+//        sliderDemo.setThumbImage(nil, for: UIControlState.normal)
+//        sliderDemo.thumbTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.01)
+//        sliderDemo.minimumTrackTintColor = .red
+//        sliderDemo.tintColor = .green
+//        sliderDemo.maximumTrackTintColor = .green
+//        sliderDemo.isUserInteractionEnabled = false
+//        sliderDemo.maximumValue = Float(tree.treeSize) * 2
+//        sliderDemo.minimumValue = 1
+//            = UIImage(named: "Spaceship")
+//        view.addSubview(sliderDemo)
+//        
         
         
         enumerateChildNodes(withName: "//*", using: { node, _ in
@@ -30,8 +75,11 @@ class Timber: SKScene {
                 eventListenerNode.sceneLoaded()
             }
         })
-        
         playerPosition = -1 // left
+//        playerSprite.position
+        addChild(playerSprite)
+        
+
         tree.BuildTree(scene: scene!)
         // TODO: Place player next to tree
         
@@ -42,19 +90,30 @@ class Timber: SKScene {
     }
     
     func moveRight() {
-        if playerPosition == -1 {
-            
+        if !playable {
+            return
         }
         
-        print("right / test")
+        
+        if playerPosition == -1 {
+            // move player object.
+            playerPosition = 1
+        }
+        cutTree()
     }
     
     func moveLeft() {
+        if !playable {
+            return
+        }
+        
+        
+        
         if playerPosition == 1 {
-            
+            // move player object.
+            playerPosition = -1
         }
         cutTree()
-        print("left / test")
     }
     
     
@@ -64,6 +123,7 @@ class Timber: SKScene {
         
         
         
+
         if (amountCut + 1) != tree.treeSize {
             if let node = childNode(withName: "tree\(amountCut)") {
                 node.removeFromParent()
@@ -77,17 +137,31 @@ class Timber: SKScene {
                 }
             }
             
-            
-            
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(Timber.resizeSlider), object: nil))
             
             tree.treeLayout.remove(at: 0)
-            
+            print("\(playerPosition)")
             amountCut += 1
+            
+            checkGameOver()
+            
         } else {
             print("GameOver")
+            playable = false
         }
+        
+        
+        
     }
     
-    
+    func checkGameOver() {
+        if tree.treeLayout[0] == playerPosition {
+            playable = false
+            // TODO:
+            // Player knocked out. Lose X Resources, dark out scene, rebuild tree.
+        }
+        
+        
+    }
     
 }
