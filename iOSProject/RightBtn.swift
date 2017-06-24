@@ -1,18 +1,18 @@
 //
-//  MiddleBtn.swift
+//  RightBtn.swift
 //  iOSProject
 //
-//  Created by Vraj Patel on 2017-06-22.
+//  Created by Vraj Patel on 2017-06-23.
 //  Copyright © 2017 See No Evil. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class MiddleBtn: SKSpriteNode, InteractiveNode
+class RightBtn: SKSpriteNode, InteractiveNode
 {
     //change name for other lane
-    static let middleLane = "MiddleLane"
+    static let rightLane = "RightLane"
     
     func sceneLoaded()
     {
@@ -22,7 +22,7 @@ class MiddleBtn: SKSpriteNode, InteractiveNode
         }
         
         size = CGSize(width: scene.size.width * 0.33, height: scene.size.height * 0.25)
-        position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height / 8)
+        //position = CGPoint(x: scene.size.width - (scene.size.width / 6), y: scene.size.height / 8)
         isUserInteractionEnabled = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(positionBtn), name: Notification.Name(Runner.movedCamera), object: nil)
@@ -35,13 +35,13 @@ class MiddleBtn: SKSpriteNode, InteractiveNode
             return
         }
         
-        position = CGPoint(x: scene.size.width * 0.5,
-                           y: (scene.camera?.position.y)! - ((scene.size.height * 0.25) + ((scene.size.height * 0.25) * 0.5)))
+        position = CGPoint(x: scene.size.width - (size.width / 2),
+                           y: (scene.camera?.position.y)! - ((scene.size.height * 0.25) + ((scene.size.height * 0.25) * 0.5))) //RIGHT
     }
     
     func interact()
     {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(MiddleBtn.middleLane), object: nil))
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(RightBtn.rightLane), object: nil))
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)

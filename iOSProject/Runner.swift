@@ -55,6 +55,8 @@ class Runner: SKScene
         
         NotificationCenter.default.addObserver(self, selector: #selector(movePlayerLeft), name: Notification.Name(LeftBtn.leftLane), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(movePlayerMiddle), name: Notification.Name(MiddleBtn.middleLane), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(movePlayerRight), name: Notification.Name(RightBtn.rightLane), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(skillsBar), name: Notification.Name(Skills.skilllayout), object: nil)
 
     }
     
@@ -72,9 +74,6 @@ class Runner: SKScene
         lastUpdateTime = currentTime
         
         moveCamera()
-        //updateRect()
-        //print("cameraPos \(camera?.position)")
-        //print("playableRect: \(playableRect)")
     }
     
     func updateRect()
@@ -140,6 +139,11 @@ class Runner: SKScene
     func movePlayerRight()
     {
         print("Moved right")
+    }
+    
+    func skillsBar()
+    {
+        print("Skill box")
     }
     
     func debugDrawPlayableArea()
