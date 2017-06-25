@@ -15,7 +15,7 @@ class PlayersShip {
     var currentMoney: Int
     var currentReputation: Int
     var currentQuest: Quest!
-    
+    var currentPlanetSelected: String = "none"
     
     init() {
         print("PSHIP")

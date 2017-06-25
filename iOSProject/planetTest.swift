@@ -14,12 +14,17 @@ struct Planet {
 }
 
 class planetTest: SKSpriteNode, InteractiveNode {
-
-
+    //let descOverlay = SKSpriteNode(imageNamed: "overlay")
+    //let planetPic = SKSpriteNode(imageNamed: "____planet")
+    var descOpen: Bool = false
+    
     func sceneLoaded() {
         print("test")
         name = "planet1"
         isUserInteractionEnabled = true
+        
+        
+        
     }
     
     func interact() {
@@ -27,19 +32,53 @@ class planetTest: SKSpriteNode, InteractiveNode {
         //      overlay can be made as a sprite
         //      the information for each planet/spacestation will be stored within a file like this.
         //      and the overlay will be built using this information.
-        
-        
-        
-        
-        
-        
-        
+
+        GameViewController.Player.currentPlanetSelected = name!
+        openPlanetDesc()
         print("touched planet")
         NotificationCenter.default.post(Notification(name: NSNotification.Name(Planet.touched), object: nil))
     }
     
+    
+    
+    func openPlanetDesc() {
+        guard let scene = scene else {
+            return
+        }
+        
+        let testPic = SKSpriteNode(color: .green, size: CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66))
+        
+        testPic.position = World.cameraPos!
+        testPic.zPosition = 10
+        testPic.name = "HUD"
+        
+        
+        
+        let yes = SKSpriteNode(color: .blue, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.25))
+        yes.position = CGPoint(x: 0 - yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.5)
+        yes.zPosition = 11
+        yes.name = "yes"
+        
+        let no = SKSpriteNode(color: .purple, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.25))
+        no.position = CGPoint(x: 0 + yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.5)
+        no.zPosition = 11
+        no.name = "no"
+        
+        
+        
+        
+        testPic.addChild(no)
+        testPic.addChild(yes)
+        scene.addChild(testPic)
+
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        interact()
+        if !descOpen {
+            interact()
+        }
+        
+
     }
 }
