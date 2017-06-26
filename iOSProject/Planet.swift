@@ -9,9 +9,13 @@
 import Foundation
 import SpriteKit
 
-struct Planet {
+enum PlanetUtils {
     static let touched = "planet_touched"
 }
+
+//enum PlanetDescriptions {
+//    
+//}
 
 class planetTest: SKSpriteNode, InteractiveNode {
     //let descOverlay = SKSpriteNode(imageNamed: "overlay")
@@ -35,8 +39,7 @@ class planetTest: SKSpriteNode, InteractiveNode {
 
         GameViewController.Player.currentPlanetSelected = name!
         openPlanetDesc()
-        print("touched planet")
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(Planet.touched), object: nil))
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(PlanetUtils.touched), object: nil))
     }
     
     
@@ -66,7 +69,6 @@ class planetTest: SKSpriteNode, InteractiveNode {
         
         
         
-        
         testPic.addChild(no)
         testPic.addChild(yes)
         scene.addChild(testPic)
@@ -78,7 +80,5 @@ class planetTest: SKSpriteNode, InteractiveNode {
         if !descOpen {
             interact()
         }
-        
-
     }
 }

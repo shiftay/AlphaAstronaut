@@ -34,7 +34,7 @@
 		EC02F7AC1EFA25530063663C /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79C1EFA25530063663C /* Vector3.swift */; };
 		EC34E9561EFF436C001FFC3B /* WorldView.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC34E9551EFF436C001FFC3B /* WorldView.sks */; };
 		EC34E9581EFF438B001FFC3B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9571EFF438B001FFC3B /* World.swift */; };
-		EC34E95A1EFF4836001FFC3B /* planetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9591EFF4836001FFC3B /* planetTest.swift */; };
+		EC34E95A1EFF4836001FFC3B /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9591EFF4836001FFC3B /* Planet.swift */; };
 		EC34E95C1EFF4E57001FFC3B /* PlayersShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */; };
 		EC34E95E1EFF4EEA001FFC3B /* PlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */; };
 		EC34E9601EFF520F001FFC3B /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95F1EFF520F001FFC3B /* Quest.swift */; };
@@ -73,7 +73,7 @@
 		EC02F79C1EFA25530063663C /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
 		EC34E9551EFF436C001FFC3B /* WorldView.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WorldView.sks; sourceTree = "<group>"; };
 		EC34E9571EFF438B001FFC3B /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
-		EC34E9591EFF4836001FFC3B /* planetTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = planetTest.swift; sourceTree = "<group>"; };
+		EC34E9591EFF4836001FFC3B /* Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersShip.swift; sourceTree = "<group>"; };
 		EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerUtils.swift; sourceTree = "<group>"; };
 		EC34E95F1EFF520F001FFC3B /* Quest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quest.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 			children = (
 				EC34E9551EFF436C001FFC3B /* WorldView.sks */,
 				EC34E9571EFF438B001FFC3B /* World.swift */,
-				EC34E9591EFF4836001FFC3B /* planetTest.swift */,
+				EC34E9591EFF4836001FFC3B /* Planet.swift */,
 				EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */,
 				EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */,
 				EC34E95F1EFF520F001FFC3B /* Quest.swift */,
@@ -274,7 +274,7 @@
 				EC02F7701EFA16CA0063663C /* GameViewController.swift in Sources */,
 				EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */,
 				EC02F7A71EFA25530063663C /* SKColor+Extensions.swift in Sources */,
-				EC34E95A1EFF4836001FFC3B /* planetTest.swift in Sources */,
+				EC34E95A1EFF4836001FFC3B /* Planet.swift in Sources */,
 				EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */,
 				EC02F7A11EFA25530063663C /* Int+Extensions.swift in Sources */,
 				EC02F7891EFA1D520063663C /* RightTile.swift in Sources */,

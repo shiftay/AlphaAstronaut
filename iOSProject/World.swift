@@ -10,6 +10,12 @@ import Foundation
 import SpriteKit
 import CoreGraphics
 
+protocol Planet {
+    func openPlanetDesc()
+    func openPlanetQuest()
+}
+
+
 class World: SKScene {
     static var cameraPos: CGPoint?
     var background: SKSpriteNode!
@@ -21,19 +27,15 @@ class World: SKScene {
     
     
     override func didMove(to view: SKView) {
-        print("WorldView")
         guard let scene = scene else {
             return
         }
-        
-        
-        
         
         cameraNode = childNode(withName: "camera") as? SKCameraNode
         World.cameraPos = cameraNode?.position
         
         //TODO: Add Background Sprite in the actual scene
-        // make limits based on sprite size +/- scene.size
+        //      make limits based on sprite size +/- scene.size
         background = SKSpriteNode(color: .black, size: scene.size)
         
         addChild(background)
@@ -44,7 +46,7 @@ class World: SKScene {
             }
         })
         
-        NotificationCenter.default.addObserver(self, selector: #selector(setbool), name: Notification.Name(Planet.touched), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setbool), name: Notification.Name(PlanetUtils.touched), object: nil)
     }
     
     func setbool() {
