@@ -66,14 +66,12 @@ class World: SKScene {
             //TODO:
             // create a gameState variable to base a switch off of.
             if !planetTouched {
-
                 if checkBounds(pos: touch.location(in: self)) {
                     cameraNode?.run(SKAction.sequence([SKAction.move(to: touch.location(in: self), duration: 0.5),
                                                        SKAction.run {
                                                         World.cameraPos = self.cameraNode?.position
                         }]))
                 }
-                
             } else {
                 if let touchedNode = atPoint(touch.location(in: self)) as? SKSpriteNode {
                     
@@ -95,11 +93,19 @@ class World: SKScene {
 //                                print("test2: \(test.radiansToDegrees())")
 //                                print("test3: \(test.degreesToRadians())")
                                 
-                                GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: -planet.position.angle, duration: 0),                                                                                        SKAction.move(to: planet.position, duration: 5),                                                                                       SKAction.scale(to: 0, duration: 2),                                                                                       SKAction.run {
-                                                self.followPlayer = false
-                                                print("zRotation: \(GameViewController.Player.image.zRotation)")
-                                                print("ship angle: \(GameViewController.Player.image.position.angle)")
-                                                }]))
+                                GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: -planet.position.angle, duration: 0),
+                                    SKAction.move(to: planet.position, duration: 5),
+                                    SKAction.scale(to: 0, duration: 2),
+                                    SKAction.run {
+                                        self.followPlayer = false
+                                    
+                                        if let planet =
+                                            self.childNode(withName: GameViewController.Player.currentPlanetSelected)
+                                                as? planetTest
+                                        {
+                                            planet.openPlanetQuest()
+                                        } 
+                                    }]))
                             }
                             if let hud = scene?.childNode(withName: "HUD") {
                                 hud.removeFromParent()
