@@ -44,18 +44,17 @@ class Timber: SKScene {
         rightPos = CGPoint(x: size.width * 0.75, y: playerSprite.size.height * 2)
 
         resourcesNeeded = 50
+        
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
                 eventListenerNode.sceneLoaded()
             }
         })
+        
         playerPosition = -1 // left
-//        playerSprite.position
         addChild(playerSprite)
-
         tree.BuildTree(scene: scene!)
-
- 
+        
         NotificationCenter.default.addObserver(self, selector: #selector(moveRight), name: Notification.Name(RightTile.rightTapped), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveLeft), name: Notification.Name(LeftTile.leftTapped), object: nil)
     }

@@ -23,6 +23,7 @@ class World: SKScene {
     let maxWidth: CGFloat = 2500.0
     
     
+    var followPlayer: Bool = false
     var planetTouched: Bool = false // planetTouched
     
     
@@ -37,8 +38,12 @@ class World: SKScene {
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         background = SKSpriteNode(color: .black, size: scene.size)
-        
         addChild(background)
+        
+        if GameViewController.Player.currentPosition != GameViewController.Player.image.position {
+            GameViewController.Player.image.position = GameViewController.Player.currentPosition
+        }
+        addChild(GameViewController.Player.image)
         
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
@@ -75,27 +80,73 @@ class World: SKScene {
                     switch touchedNode.name! {
                         case "yes":
                             print("Current Selected Planet: \(GameViewController.Player.currentPlanetSelected)")
+                            if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetTest {
+                                GameViewController.Player.image.zRotation = 0
+//                                print("ship angle: \(GameViewController.Player.image.zRotation)")
+//                                print("planet angle: \(planet.position.angle)")
+//                                print("planet angle2: \(planet.position.angle.radiansToDegrees())")
+//                                print("ship angle2: \(GameViewController.Player.image.position.angle)")
+//                                let short = shortestAngleBetween(GameViewController.Player.image.position.angle, angle2: planet.position.angle)
+//                                print("shortest angle: \(short)")
+//                                print("shortest angle2: \(short.radiansToDegrees())")
+//                                
+//                                let test = GameViewController.Player.image.position.angle + short
+//                                print("test: \(test)")
+//                                print("test2: \(test.radiansToDegrees())")
+//                                print("test3: \(test.degreesToRadians())")
+                                
+                                GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: -planet.position.angle, duration: 0),                                                                                        SKAction.move(to: planet.position, duration: 5),                                                                                       SKAction.scale(to: 0, duration: 2),                                                                                       SKAction.run {
+                                                self.followPlayer = false
+                                                print("zRotation: \(GameViewController.Player.image.zRotation)")
+                                                print("ship angle: \(GameViewController.Player.image.position.angle)")
+                                                }]))
+                            }
+                            if let hud = scene?.childNode(withName: "HUD") {
+                                hud.removeFromParent()
+                                followPlayer = true
+                            }
+
                         case "no":
                             if let hud = scene?.childNode(withName: "HUD") {
-                                GameViewController.Player.currentPlanetSelected = "none"
+                                
                                 hud.removeFromParent()
                                 planetTouched = false
                             }
+                            if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetTest {
+                                planet.descOpen = false
+                            }
+                            GameViewController.Player.currentPlanetSelected = "none"
                             print("Current Selected Planet: \(GameViewController.Player.currentPlanetSelected)")
                         default:
                             break
                     }
-//                    if touchedNode.name == "yes" {
-//                        if let hud = scene?.childNode(withName: "HUD") {
-//                            World.currentPlanetSelected = "none"
-//                            hud.removeFromParent()
-//                            planetTouched = false
-//                        }
-//                    }
                 }
             }
 
         }
+    }
+    
+    
+    override func update(_ currentTime: TimeInterval) {
+        
+        
+        if followPlayer {
+            cameraFollowsPlayer()
+
+        }
+    }
+    
+    func rotate(sprite: SKSpriteNode, direction: CGPoint) {
+        
+        
+        
+        
+    }
+    
+    
+    
+    func cameraFollowsPlayer() {
+        cameraNode?.position = GameViewController.Player.image.position
     }
     
     // TODO:    Decide how large the solar system is.
