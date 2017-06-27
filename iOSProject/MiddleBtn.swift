@@ -21,6 +21,7 @@ class MiddleBtn: SKSpriteNode, InteractiveNode
             return
         }
         
+        alpha = 0.01
         size = CGSize(width: scene.size.width * 0.33, height: scene.size.height * 0.25)
         position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height / 8)
         isUserInteractionEnabled = true
@@ -41,7 +42,10 @@ class MiddleBtn: SKSpriteNode, InteractiveNode
     
     func interact()
     {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(MiddleBtn.middleLane), object: nil))
+        if !Runner.gameState
+        {
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(MiddleBtn.middleLane), object: nil))
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)

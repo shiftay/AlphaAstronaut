@@ -41,7 +41,10 @@ class Skills: SKSpriteNode, InteractiveNode
     
     func interact()
     {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(Skills.skilllayout), object: nil))
+        if !Runner.gameState
+        {
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(Skills.skilllayout), object: nil))
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
