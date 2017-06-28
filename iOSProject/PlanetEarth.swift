@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-class PlanetEarth: planetTest {
+class PlanetEarth: planetBase {
     //let descOverlay = SKSpriteNode(imageNamed: "overlay")
     //let planetPic = SKSpriteNode(imageNamed: "____planet")
     //    var descOpen: Bool = false

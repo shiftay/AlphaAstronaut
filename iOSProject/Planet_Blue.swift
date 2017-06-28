@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class PlanetBlue: planetTest {
+class PlanetBlue: planetBase {
     //let descOverlay = SKSpriteNode(imageNamed: "overlay")
     //let planetPic = SKSpriteNode(imageNamed: "____planet")
     //    var descOpen: Bool = false

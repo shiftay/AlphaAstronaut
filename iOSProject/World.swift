@@ -84,7 +84,7 @@ class World: SKScene {
                                 hud.removeFromParent()
                                 planetTouched = false
                             }
-                            if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetTest {
+                            if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetBase {
                                 planet.descOpen = false
                             }
                             GameViewController.Player.currentPlanetSelected = "none"
@@ -109,7 +109,7 @@ class World: SKScene {
     }
     
     func flyShip() {
-        if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetTest {
+        if let planet = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetBase {
             GameViewController.Player.image.zRotation = 0
 
             let shipPos = GameViewController.Player.image.position
@@ -133,8 +133,7 @@ class World: SKScene {
                 angle = asin(opp / hyp) * -1
             }
             
-            
-            
+            //TODO: run randomizer to see if event fires, either on planet or on flight.
             
             GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: angle, duration: 0.5, shortestUnitArc: true),
                                                                    SKAction.move(to: planet.position, duration: 5),
@@ -144,7 +143,7 @@ class World: SKScene {
                                                                     
                                                                     if let planet =
                                                                         self.childNode(withName: GameViewController.Player.currentPlanetSelected)
-                                                                            as? planetTest
+                                                                            as? planetBase
                                                                     {
                                                                         planet.openPlanetQuest()
                                                                     }

@@ -9,11 +9,10 @@
 import Foundation
 import SpriteKit
 
-class PlanetRed: planetTest {
+class PlanetRed: planetBase {
     //let descOverlay = SKSpriteNode(imageNamed: "overlay")
     //let planetPic = SKSpriteNode(imageNamed: "____planet")
-//    var descOpen: Bool = false
-    
+
     override func sceneLoaded() {
         name = "red"
         print("\(name)")
