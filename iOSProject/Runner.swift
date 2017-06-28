@@ -77,7 +77,7 @@ class Runner: SKScene
                 eventListenerNode.sceneLoaded()
             }
         })
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(movePlayerLeft), name: Notification.Name(LeftBtn.leftLane), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(movePlayerMiddle), name: Notification.Name(MiddleBtn.middleLane), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(movePlayerRight), name: Notification.Name(RightBtn.rightLane), object: nil)
@@ -101,6 +101,7 @@ class Runner: SKScene
             lastUpdateTime = currentTime
             moveCamera()
             movePlayer()
+            livesDisplay()
             garbageCollector()
             checkCollisions()
             
@@ -113,7 +114,6 @@ class Runner: SKScene
             {
                 wrenchTime = currentTime
                 timerStarted = true
-                print("WT: \(wrenchTime)")
             }
             
             if timerStarted
@@ -304,10 +304,12 @@ class Runner: SKScene
         for i in 1...3
         {
             let node = childNode(withName: "\(i)") as? SKSpriteNode
-            node?.position = CGPoint(x: size.width / 2,
-                                              y: ((scene.camera?.position.y)! + (scene.size.height / 2)) - size.height / 2)
+            node?.position = CGPoint(x: scene.size.width - (node?.size.width)! * CGFloat(i),
+                                     y: ((scene.camera?.position.y)! + (scene.size.height / 2)) - (node?.size.height)!)
+            node?.zPosition = 3
             //TODO: Align top-right based of i and their width
         }
+        
     }
     
     func gameOverScene()
