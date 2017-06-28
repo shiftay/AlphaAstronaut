@@ -21,7 +21,8 @@ class Skills: SKSpriteNode, InteractiveNode
             return
         }
         
-        size = CGSize(width: (scene.size.width * 0.33) * 0.33, height: scene.size.height * 0.25)
+        alpha = 0.01
+        size = CGSize(width: (scene.size.width / 5) * 0.5, height: (scene.size.height * 0.3) * 0.5)
         position = CGPoint(x: scene.size.width - (scene.size.width), y: scene.size.height * 0.5)
         isUserInteractionEnabled = true
         
@@ -41,9 +42,11 @@ class Skills: SKSpriteNode, InteractiveNode
     
     func interact()
     {
-        if !Runner.gameState
+        if !Runner.gameState && Runner.useWrench && !Runner.fullHP
         {
             NotificationCenter.default.post(Notification(name: NSNotification.Name(Skills.skilllayout), object: nil))
+            
+            alpha = 0.01
         }
     }
     

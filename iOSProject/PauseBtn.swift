@@ -55,14 +55,15 @@ class PauseBtn: SKSpriteNode, InteractiveNode
             return
         }
         
-        let testPic = SKSpriteNode(color: .green, size: CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66))
+        let testPic = SKSpriteNode(imageNamed: "Overlay")
+        testPic.size = CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66)
         
         testPic.position = CGPoint.zero
         testPic.zPosition = 10
         
         let bg = SKSpriteNode(color: .black, size: CGSize(width: scene.size.width, height: scene.size.height))
         bg.position =  Runner.cameraPos!
-        bg.zPosition = 3
+        bg.zPosition = 4
         bg.alpha = 0.90
         bg.name = "HUD"
         

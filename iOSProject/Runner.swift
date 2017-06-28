@@ -13,8 +13,13 @@ class Runner: SKScene
 {
     static let movedCamera = "moved"
     static var cameraPos: CGPoint?
+    static var fullHP: Bool = true
     static var gameState: Bool = false
+    static var useWrench: Bool = false
     var gameOver: Bool = false
+    var wrenchTime: TimeInterval = 0
+    var timerStarted: Bool = false
+    let wrenchDelay: Double = 15
     var currentPlayerPos: Int = 0
     {
         didSet
@@ -54,16 +59,19 @@ class Runner: SKScene
             addChild(background)
         }
         
-        player.setScale(0.33)
+        player.yScale = -1
         player.zPosition = 2
     
         addChild(player)
         addChild(cameraNode)
+        
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         playableRect = CGRect(x: 0, y: cameraRect.minY, width: size.width, height: size.height)
+        
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnEnemy()}, SKAction.wait(forDuration: 2.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnStaticObjs()}, SKAction.wait(forDuration: 5.0)])))
+        
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
                 eventListenerNode.sceneLoaded()
@@ -77,8 +85,7 @@ class Runner: SKScene
         NotificationCenter.default.addObserver(self, selector: #selector(skillsBar), name: Notification.Name(Skills.skilllayout), object: nil)
 
     }
-    
-    
+
     override func update(_ currentTime: TimeInterval)
     {
         if !Runner.gameState
@@ -101,6 +108,40 @@ class Runner: SKScene
             {
                gameOverScene()
             }
+            
+            if !timerStarted && !Runner.useWrench
+            {
+                wrenchTime = currentTime
+                timerStarted = true
+                print("WT: \(wrenchTime)")
+            }
+            
+            if timerStarted
+            {
+                if wrenchTime + wrenchDelay <= currentTime
+                {
+                    wrenchAlpha()
+                }
+            }
+            
+            if playerLives == 3
+            {
+                Runner.fullHP = true
+            }
+            else
+            {
+                Runner.fullHP = false
+            }
+        }
+    }
+    
+    func wrenchAlpha()
+    {
+        Runner.useWrench = true
+        timerStarted = false
+        if let wrench = childNode(withName: "Wrench") as? Skills
+        {
+            wrench.run(SKAction.fadeAlpha(to: 1, duration: 2.0))
         }
     }
     
@@ -110,12 +151,12 @@ class Runner: SKScene
         bgNode.anchorPoint = CGPoint.zero
         bgNode.name = "bg"
         
-        let bg2 = SKSpriteNode(imageNamed: "bg_1")
+        let bg2 = SKSpriteNode(imageNamed: "bg")
         bg2.anchorPoint = CGPoint.zero
         bg2.position = CGPoint.zero
         bgNode.addChild(bg2)
         
-        let bg3 = SKSpriteNode(imageNamed: "bg_2")
+        let bg3 = SKSpriteNode(imageNamed: "bg")
         bg3.anchorPoint = CGPoint.zero
         bg3.position = CGPoint(x: 0, y: bg2.size.height)
         bgNode.addChild(bg3)
@@ -171,7 +212,7 @@ class Runner: SKScene
     {
         let enemy = SKSpriteNode(imageNamed: "PauseBtn")
         enemy.name = "enemy"
-        enemy.setScale(0.5)
+        enemy.setScale(0.2)
         enemy.position = CGPoint(x: CGFloat.random(min: cameraRect.minX + enemy.size.width * 0.5,
                                                    max: cameraRect.maxX - enemy.size.width * 0.5),
                                  y: cameraRect.maxY + enemy.size.height * 0.5)
@@ -187,9 +228,10 @@ class Runner: SKScene
     
     func spawnStaticObjs()
     {
-        let obj = SKSpriteNode(imageNamed: "RawBtn")
+        let string = "object\(Int.random(min: 1,max: 3))"
+        let obj = SKSpriteNode(imageNamed: string)
+        obj.setScale(2)
         obj.name = "object"
-        obj.setScale(0.5)
         obj.position = CGPoint(x: CGFloat.random(min: cameraRect.minX + obj.size.width * 0.5,
                                                  max: cameraRect.maxX - obj.size.width * 0.5),
                                y: cameraRect.maxY + obj.size.height * 0.5)
@@ -200,14 +242,12 @@ class Runner: SKScene
     func playerHit(enemy: SKSpriteNode)
     {
         playerLives -= 1
-        print("Lives: \(playerLives)")
         enemy.removeFromParent()
     }
     
     func playerHit(obj: SKSpriteNode)
     {
         resourceCollected += 1
-        print("Resource Collected: \(resourceCollected)")
         obj.removeFromParent()
     }
     
@@ -254,6 +294,19 @@ class Runner: SKScene
         }
     }
     
+    func livesDisplay()
+    {
+        guard let scene = scene else
+        {
+            return
+        }
+        
+        for i in 1...3
+        {
+            let node = childNode(withName: "\(i)")
+        }
+    }
+    
     func gameOverScene()
     {
         Runner.gameState = true
@@ -275,14 +328,15 @@ class Runner: SKScene
             return
         }
         
-        let testPic = SKSpriteNode(color: .green, size: CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66))
+        let testPic = SKSpriteNode(imageNamed: "Overlay")
+        testPic.size = CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66)
         
         testPic.position = CGPoint.zero
         testPic.zPosition = 10
         
         let bg = SKSpriteNode(color: .black, size: CGSize(width: scene.size.width, height: scene.size.height))
         bg.position =  Runner.cameraPos!
-        bg.zPosition = 3
+        bg.zPosition = 4
         bg.alpha = 0.90
         bg.name = "HUD"
         
@@ -314,18 +368,46 @@ class Runner: SKScene
     func resetGame()
     {
         Runner.gameState = false
+        timerStarted = false
+        Runner.useWrench = false
         gameOver = false
         currentPlayerPos = 0
         playerLives = 3
         resourceCollected = 0
+        
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnEnemy()}, SKAction.wait(forDuration: 2.0)])))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnStaticObjs()}, SKAction.wait(forDuration: 5.0)])))
+    }
+    
+    func resumeGame()
+    {
+        Runner.gameState = false
+        
+        enumerateChildNodes(withName: "enemy"){node, _ in
+            if let enemy = node as? SKSpriteNode
+            {
+                let actionMove = SKAction.moveTo(y: self.cameraRect.minY - enemy.size.height * 0.5, duration: 2.0)
+                let actionRemove = SKAction.removeFromParent()
+
+                enemy.run(SKAction.sequence([actionMove, actionRemove]))
+            }
+        }
+        
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnEnemy()}, SKAction.wait(forDuration: 2.0)])))
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnStaticObjs()}, SKAction.wait(forDuration: 5.0)])))
     }
     
     func pausedGame()
     {
-        print("Game Paused!")
         Runner.gameState = true
+        self.removeAllActions()
+        
+        enumerateChildNodes(withName: "enemy"){node, _ in
+            if let enemy = node as? SKSpriteNode
+            {
+                enemy.removeAllActions()
+            }
+        }
     }
     
     func movePlayerLeft()
@@ -354,7 +436,10 @@ class Runner: SKScene
     
     func skillsBar()
     {
-        print("Skill box")
+        print("skillsbar")
+        playerLives += 1
+        timerStarted = false
+        Runner.useWrench = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -370,14 +455,13 @@ class Runner: SKScene
                     switch touchedNode.name!
                     {
                     case "yes":
-                        print("pressed yes")
                         if let hud = scene?.childNode(withName: "HUD")
                         {
                             hud.removeFromParent()
-                            Runner.gameState = false
-                            
                         }
-                        
+                    
+                        resumeGame()
+            
                     case "no":
                         print("pressed no")
                     
