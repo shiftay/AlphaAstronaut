@@ -303,7 +303,10 @@ class Runner: SKScene
         
         for i in 1...3
         {
-            let node = childNode(withName: "\(i)")
+            let node = childNode(withName: "\(i)") as? SKSpriteNode
+            node?.position = CGPoint(x: size.width / 2,
+                                              y: ((scene.camera?.position.y)! + (scene.size.height / 2)) - size.height / 2)
+            //TODO: Align top-right based of i and their width
         }
     }
     
