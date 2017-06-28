@@ -26,33 +26,19 @@ class planetTest: SKSpriteNode, InteractiveNode, Planet {
         descOpen = !descOpen
     }
     
-    func sceneLoaded() {
-        print("test")
-        name = "planet1"
-        isUserInteractionEnabled = true
-    }
+    func sceneLoaded() {}
     
-    func interact() {
-        //TODO: load up a overlay for the planet in question.
-        //      overlay can be made as a sprite
-        //      the information for each planet/spacestation will be stored within a file like this.
-        //      and the overlay will be built using this information.
-        if !descOpen {
-            GameViewController.Player.currentPlanetSelected = name!
-            openPlanetDesc()
-            NotificationCenter.default.post(Notification(name: NSNotification.Name(PlanetUtils.touched), object: nil))
-        }
-
-    }
+    func interact() {}
     
     func openPlanetQuest() {
         //TODO: create the quest layout for the player.
         //      create shop per planet
         //      create gather type on planet.
+        print(name)
         print("Hello, quest!?")
     }
     
-    func openPlanetDesc() {
+    func openPlanetDesc(name: String) {
         guard let scene = scene else {
             return
         }

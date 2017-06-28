@@ -27,7 +27,8 @@ class PlayersShip {
         currentPosition = CGPoint.zero
         image.position = currentPosition
         image.setScale(0.25)
-        image.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        image.zPosition = 6
+        image.anchorPoint = CGPoint(x: 0.5, y: 1)
     }
 
 }
