@@ -32,7 +32,13 @@ class Runner: SKScene
     let cameraNode = SKCameraNode()
     var dt: TimeInterval = 0
     var lastUpdateTime: TimeInterval = 0
-    var playerLives: Int = 3
+    var playerLives: Int = 0
+    {
+        didSet
+        {
+            livesChanged()
+        }
+    }
     var resourceCollected: Int = 0
     var playableRect: CGRect!
     let shape = SKShapeNode()
@@ -61,7 +67,7 @@ class Runner: SKScene
         
         player.yScale = -1
         player.zPosition = 2
-    
+        playerLives = 3
         addChild(player)
         addChild(cameraNode)
         
@@ -133,6 +139,12 @@ class Runner: SKScene
                 Runner.fullHP = false
             }
         }
+    }
+    
+    func addToCamera(node: SKNode)
+    {
+        node.removeFromParent()
+        cameraNode.addChild(node)
     }
     
     func wrenchAlpha()
@@ -304,12 +316,42 @@ class Runner: SKScene
         for i in 1...3
         {
             let node = childNode(withName: "\(i)") as? SKSpriteNode
-            node?.position = CGPoint(x: scene.size.width - (node?.size.width)! * CGFloat(i),
+            node?.setScale(0.75)
+            node?.position = CGPoint(x: (scene.size.width - ((node?.size.width)! * 0.5)) - (node?.size.width)! * CGFloat(i - 1),
                                      y: ((scene.camera?.position.y)! + (scene.size.height / 2)) - (node?.size.height)!)
             node?.zPosition = 3
             //TODO: Align top-right based of i and their width
         }
         
+    }
+    
+    func livesChanged()
+    {
+        for i in 1...3
+        {
+            let node = childNode(withName: "\(i)") as? SKSpriteNode
+            
+            if playerLives == 0
+            {
+                node?.alpha = 0
+            }
+            else if playerLives == 3
+            {
+                node?.alpha = 1
+            }
+            else if playerLives == 2 && i == 1
+            {
+                node?.alpha = 0
+            }
+            else if playerLives == 1 && i == 1 || playerLives == 1 && i == 2
+            {
+                node?.alpha = 0
+            }
+            else
+            {
+                node?.alpha = 1
+            }
+        }
     }
     
     func gameOverScene()
@@ -376,6 +418,7 @@ class Runner: SKScene
         timerStarted = false
         Runner.useWrench = false
         gameOver = false
+        wrenchTime = 0
         currentPlayerPos = 0
         playerLives = 3
         resourceCollected = 0

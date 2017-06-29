@@ -45,8 +45,11 @@ class Skills: SKSpriteNode, InteractiveNode
         if !Runner.gameState && Runner.useWrench && !Runner.fullHP
         {
             NotificationCenter.default.post(Notification(name: NSNotification.Name(Skills.skilllayout), object: nil))
-            
-            alpha = 0.01
+            if hasActions()
+            {
+                removeAllActions()
+            }
+            run(SKAction.fadeAlpha(to: 0.01, duration: 0.2))
         }
     }
     

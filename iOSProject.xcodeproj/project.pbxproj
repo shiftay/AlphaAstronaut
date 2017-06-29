@@ -39,6 +39,7 @@
 		F44EFAF11EFDB7780046BB7B /* RightBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44EFAF01EFDB7780046BB7B /* RightBtn.swift */; };
 		F44EFAF31EFDB9470046BB7B /* Skills.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44EFAF21EFDB9470046BB7B /* Skills.swift */; };
 		F44EFAF51EFDBE230046BB7B /* PauseBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44EFAF41EFDBE230046BB7B /* PauseBtn.swift */; };
+		F4FDA5651F0467AA00659666 /* ResourceSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDA5641F0467AA00659666 /* ResourceSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		F44EFAF01EFDB7780046BB7B /* RightBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightBtn.swift; sourceTree = "<group>"; };
 		F44EFAF21EFDB9470046BB7B /* Skills.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skills.swift; sourceTree = "<group>"; };
 		F44EFAF41EFDBE230046BB7B /* PauseBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseBtn.swift; sourceTree = "<group>"; };
+		F4FDA5641F0467AA00659666 /* ResourceSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +175,7 @@
 				F44EFAF01EFDB7780046BB7B /* RightBtn.swift */,
 				F44EFAF21EFDB9470046BB7B /* Skills.swift */,
 				F44EFAF41EFDBE230046BB7B /* PauseBtn.swift */,
+				F4FDA5641F0467AA00659666 /* ResourceSlider.swift */,
 			);
 			name = Runner;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				F44EFAF31EFDB9470046BB7B /* Skills.swift in Sources */,
 				EC02F78B1EFA20490063663C /* Tree.swift in Sources */,
 				EC02F7A81EFA25530063663C /* SKNode+Extensions.swift in Sources */,
+				F4FDA5651F0467AA00659666 /* ResourceSlider.swift in Sources */,
 				EC02F7871EFA1BB10063663C /* LeftTile.swift in Sources */,
 				F44153FE1EFC8B0A009CA19F /* LeftBtn.swift in Sources */,
 				EC02F7A51EFA25530063663C /* SKAction+Extensions.swift in Sources */,
