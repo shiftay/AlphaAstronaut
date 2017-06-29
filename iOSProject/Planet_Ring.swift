@@ -16,7 +16,6 @@ class PlanetRing: planetBase {
     
     override func sceneLoaded() {
         name = "ring"
-        print("\(name)")
         isUserInteractionEnabled = true
     }
     

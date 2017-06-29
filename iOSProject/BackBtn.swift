@@ -12,11 +12,24 @@ import SpriteKit
 class BackBtn: SKSpriteNode, InteractiveNode {
     
     func interact() {
+        print("back")
         
+        
+        guard let scene = scene else {
+            return
+        }
+        
+        let ssButton = scene.camera?.childNode(withName: "ssButton") as? SKSpriteNode
+        let stationOL = scene.camera?.childNode(withName: "stationOL") as? SKSpriteNode
+        
+        stationOL?.run(SKAction.sequence([SKAction.moveTo(x: scene.size.width * 0.5 + (stationOL?.size.width)! * 0.5, duration: 0.5), SKAction.run {
+                ssButton?.run(SKAction.fadeAlpha(to: 1, duration: 0.5))
+            }]))
     }
     
     
     func sceneLoaded() {
+        print("backbutton")
         isUserInteractionEnabled = true
     }
     

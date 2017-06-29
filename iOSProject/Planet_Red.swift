@@ -15,7 +15,6 @@ class PlanetRed: planetBase {
 
     override func sceneLoaded() {
         name = "red"
-        print("\(name)")
         isUserInteractionEnabled = true
     }
     

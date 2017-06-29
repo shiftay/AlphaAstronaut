@@ -37,6 +37,7 @@
 		EC02F7AA1EFA25530063663C /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79A1EFA25530063663C /* SKTEffects.swift */; };
 		EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */; };
 		EC02F7AC1EFA25530063663C /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79C1EFA25530063663C /* Vector3.swift */; };
+		EC2BE9C61F04A30100E1BF9B /* World-Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */; };
 		EC34E9561EFF436C001FFC3B /* WorldView.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC34E9551EFF436C001FFC3B /* WorldView.sks */; };
 		EC34E9581EFF438B001FFC3B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9571EFF438B001FFC3B /* World.swift */; };
 		EC34E95A1EFF4836001FFC3B /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9591EFF4836001FFC3B /* Planet.swift */; };
@@ -86,6 +87,7 @@
 		EC02F79A1EFA25530063663C /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		EC02F79C1EFA25530063663C /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "World-Touch.swift"; sourceTree = "<group>"; };
 		EC34E9551EFF436C001FFC3B /* WorldView.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WorldView.sks; sourceTree = "<group>"; };
 		EC34E9571EFF438B001FFC3B /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		EC34E9591EFF4836001FFC3B /* Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
@@ -209,15 +211,32 @@
 		EC02F7AD1EFA26970063663C /* Optional */ = {
 			isa = PBXGroup;
 			children = (
+				EC2147661F05A8C000DDF0A9 /* Player */,
+				EC2147651F05A8A900DDF0A9 /* GameplayLogic */,
 				EC0019CD1F033C2F00F04461 /* SpaceStations */,
 				EC0019C01F032FA400F04461 /* Planet */,
 				EC34E9551EFF436C001FFC3B /* WorldView.sks */,
+			);
+			name = Optional;
+			sourceTree = "<group>";
+		};
+		EC2147651F05A8A900DDF0A9 /* GameplayLogic */ = {
+			isa = PBXGroup;
+			children = (
 				EC34E9571EFF438B001FFC3B /* World.swift */,
+				EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */,
+			);
+			name = GameplayLogic;
+			sourceTree = "<group>";
+		};
+		EC2147661F05A8C000DDF0A9 /* Player */ = {
+			isa = PBXGroup;
+			children = (
 				EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */,
 				EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */,
 				EC34E95F1EFF520F001FFC3B /* Quest.swift */,
 			);
-			name = Optional;
+			name = Player;
 			sourceTree = "<group>";
 		};
 		F44153F71EFC76CF009CA19F /* Runner */ = {
@@ -343,6 +362,7 @@
 				EC02F7681EFA16C90063663C /* AppDelegate.swift in Sources */,
 				EC3B0C221F0467B00073B40F /* SSButton.swift in Sources */,
 				EC3B0C261F04708C0073B40F /* alphaBtn.swift in Sources */,
+				EC2BE9C61F04A30100E1BF9B /* World-Touch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

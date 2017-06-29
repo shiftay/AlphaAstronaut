@@ -13,24 +13,21 @@ class SSButton: SKSpriteNode, InteractiveNode {
     var descOpen: Bool = false
     
     func interact() {
-        guard let scene = scene else {
+        guard let scene = scene as? World else {
             return
         }
-        
-        if let stationOL = scene.camera?.childNode(withName: "stationOL") as? SKSpriteNode {
-            print("\(((scene.camera?.position.x)! + scene.size.width * 0.5))")
-            print("\(stationOL.size.width * 0.5)")
-            
-            
-            
-            stationOL.run(SKAction.moveTo(x: ((scene.camera?.position.x)! + scene.size.width * 0.5) - stationOL.size.width * 0.5, duration: 0.5))
-
+        if scene.planetTouched || scene.spaceStationTouched {
+            return
         }
-        alpha = 0.0
+
+        if let stationOL = scene.camera?.childNode(withName: "stationOL") as? SKSpriteNode {
+
+            stationOL.run(SKAction.moveTo(x: scene.size.width * 0.5 - stationOL.size.width * 0.5, duration: 0.5))
+            alpha = 0.0
+        }
     }
     
     func sceneLoaded() {
-        print("button")
         isUserInteractionEnabled = true
     }
     

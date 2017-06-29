@@ -16,7 +16,6 @@ class PlanetYellow: planetBase {
     
     override func sceneLoaded() {
         name = "yellow"
-        print("\(name)")
         isUserInteractionEnabled = true
     }
     
@@ -28,6 +27,7 @@ class PlanetYellow: planetBase {
         if !descOpen {
             GameViewController.Player.currentPlanetSelected = name!
             openPlanetDesc(name: name!)
+            
             NotificationCenter.default.post(Notification(name: NSNotification.Name(PlanetUtils.touched), object: nil))
         }
         

@@ -34,7 +34,6 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         //TODO: create the quest layout for the player.
         //      create shop per planet
         //      create gather type on planet.
-        print(name)
         print("Hello, quest!?")
     }
     

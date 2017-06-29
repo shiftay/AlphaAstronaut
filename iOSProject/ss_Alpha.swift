@@ -13,6 +13,11 @@ class SSAlpha: SpaceStation {
     
     override func interact() {
         if !descOpen {
+            guard let scene = scene as? World else {
+                return
+            }
+            
+            scene.spaceStationTouched = true
             openDesc(name: name!)
             GameViewController.Player.currentPlanetSelected = name!
         }
@@ -20,7 +25,8 @@ class SSAlpha: SpaceStation {
     
     override func sceneLoaded() {
         name = "SpaceStation Alpha"
+        isUserInteractionEnabled = true
         randomizeRates()
     }
- 
+    
 }
