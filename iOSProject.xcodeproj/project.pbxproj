@@ -32,6 +32,8 @@
 		EC02F7AA1EFA25530063663C /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79A1EFA25530063663C /* SKTEffects.swift */; };
 		EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */; };
 		EC02F7AC1EFA25530063663C /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79C1EFA25530063663C /* Vector3.swift */; };
+		F435663D1F05C0E500C6443B /* FireTrail1.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663C1F05C0E500C6443B /* FireTrail1.sks */; };
+		F435663F1F05C70200C6443B /* FireTrail2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663E1F05C70200C6443B /* FireTrail2.sks */; };
 		F44153FA1EFC76FC009CA19F /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44153F91EFC76FC009CA19F /* Runner.swift */; };
 		F44153FC1EFC770B009CA19F /* RunnerScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F44153FB1EFC770B009CA19F /* RunnerScene.sks */; };
 		F44153FE1EFC8B0A009CA19F /* LeftBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44153FD1EFC8B0A009CA19F /* LeftBtn.swift */; };
@@ -70,6 +72,8 @@
 		EC02F79A1EFA25530063663C /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		EC02F79C1EFA25530063663C /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		F435663C1F05C0E500C6443B /* FireTrail1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail1.sks; sourceTree = "<group>"; };
+		F435663E1F05C70200C6443B /* FireTrail2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail2.sks; sourceTree = "<group>"; };
 		F44153F91EFC76FC009CA19F /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
 		F44153FB1EFC770B009CA19F /* RunnerScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RunnerScene.sks; sourceTree = "<group>"; };
 		F44153FD1EFC8B0A009CA19F /* LeftBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftBtn.swift; sourceTree = "<group>"; };
@@ -165,9 +169,19 @@
 			name = Optional;
 			sourceTree = "<group>";
 		};
+		F43566391F05BEFD00C6443B /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				F435663C1F05C0E500C6443B /* FireTrail1.sks */,
+				F435663E1F05C70200C6443B /* FireTrail2.sks */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
 		F44153F71EFC76CF009CA19F /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				F43566391F05BEFD00C6443B /* Particles */,
 				F44153F91EFC76FC009CA19F /* Runner.swift */,
 				F44153FB1EFC770B009CA19F /* RunnerScene.sks */,
 				F44153FD1EFC8B0A009CA19F /* LeftBtn.swift */,
@@ -241,11 +255,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F44153FC1EFC770B009CA19F /* RunnerScene.sks in Resources */,
+				F435663D1F05C0E500C6443B /* FireTrail1.sks in Resources */,
 				EC02F7731EFA16CA0063663C /* Main.storyboard in Resources */,
 				EC02F76A1EFA16CA0063663C /* GameScene.sks in Resources */,
 				EC02F7751EFA16CA0063663C /* Assets.xcassets in Resources */,
 				EC02F7781EFA16CA0063663C /* LaunchScreen.storyboard in Resources */,
 				EC02F76C1EFA16CA0063663C /* Actions.sks in Resources */,
+				F435663F1F05C70200C6443B /* FireTrail2.sks in Resources */,
 				EC02F7851EFA17660063663C /* TimberScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

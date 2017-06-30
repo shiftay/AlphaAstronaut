@@ -67,19 +67,19 @@ class PauseBtn: SKSpriteNode, InteractiveNode
         bg.alpha = 0.90
         bg.name = "HUD"
         
-        let yes = SKSpriteNode(imageNamed: "RawBtn")
+        let yes = SKSpriteNode(imageNamed: "ReturnToShip")
         yes.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         yes.position = CGPoint(x: 0, y: 0 - yes.size.height)
         yes.zPosition = 11
-        yes.name = "yes"
+        yes.name = "return"
         
-        let no = SKSpriteNode(imageNamed: "RawBtn")
+        let no = SKSpriteNode(imageNamed: "Resume")
         no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         no.position = CGPoint(x: 0, y: 0)
         no.zPosition = 11
-        no.name = "no"
+        no.name = "resume"
         
-        let exit = SKSpriteNode(imageNamed: "RawBtn")
+        let exit = SKSpriteNode(imageNamed: "Quit")
         exit.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         exit.position = CGPoint(x: 0, y: yes.position.y - exit.size.height)
         exit.zPosition = 11

@@ -68,6 +68,7 @@ class Runner: SKScene
         player.yScale = -1
         player.zPosition = 2
         playerLives = 3
+        
         addChild(player)
         addChild(cameraNode)
         
@@ -90,6 +91,7 @@ class Runner: SKScene
         NotificationCenter.default.addObserver(self, selector: #selector(pausedGame), name: Notification.Name(PauseBtn.pauseBtn), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(skillsBar), name: Notification.Name(Skills.skilllayout), object: nil)
 
+        setupTrail()
     }
 
     override func update(_ currentTime: TimeInterval)
@@ -387,19 +389,19 @@ class Runner: SKScene
         bg.alpha = 0.90
         bg.name = "HUD"
         
-        let yes = SKSpriteNode(imageNamed: "RawBtn")
+        let yes = SKSpriteNode(imageNamed: "ReturnToShip")
         yes.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         yes.position = CGPoint(x: 0, y: 0 - yes.size.height)
         yes.zPosition = 11
-        yes.name = "play again"
+        yes.name = "return"
         
-        let no = SKSpriteNode(imageNamed: "RawBtn")
+        let no = SKSpriteNode(imageNamed: "Explore")
         no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         no.position = CGPoint(x: 0, y: 0)
         no.zPosition = 11
         no.name = "play again"
         
-        let exit = SKSpriteNode(imageNamed: "RawBtn")
+        let exit = SKSpriteNode(imageNamed: "Quit")
         exit.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         exit.position = CGPoint(x: 0, y: yes.position.y - exit.size.height)
         exit.zPosition = 11
@@ -458,6 +460,29 @@ class Runner: SKScene
         }
     }
     
+    func setupTrail()
+    {
+        let emitter1 = SKEmitterNode(fileNamed: "FireTrail1.sks")!
+        let emitter2 = SKEmitterNode(fileNamed: "FireTrail2.sks")!
+        emitter1.advanceSimulationTime(3.0)
+        emitter2.advanceSimulationTime(3.0)
+        emitter1.yScale = -1
+        emitter2.yScale = -1
+        emitter1.position = CGPoint(x: 0 - player.size.width * 0.20, y: 0 + player.size.height * 0.5)
+        emitter2.position = CGPoint(x: 0 + player.size.width * 0.20, y: 0 + player.size.height * 0.5)
+        player.addChild(emitter1)
+        player.addChild(emitter2)
+    }
+    
+    func returnToShip()
+    {
+        print("return to ship")
+//        let returnShip = Runner()
+//        
+//        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
+//        view?.presentScene(returnShip, transition: reveal)
+    }
+    
     func movePlayerLeft()
     {
         if currentPlayerPos != -1
@@ -484,7 +509,6 @@ class Runner: SKScene
     
     func skillsBar()
     {
-        print("skillsbar")
         playerLives += 1
         timerStarted = false
         Runner.useWrench = false
@@ -502,7 +526,7 @@ class Runner: SKScene
                 {
                     switch touchedNode.name!
                     {
-                    case "yes":
+                    case "resume":
                         if let hud = scene?.childNode(withName: "HUD")
                         {
                             hud.removeFromParent()
@@ -510,8 +534,8 @@ class Runner: SKScene
                     
                         resumeGame()
             
-                    case "no":
-                        print("pressed no")
+                    case "exit":
+                        print("pressed exit")
                     
                     case "play again":
                         resetGame()
@@ -520,22 +544,13 @@ class Runner: SKScene
                             hud.removeFromParent()
                             
                         }
+                    case "return":
+                        returnToShip()
                     default:
                         break
                     }
                 }
             }
         }
-    }
-    
-    func debugDrawPlayableArea()
-    {
-        let path = CGMutablePath()
-        path.addRect(playableRect)
-        shape.path = path
-        shape.strokeColor = SKColor.red
-        shape.lineWidth = 4.0
-        shape.zPosition = 100
-        addChild(shape)
     }
 }
