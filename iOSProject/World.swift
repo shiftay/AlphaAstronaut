@@ -21,13 +21,27 @@ class World: SKScene {
     var cameraNode: SKCameraNode?
     var maxWidth: CGFloat = 2500.0
     var maxHeight: CGFloat = 2500.0
+    
+    var buy: Bool = false
+    var amountToSell: Int = 0
+    var shopItem: String!
+
+    
     var eventPoppedUp: Bool = false
-    
     var followPlayer: Bool = false
-    
     var visitingPlanet: Bool = false
     var visitingSpaceStation: Bool = false
-    var spaceStationTouched: Bool = false
+    var spaceStationTouched: Bool = false {
+        didSet {
+            if let ssButton = camera?.childNode(withName: "ssButton") as? SKSpriteNode {
+                if spaceStationTouched {
+                    ssButton.alpha = 0
+                } else {
+                    ssButton.alpha = 1
+                }
+            }
+        }
+    }
     var planetTouched: Bool = false {
         didSet {
             if let ssButton = camera?.childNode(withName: "ssButton") as? SKSpriteNode {

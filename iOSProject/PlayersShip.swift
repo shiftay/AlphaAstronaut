@@ -19,12 +19,35 @@ class PlayersShip {
     var currentReputation: Int
     var currentQuest: Quest!
     var currentPlanetSelected: String = "none"
+    var currentMinerals: Int {
+        didSet {
+            ShipStock.currentHullSpace -= oldValue
+            ShipStock.currentHullSpace += currentMinerals
+        }
+    }
+    
+    var currentMetalParts: Int {
+        didSet {
+            ShipStock.currentHullSpace -= oldValue
+            ShipStock.currentHullSpace += currentMetalParts
+        }
+    }
+    
+    var currentOil: Int {
+        didSet {
+            ShipStock.currentHullSpace -= oldValue
+            ShipStock.currentHullSpace += currentOil
+        }
+    }
     
     init() {
-        ShipStock = ShipUtilities(maxFuel: 100, maxHullSpace: 500, maxShields: 10)
+        ShipStock = ShipUtilities(maxFuel: 100, maxHullSpace: 100, maxShields: 10)
         currentMoney = 0
         currentReputation = 0
         currentPosition = CGPoint.zero
+        currentMinerals = 0
+        currentOil = 0
+        currentMetalParts = 0
         image.position = currentPosition
         image.setScale(0.25)
         image.zPosition = 6
