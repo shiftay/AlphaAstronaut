@@ -13,8 +13,10 @@ import Foundation
 
 class Quest {
     var questTypes: [String] = ["collect", "deliverPlanet", "deliverSS"]
-    var resourceTypes: [String] = ["Oil", "Minerals", "Metal Parts"]
+    var resourceTypes: [String] = []
+    //["Oil", "Minerals", "Metal Parts"]
     var planetNames: [String] = [PlanetList.blue, PlanetList.earth, PlanetList.red, PlanetList.yellow, PlanetList.ring]
+    var spaceStationName: [String] = ["Spacestation Alpha", "Beta"]
     var description: String!
     var reward: Int!
     var reputationGain: Int!
@@ -43,16 +45,26 @@ class Quest {
     }
     
     func createQuest() {
-        questType = questTypes[Int.random(min:0, max: questTypes.count - 2)]
+        questType = questTypes[Int.random(min:0, max: questTypes.count - 1)]
+
+        if questType == "deliverSS" {
+            planetName = spaceStationName[Int.random(min:0, max: spaceStationName.count - 1)]
+        } else {
+            planetName = planetNames[Int.random(min: 0, max: planetNames.count - 1)]
+        }
+        
+        resourceAmount = 25
         resourceType = resourceTypes[Int.random(min: 0, max: resourceTypes.count - 1)]
-        planetName = planetNames[Int.random(min: 0, max: planetNames.count - 1)]
+        //TODO: Add the resourceType switch so only certain planets will contain certain resources.
+        //      Maybe place them like the planet will know which resources are possible
         
         switch questType {
         case "collect":
             description = "You must go to \(planetName) and collect\n \(resourceAmount) \(resourceType). Upon returning \nto \(questGiver) you will recieve your reward."
             questName = "Collect \(resourceType) from \(planetName!)"
         case "deliverSS":
-            print("inside DeliverSS")
+            description = "You must go to \(planetName!) and deliver this package.\n It will take up your inventory space,\n however they will pay you on arrival."
+            questName = "Deliver a package to \(planetName!)"
         case "deliverPlanet":
             description = "You must go to \(planetName!) and deliver this package.\n It will take up your inventory space,\n however they will pay you on arrival."
             questName = "Deliver a package to \(planetName!)"
@@ -62,4 +74,7 @@ class Quest {
         
     }
     
+    func fillResources() {
+    
+    }
 }
