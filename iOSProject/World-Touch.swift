@@ -41,11 +41,6 @@ extension World {
                 } else {
                     handleSSOL(firstTouch: firstTouch)
                 }
-                
-                
-                
-               
-
             }
         
             if visitingPlanet {
@@ -173,7 +168,6 @@ extension World {
         return retVal
     }
     
-    
     func sellPrice() -> String {
         var retVal: String = ""
         let spaceStation = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
@@ -191,7 +185,6 @@ extension World {
         
         return retVal
     }
-    
     
     func sellItem() {
         let test = GameViewController.Player
@@ -233,7 +226,6 @@ extension World {
         }
     }
     
-    
     func enoughMoney() -> Bool {
         var retVal: Bool = false
         let player = GameViewController.Player
@@ -264,7 +256,6 @@ extension World {
         return retVal
     }
     
-    
     func returnMax() -> Int {
         var retVal: Int = 0
         let test = GameViewController.Player
@@ -290,8 +281,6 @@ extension World {
 
         return retVal
     }
-    
-    
     
     func handlePlanetOL(firstTouch: UITouch) {
         print("handlePlanetOL")

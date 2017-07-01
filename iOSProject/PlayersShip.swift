@@ -49,7 +49,8 @@ class PlayersShip {
         currentOil = 0
         currentMetalParts = 0
         image.position = currentPosition
-        image.setScale(0.25)
+        image.setScale(0.8)
+        image.yScale *= -1
         image.zPosition = 6
         image.anchorPoint = CGPoint(x: 0.5, y: 0.5)
     }

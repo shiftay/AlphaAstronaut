@@ -37,6 +37,19 @@
 		EC02F7AA1EFA25530063663C /* SKTEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79A1EFA25530063663C /* SKTEffects.swift */; };
 		EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */; };
 		EC02F7AC1EFA25530063663C /* Vector3.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F79C1EFA25530063663C /* Vector3.swift */; };
+		EC2BE9C61F04A30100E1BF9B /* World-Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */; };
+		EC34E9561EFF436C001FFC3B /* WorldView.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC34E9551EFF436C001FFC3B /* WorldView.sks */; };
+		EC34E9581EFF438B001FFC3B /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9571EFF438B001FFC3B /* World.swift */; };
+		EC34E95A1EFF4836001FFC3B /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E9591EFF4836001FFC3B /* Planet.swift */; };
+		EC34E95C1EFF4E57001FFC3B /* PlayersShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */; };
+		EC34E95E1EFF4EEA001FFC3B /* PlayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */; };
+		EC34E9601EFF520F001FFC3B /* Quest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC34E95F1EFF520F001FFC3B /* Quest.swift */; };
+		EC3B0C1E1F0455F40073B40F /* SpaceStation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C1D1F0455F40073B40F /* SpaceStation.swift */; };
+		EC3B0C201F0458280073B40F /* ss_Alpha.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C1F1F0458280073B40F /* ss_Alpha.swift */; };
+		EC3B0C221F0467B00073B40F /* SSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C211F0467B00073B40F /* SSButton.swift */; };
+		EC3B0C241F04707D0073B40F /* BackBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C231F04707D0073B40F /* BackBtn.swift */; };
+		EC3B0C261F04708C0073B40F /* alphaBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C251F04708C0073B40F /* alphaBtn.swift */; };
+		EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */; };
 		F435663D1F05C0E500C6443B /* FireTrail1.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663C1F05C0E500C6443B /* FireTrail1.sks */; };
 		F435663F1F05C70200C6443B /* FireTrail2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663E1F05C70200C6443B /* FireTrail2.sks */; };
 		F44153FA1EFC76FC009CA19F /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44153F91EFC76FC009CA19F /* Runner.swift */; };
@@ -82,6 +95,19 @@
 		EC02F79A1EFA25530063663C /* SKTEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTEffects.swift; sourceTree = "<group>"; };
 		EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKTTimingFunctions.swift; sourceTree = "<group>"; };
 		EC02F79C1EFA25530063663C /* Vector3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3.swift; sourceTree = "<group>"; };
+		EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "World-Touch.swift"; sourceTree = "<group>"; };
+		EC34E9551EFF436C001FFC3B /* WorldView.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WorldView.sks; sourceTree = "<group>"; };
+		EC34E9571EFF438B001FFC3B /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		EC34E9591EFF4836001FFC3B /* Planet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayersShip.swift; sourceTree = "<group>"; };
+		EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerUtils.swift; sourceTree = "<group>"; };
+		EC34E95F1EFF520F001FFC3B /* Quest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quest.swift; sourceTree = "<group>"; };
+		EC3B0C1D1F0455F40073B40F /* SpaceStation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceStation.swift; sourceTree = "<group>"; };
+		EC3B0C1F1F0458280073B40F /* ss_Alpha.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ss_Alpha.swift; sourceTree = "<group>"; };
+		EC3B0C211F0467B00073B40F /* SSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSButton.swift; sourceTree = "<group>"; };
+		EC3B0C231F04707D0073B40F /* BackBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackBtn.swift; sourceTree = "<group>"; };
+		EC3B0C251F04708C0073B40F /* alphaBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alphaBtn.swift; sourceTree = "<group>"; };
+		EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		F435663C1F05C0E500C6443B /* FireTrail1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail1.sks; sourceTree = "<group>"; };
 		F435663E1F05C70200C6443B /* FireTrail2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail2.sks; sourceTree = "<group>"; };
 		F44153F91EFC76FC009CA19F /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
@@ -210,6 +236,15 @@
 			name = Optional;
 			sourceTree = "<group>";
 		};
+        EC2147651F05A8A900DDF0A9 /* GameplayLogic */ = {
+            isa = PBXGroup;
+            children = (
+                EC34E9571EFF438B001FFC3B /* World.swift */,
+                EC2BE9C51F04A30100E1BF9B /* World-Touch.swift */,
+            );
+            name = GameplayLogic;
+            sourceTree = "<group>";
+        };
 		F43566391F05BEFD00C6443B /* Particles */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +252,16 @@
 				F435663E1F05C70200C6443B /* FireTrail2.sks */,
 			);
 			name = Particles;
+			sourceTree = "<group>";
+		};
+		EC2147661F05A8C000DDF0A9 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				EC34E95B1EFF4E57001FFC3B /* PlayersShip.swift */,
+				EC34E95D1EFF4EEA001FFC3B /* PlayerUtils.swift */,
+				EC34E95F1EFF520F001FFC3B /* Quest.swift */,
+			);
+			name = Player;
 			sourceTree = "<group>";
 		};
 		F44153F71EFC76CF009CA19F /* Runner */ = {
@@ -325,6 +370,7 @@
 				EC02F7871EFA1BB10063663C /* LeftTile.swift in Sources */,
 				F44153FE1EFC8B0A009CA19F /* LeftBtn.swift in Sources */,
 				EC02F7A51EFA25530063663C /* SKAction+Extensions.swift in Sources */,
+				EC0019C61F0331AC00F04461 /* PlanetEarth.swift in Sources */,
 				F44EFAF51EFDBE230046BB7B /* PauseBtn.swift in Sources */,
 				EC02F76E1EFA16CA0063663C /* GameScene.swift in Sources */,
 				EC0019C21F03310C00F04461 /* Planet_Red.swift in Sources */,
@@ -335,6 +381,9 @@
 				EC02F7701EFA16CA0063663C /* GameViewController.swift in Sources */,
 				EC02F7AB1EFA25530063663C /* SKTTimingFunctions.swift in Sources */,
 				EC02F7A71EFA25530063663C /* SKColor+Extensions.swift in Sources */,
+				EC34E95A1EFF4836001FFC3B /* Planet.swift in Sources */,
+				EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */,
+				EC3B0C241F04707D0073B40F /* BackBtn.swift in Sources */,
 				F44EFAF11EFDB7780046BB7B /* RightBtn.swift in Sources */,
 				F44154001EFC9610009CA19F /* MiddleBtn.swift in Sources */,
 				EC02F7A11EFA25530063663C /* Int+Extensions.swift in Sources */,
