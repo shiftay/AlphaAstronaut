@@ -15,7 +15,7 @@ class PlayersShip {
     var ShipStock: ShipUtilities!
 //    var ShipRoster
     var currentPosition: CGPoint!
-    var currentMoney: Int
+    var currentMoney: CGFloat
     var currentReputation: Int
     var currentQuest: Quest!
     var currentPlanetSelected: String = "none"
@@ -42,7 +42,7 @@ class PlayersShip {
     
     init() {
         ShipStock = ShipUtilities(maxFuel: 100, maxHullSpace: 100, maxShields: 10)
-        currentMoney = 0
+        currentMoney = 0.0
         currentReputation = 0
         currentPosition = CGPoint.zero
         currentMinerals = 0

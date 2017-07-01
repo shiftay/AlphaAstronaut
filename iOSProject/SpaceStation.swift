@@ -17,11 +17,19 @@ enum SSDesc {
 
 
 class SpaceStation: SKSpriteNode, InteractiveNode {
+    var quests: [Quest] = []
     // all rates are multipliers
     let fuelRate: CGFloat = 2.0
-    var mineralRate: CGFloat = 100.0
-    var woodRate: CGFloat = 50.0
-    var plantRate: CGFloat = 10.0
+    // buyRates
+    var oilRate: CGFloat = 100.0
+    var mineralRate: CGFloat = 50.0
+    var metalRate: CGFloat = 10.0
+    // sellRates
+    var oilSell: CGFloat = 300.0
+    var mineralSell: CGFloat = 150.0
+    var metalSell: CGFloat = 30.0
+    
+    
     var descOpen: Bool = false
     
 
@@ -85,12 +93,21 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
     }
     
     func randomizeRates() {
-        let multiplier = CGFloat.random(min: 0.1, max: 1)
+        let multiplier = CGFloat.random(min: 0.75, max: 1.5)
         print("\(multiplier)")
         
-        woodRate *= multiplier
+        oilRate *= multiplier
         mineralRate *= multiplier
-        plantRate *= multiplier
+        metalRate *= multiplier
+    }
+    
+    func randomizeSell() {
+        let multiplier = CGFloat.random(min: 0.5, max: 1)
+        print("\(multiplier)")
+        
+        oilSell *= multiplier
+        mineralSell *= multiplier
+        metalSell *= multiplier
     }
     
     func generateShopPage(HUDSize: CGSize, halfSize: CGSize) -> SKSpriteNode {
@@ -99,7 +116,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         shopPage.name = "ShopPage"
         shopPage.zPosition = 11
         
-        for i in 1...2 {
+        for i in 1...4 {
             
             let color: UIColor!
             if i == 1 {
@@ -110,7 +127,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: ((0 + HUDSize.height * 0.25)) - (buy2.size.height * CGFloat(i-1)))
+            buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 20) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "buy\(i)"
             
@@ -119,7 +136,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         }
         
         
-        for i in 1...2 {
+        for i in 1...3 {
             
             let color: UIColor!
             if i == 1 {
@@ -130,28 +147,13 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: ((0 + HUDSize.height * 0.25)) - (buy2.size.height * CGFloat(i-1)))
+            buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 20) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "sell\(i)"
             
             
             shopPage.addChild(buy2)
         }
-        
-        
-        let buy = SKSpriteNode(color: .blue, size: CGSize(width: HUDSize.width * 0.5, height: HUDSize.height / 8))
-        buy.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 - HUDSize.height * 0.5) - halfSize.height * 0.5)
-        buy.zPosition = 11
-        buy.name = "buy"
-        
-        let sell = SKSpriteNode(color: .purple, size: CGSize(width: HUDSize.width * 0.5, height: HUDSize.height / 8))
-        sell.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 - HUDSize.height * 0.5) - halfSize.height * 0.5)
-        sell.zPosition = 11
-        sell.name = "sell"
-        
-
-        shopPage.addChild(buy)
-        shopPage.addChild(sell)
         
         return shopPage
     }
@@ -172,39 +174,36 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             }
             
             
-            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: ((0 + HUDSize.height * 0.25)) - (buy2.size.height * CGFloat(i-1)))
+            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.66, height: HUDSize.height / 8))
+            buy2.position = CGPoint(x: 0, y: ((0 + HUDSize.height * 0.1 )) - ((buy2.size.height + 25) * CGFloat(i-1)))
             buy2.zPosition = 11
-            buy2.name = "buy\(i)"
+            buy2.name = "quest\(i)"
             
+            let text = SKLabelNode(fontNamed: "Arial")
+            text.name = "quest\(i)"
+            text.position = buy2.position
+            text.zPosition = 12
+            text.fontSize = 20
+            text.verticalAlignmentMode = .center
+            text.fontColor = .black
+            text.text = quests[i-1].questName
             
-            questPage.addChild(buy2)
-        }
-        
-        
-        for i in 1...2 {
-            
-            let color: UIColor!
-            if i == 1 {
-                color = .cyan
-            } else {
-                color = .orange
-            }
-            
-            
-            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: ((0 + HUDSize.height * 0.25)) - (buy2.size.height * CGFloat(i-1)))
-            buy2.zPosition = 11
-            buy2.name = "sell\(i)"
-            
-            
+            questPage.addChild(text)
             questPage.addChild(buy2)
         }
         
         return questPage
     }
     
-    
+    func createQuests() {
+        if quests.count > 0 {
+            quests.removeAll()
+        }
+        
+        for i in 0...1 {
+            quests.insert(Quest(questGiver: self.name!), at: i)
+        }
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

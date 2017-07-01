@@ -15,7 +15,7 @@ class PlanetYellow: planetBase {
     //    var descOpen: Bool = false
     
     override func sceneLoaded() {
-        name = "yellow"
+        name = PlanetList.yellow
         isUserInteractionEnabled = true
     }
     

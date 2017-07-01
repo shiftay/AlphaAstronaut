@@ -13,9 +13,13 @@ enum PlanetUtils {
     static let touched = "planet_touched"
 }
 
-//enum PlanetDescriptions {
-//    
-//}
+enum PlanetList {
+    static let ring = "ring"
+    static let blue = "blue"
+    static let red = "red"
+    static let earth = "earth"
+    static let yellow = "yellow"
+}
 
 class planetBase: SKSpriteNode, InteractiveNode, Planet {
     //let descOverlay = SKSpriteNode(imageNamed: "overlay")

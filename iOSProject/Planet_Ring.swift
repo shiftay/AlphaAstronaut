@@ -15,7 +15,7 @@ class PlanetRing: planetBase {
     //    var descOpen: Bool = false
     
     override func sceneLoaded() {
-        name = "ring"
+        name = PlanetList.ring
         isUserInteractionEnabled = true
     }
     

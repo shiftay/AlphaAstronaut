@@ -27,6 +27,9 @@ class SSAlpha: SpaceStation {
         name = "SpaceStation Alpha"
         isUserInteractionEnabled = true
         randomizeRates()
+        randomizeSell()
+        quests.insert(Quest(questGiver: self.name!), at: 0)
+        quests.insert(Quest(questGiver: self.name!), at: 1)
     }
     
 }

@@ -14,7 +14,7 @@ class PlanetRed: planetBase {
     //let planetPic = SKSpriteNode(imageNamed: "____planet")
 
     override func sceneLoaded() {
-        name = "red"
+        name = PlanetList.red
         isUserInteractionEnabled = true
     }
     

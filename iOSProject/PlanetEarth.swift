@@ -15,7 +15,7 @@ class PlanetEarth: planetBase {
     //    var descOpen: Bool = false
     
     override func sceneLoaded() {
-        name = "earth"
+        name = PlanetList.earth
         isUserInteractionEnabled = true
     }
     
