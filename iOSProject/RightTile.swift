@@ -17,7 +17,7 @@ class RightTile: SKSpriteNode, InteractiveNode {
             return
         }
         
-        zPosition = -1
+        zPosition = 1
         position = CGPoint(x: scene.size.width * 0.75,
                            y: scene.size.height * 0.5)
         size = CGSize(width: scene.size.width * 0.5,

@@ -11,19 +11,28 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
-
+    static var Player: PlayersShip!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GameViewController.Player = PlayersShip()
+        
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "RunnerScene") {
+            if let scene = SKScene(fileNamed: "WorldView") {
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
+                scene.scaleMode = .aspectFit
                 
                 // Present the scene
                 view.presentScene(scene)
             }
+            
+            
+            
+            
+            view.autoresizesSubviews = true
             
             view.ignoresSiblingOrder = true
             
