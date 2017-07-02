@@ -58,4 +58,12 @@ class ShipUtilities {
         currentHullSpace = 0
         currentShields = 0
     }
+    
+    func spaceLeft() -> Int {
+        var retVal: Int = 0
+        
+        retVal = maxHullSpace - currentHullSpace
+    
+        return retVal
+    }
 }

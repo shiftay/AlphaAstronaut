@@ -13,7 +13,7 @@ import Foundation
 
 class Quest {
     var questTypes: [String] = ["collect", "deliverPlanet", "deliverSS"]
-    var resourceTypes: [String] = []
+    var resourceTypes: [String] = ["Oil", "Minerals", "Metal Parts"]
     //["Oil", "Minerals", "Metal Parts"]
     var planetNames: [String] = [PlanetList.blue, PlanetList.earth, PlanetList.red, PlanetList.yellow, PlanetList.ring]
     var spaceStationName: [String] = ["Spacestation Alpha", "Beta"]
@@ -45,7 +45,14 @@ class Quest {
     }
     
     func createQuest() {
-        questType = questTypes[Int.random(min:0, max: questTypes.count - 1)]
+        
+        if questGiver.contains("Spacestation") {
+            questType = questTypes[Int.random(min:0, max: questTypes.count - 2)]
+        } else {
+            questType = questTypes[Int.random(min:0, max: questTypes.count - 1)]
+        }
+        
+        
 
         if questType == "deliverSS" {
             planetName = spaceStationName[Int.random(min:0, max: spaceStationName.count - 1)]

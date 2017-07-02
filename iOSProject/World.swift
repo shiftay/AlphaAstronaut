@@ -17,6 +17,10 @@ protocol Planet {
 
 class World: SKScene {
     static var cameraPos: CGPoint?
+    static let updateGauge = "updateGauge"
+    let fuelUsageUnit: CGFloat = 32.5
+    let distanceUnit: CGFloat = 400.0
+    
     var background: SKSpriteNode!
     var cameraNode: SKCameraNode?
     var maxWidth: CGFloat = 2500.0
@@ -65,7 +69,7 @@ class World: SKScene {
         
         cameraNode = childNode(withName: "camera") as? SKCameraNode
         World.cameraPos = cameraNode?.position
-        
+        GameViewController.Player.ShipStock.currentFuel = 10
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         addChild(GameViewController.Player.image)
@@ -99,6 +103,7 @@ class World: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
+        NotificationCenter.default.post(Notification(name: NSNotification.Name(World.updateGauge), object: nil))
         
         if followPlayer {
             cameraFollowsPlayer()
@@ -149,8 +154,36 @@ class World: SKScene {
             
             
             
-            GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2) , duration: 0.5),
-                                                                   SKAction.move(to: planet.position, duration: 5),
+            
+            
+            
+            if hyp == 0 {
+                GameViewController.Player.image.run(SKAction.sequence([SKAction.scale(to: 0, duration: 2),
+                                                                       SKAction.run {
+                                                                        self.followPlayer = false
+                                                                        self.visitingSpaceStation = true
+                                                                        if let planet =
+                                                                            self.childNode(withName: GameViewController.Player.currentPlanetSelected)
+                                                                                as? SpaceStation
+                                                                        {
+                                                                            planet.openInventory(name: (planet.name)!)
+                                                                        }
+                    }]))
+            } else {
+                let duration = hyp / distanceUnit
+                let fuelSpent = hyp / fuelUsageUnit
+                
+                if GameViewController.Player.ShipStock.currentFuel - Int(fuelSpent) <= 0 {
+                    print("not enough fuel")
+                    
+                    let hud = childNode(withName: "HUD") as? SKSpriteNode
+                    hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Not enough fuel. Land at a closer Planet."))
+                } else {
+                print("fuelSpent: \(fuelSpent)")
+                print("duration: \(duration)")
+                GameViewController.Player.ShipStock.currentFuel -= Int(fuelSpent)
+                  GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2) , duration: 0.5),
+                                                                   SKAction.move(to: planet.position, duration: TimeInterval(duration)),
                                                                    SKAction.scale(to: 0, duration: 2),
                                                                    SKAction.run {
                                                                     self.followPlayer = false
@@ -162,9 +195,15 @@ class World: SKScene {
                                                                         planet.openInventory(name: (planet.name)!)
                                                                     }
                 }]))
+                }
+            }
         }
 
     }
+    
+    // 32.5 --- TO DECIDE FUEL (1%)
+    //
+    // 800  |  2800
     
     
     
@@ -213,11 +252,35 @@ class World: SKScene {
                 angle = asin(opp / hyp) * -1
                 angle2 *= -1
             }
+            
+            if hyp == 0 {
+                GameViewController.Player.image.run(SKAction.sequence([SKAction.scale(to: 0, duration: 2),
+                                                                       SKAction.run {
+                                                                        self.followPlayer = false
+                                                                        self.visitingPlanet = true
+                                                                        if let planet =
+                                                                            self.childNode(withName: GameViewController.Player.currentPlanetSelected)
+                                                                                as? planetBase
+                                                                        {
+                                                                            planet.openPlanetQuest()
+                                                                        }
+                    }]))
+            } else {
+                let duration = hyp / distanceUnit
+                let fuelSpent = hyp / fuelUsageUnit
 
+                if GameViewController.Player.ShipStock.currentFuel - Int(fuelSpent) <= 0 {
+                    print("not enough fuel")
+                    
+                    let hud = childNode(withName: "HUD") as? SKSpriteNode
+                    hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Not enough fuel. Land at a closer Planet."))
+                } else {
+                
+                GameViewController.Player.ShipStock.currentFuel -= Int(fuelSpent)
             //TODO: run randomizer to see if event fires, either on planet or on flight.
             
-            GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2), duration: 0.5),
-                                                                   SKAction.move(to: planet.position, duration: 5),
+                    GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2), duration: 0.5),
+                                                                   SKAction.move(to: planet.position, duration: TimeInterval(duration)),
                                                                    SKAction.scale(to: 0, duration: 2),
                                                                    SKAction.run {
                                                                     self.followPlayer = false
@@ -229,6 +292,8 @@ class World: SKScene {
                                                                         planet.openPlanetQuest()
                                                                     }
                 }]))
+                }
+            }
         }
     }
     

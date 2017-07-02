@@ -57,6 +57,13 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         no.zPosition = 11
         no.name = "Quest"
         
+        
+        let leave = SKSpriteNode(color: .white, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.1))
+        leave.zPosition = 11
+        leave.position = CGPoint(x: 0, y: (0 - testPic.size.height * 0.5) + leave.size.height * 0.5)
+        leave.name = "Leave"
+        
+        testPic.addChild(leave)
         testPic.addChild(generateShopPage(HUDSize: testPic.size, halfSize: yes.size))
         testPic.addChild(no)
         testPic.addChild(yes)
@@ -127,7 +134,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 20) * CGFloat(i-1)))
+            buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "buy\(i)"
             
@@ -147,7 +154,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
-            buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 20) * CGFloat(i-1)))
+            buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "sell\(i)"
             

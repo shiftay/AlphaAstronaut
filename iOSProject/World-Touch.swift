@@ -148,156 +148,67 @@ extension World {
     }
     
     
-    func buyPrice() -> String {
-        var retVal: String = ""
-        let spaceStation = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
 
-        switch shopItem {
-        case "fuel" :
-            retVal = "$\(CGFloat(amountToSell) * (spaceStation?.fuelRate)!)"
-        case "minerals":
-            retVal = "$" + String(format: "%.2f", CGFloat(amountToSell) * (spaceStation?.mineralSell)!)
-        case "oil":
-            retVal = "$\(CGFloat(amountToSell) * (spaceStation?.oilSell)!)"
-        case "metal" :
-            retVal = "$\(CGFloat(amountToSell) * (spaceStation?.metalSell)!)"
-        default:
-            break
-        }
-        
-        return retVal
-    }
     
-    func sellPrice() -> String {
-        var retVal: String = ""
-        let spaceStation = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
-        
-        switch shopItem {
-        case "minerals":
-            retVal = "$" + String(format: "%.2f", "\(CGFloat(amountToSell) * (spaceStation?.mineralSell)!)")
-        case "oil":
-            retVal = "$\(CGFloat(amountToSell) * (spaceStation?.oilSell)!)"
-        case "metal" :
-            retVal = "$\(CGFloat(amountToSell) * (spaceStation?.metalSell)!)"
-        default:
-            break
-        }
-        
-        return retVal
-    }
-    
-    func sellItem() {
-        let test = GameViewController.Player
-        
-        switch shopItem {
-        case "fuel" :
-            test?.ShipStock.currentFuel -= amountToSell
-        case "minerals":
-            test?.currentMinerals -= amountToSell
-        case "oil":
-            test?.currentOil -= amountToSell
-        case "metal" :
-            test?.currentMetalParts -= amountToSell
-        default:
-            break
-        }
-    }
-    
-    func buyItem() {
-        let test = GameViewController.Player
-        
-        if !enoughMoney() {
-            print("not enough money")
-            // TODO: Open pop up saying you dont have enough money.
-            return
-        }
-        
-        switch shopItem {
-        case "fuel" :
-            test?.ShipStock.currentFuel += amountToSell
-        case "minerals":
-            test?.currentMinerals += amountToSell
-        case "oil":
-            test?.currentOil += amountToSell
-        case "metal" :
-            test?.currentMetalParts += amountToSell
-        default:
-            break
-        }
-    }
-    
-    func enoughMoney() -> Bool {
-        var retVal: Bool = false
-        let player = GameViewController.Player
-        let spaceStation = scene?.childNode(withName: (player?.currentPlanetSelected)!) as? SpaceStation
-        
-        switch shopItem {
-        case "fuel" :
-            if (player?.currentMoney)! >= ((spaceStation?.fuelRate)! * CGFloat(amountToSell)) {
-                retVal = true
-            }
-        case "minerals":
-            if (player?.currentMoney)! >= ((spaceStation?.mineralSell)! * CGFloat(amountToSell)) {
-                retVal = true
-            }
-        case "oil":
-            if (player?.currentMoney)! >= ((spaceStation?.oilSell)! * CGFloat(amountToSell)) {
-                retVal = true
-            }
-        case "metal" :
-            if (player?.currentMoney)! >= ((spaceStation?.metalSell)! * CGFloat(amountToSell)) {
-                retVal = true
-            }
-        default:
-            break
-        }
+    func handlePlanetOL(firstTouch: UITouch) {
+        let hud = childNode(withName: "HUD") as? SKSpriteNode
+        let planet = childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetBase
         
         
-        return retVal
-    }
-    
-    func returnMax() -> Int {
-        var retVal: Int = 0
-        let test = GameViewController.Player
-
-        if buy {
-            if shopItem == "fuel" {
-                retVal = (test?.ShipStock.maxFuel)! - (test?.ShipStock.currentFuel)!
-            } else {
-                retVal = (test?.ShipStock.maxHullSpace)! - (test?.ShipStock.currentHullSpace)!
-            }
-        } else {
-            switch shopItem {
-            case "minerals":
-                retVal = (test?.currentMinerals)!
-            case "oil":
-                retVal = (test?.currentOil)!
-            case "metal":
-                retVal = (test?.currentMetalParts)!
+        if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKNode {
+            switch touchedNode.name! {
+            case "Leave":
+                hud?.removeFromParent()
+                GameViewController.Player.image.run(SKAction.sequence([SKAction.scale(to: 0.8, duration: 1),
+                                                                       SKAction.run {
+                                                                        GameViewController.Player.image.yScale *= -1
+                                                    }]))
+                planetTouched = false
+                planet?.descOpen = false
+                GameViewController.Player.currentPlanetSelected = "none"
+                visitingPlanet = false
+            case "Gather":
+                hud?.addChild(createGatherBox(HUDsize: (hud?.size)!))
+            case "Quest":
+                break
+            case "Quit":
+                if let node = hud?.childNode(withName: "GatherPopup") as? SKSpriteNode {
+                    node.removeFromParent()
+                }
+            case "Oil":
+                print("oil")
+            case "Fuel":
+                print("fuel")
+            case "Minerals":
+                print("minerals")
+            case "Metal":
+                break
+                
             default:
                 break
             }
         }
-
-        return retVal
-    }
     
-    func handlePlanetOL(firstTouch: UITouch) {
-        print("handlePlanetOL")
         //TODO: Gather: Fuel -> Loads other scene
         //              Materials -> Loads other scene
         //      Leave:  Closes the HUD
         //      Quest:  Hand in quest or accept cargo
     }
+    
+    
+        
+    
 
     func handleSSOL(firstTouch: UITouch) {
         let hud = childNode(withName: "HUD") as? SKSpriteNode
         let spaceStation = childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
-        
+        let player = GameViewController.Player
         //TODO: In order for touch to work with inventory, each space station needs the same amount of things to sell
         //      Player can only SELL the resources
         //      if other thing is open, okay, cancel, max, + / -
         //
+        GameViewController.Player.currentMetalParts = 100
+        
         
         if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKNode {
             switch touchedNode.name! {
@@ -319,35 +230,59 @@ extension World {
                 buy = true
                 print("buy fuel")
             case "buy2":
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                shopItem = "minerals"
-                buy = true
-                print("buy minerals")
+                if (player?.ShipStock.spaceLeft())! <= 0 {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Inventory FULL"))
+                } else {
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    shopItem = "minerals"
+                    buy = true
+                }
             case "buy3":
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                shopItem = "oil"
-                buy = true
+                if (player?.ShipStock.spaceLeft())! <= 0 {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Inventory FULL"))
+                } else {
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    shopItem = "oil"
+                    buy = true
+                }
                 print("buy oil")
             case "buy4":
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                shopItem = "metal"
-                buy = true
+                if (player?.ShipStock.spaceLeft())! <= 0 {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Inventory FULL"))
+                } else {
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    shopItem = "metal"
+                    buy = true
+                }
                 print("buy metal")
             case "sell1":
-                print("sell minerals")
-                shopItem = "minerals"
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                buy = false
+                if ((player?.currentMinerals)! <= 0) {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
+                } else {
+                    print("sell minerals")
+                    shopItem = "minerals"
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    buy = false
+                }
+
             case "sell2":
-                print("sell oil")
-                shopItem = "oil"
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                buy = false
+                if ((player?.currentOil)! <= 0) {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
+                } else {
+                    print("sell oil")
+                    shopItem = "oil"
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    buy = false
+                }
             case "sell3":
-                print("sell metal")
-                shopItem = "metal"
-                hud?.addChild(createSellBox(HUDsize: hud!.size))
-                buy = false
+                if ((player?.currentMetalParts)! <= 0) {
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
+                } else {
+                    print("sell metal")
+                    shopItem = "metal"
+                    hud?.addChild(createSellBox(HUDsize: hud!.size))
+                    buy = false
+                }
             case "quest1":
                 if GameViewController.Player.currentQuest == nil {
                     hud?.addChild(createQuestBox(HUDsize: hud!.size, QuestNumber: 0))
@@ -357,28 +292,58 @@ extension World {
                 //TODO: Only allow if player doesnt have any quests.
 
             case "quest2":
-                print("show quest box")
+                if GameViewController.Player.currentQuest == nil {
+                    hud?.addChild(createQuestBox(HUDsize: hud!.size, QuestNumber: 1))
+                } else {
+                    print("you already have a quest")
+                }
+            
+            case "Leave":
+                hud?.removeFromParent()
+                GameViewController.Player.image.run(SKAction.sequence([SKAction.scale(to: 0.8, duration: 1),
+                                                                       SKAction.run {
+                                                                        GameViewController.Player.image.yScale *= -1
+                    }]))
+                spaceStationTouched = false
+                GameViewController.Player.currentPlanetSelected = "none"
+                visitingSpaceStation = false
+                spaceStation?.descOpen = false
                 
+            case "leaveInv":
+                if let node = hud?.childNode(withName: "InvenFull") as? SKSpriteNode {
+                    node.removeFromParent()
+                }
             default:
                 break
             }
             
         }
     }
+    
+        
+    
 
     func handleDescBox(firstTouch: UITouch, isSpaceStation: Bool) {
+        let hud = childNode(withName: "HUD") as? SKSpriteNode
+        
         if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKSpriteNode {
             switch touchedNode.name! {
             case "yes":
+                
+                
+                
+                
                 if isSpaceStation {
                     flyShipToStation()
                 } else {
                     flyShip()
                 }
                 
-                if let hud = scene?.childNode(withName: "HUD") {
-                    hud.removeFromParent()
-                    followPlayer = true
+                if (hud?.childNode(withName: "InvenFull") as? SKSpriteNode) == nil {
+                    if let hud = scene?.childNode(withName: "HUD") {
+                        hud.removeFromParent()
+                        followPlayer = true
+                    }
                 }
             case "no":
                 if let hud = scene?.childNode(withName: "HUD") {
@@ -398,6 +363,11 @@ extension World {
                 }
                 
                 GameViewController.Player.currentPlanetSelected = "none"
+                
+            case "leaveInv":
+                if let node = hud?.childNode(withName: "InvenFull") as? SKSpriteNode {
+                    node.removeFromParent()
+                }
             default:
                 break
             }
@@ -413,149 +383,10 @@ extension World {
         }
     }
     
-    func createSellBox(HUDsize: CGSize) -> SKSpriteNode {
-        let bg = SKSpriteNode(color: .black, size: (scene?.size)!)
-        bg.alpha = 0.90
-        bg.zPosition = -10
-        bg.position = CGPoint.zero
-        bg.name = "bg"
-
-        let box = SKSpriteNode(color: .white, size: CGSize(width: HUDsize.width, height: HUDsize.height * 0.5))
-        box.zPosition = 52
-        box.position = CGPoint.zero
-        box.name = "ShopPopup"
-        box.addChild(bg)
-
-        let number = SKSpriteNode(color: .red, size: CGSize(width: HUDsize.width * 0.33, height: HUDsize.width * 0.33))
-        number.zPosition = 53
-        number.position = CGPoint(x: 0, y: 0 + number.size.height * 0.5)
-        number.name = "number"
-        box.addChild(number)
         
-        let text = SKLabelNode(fontNamed: "Arial")
-        text.zPosition = 54
-        text.verticalAlignmentMode = .center
-        text.position = number.position
-        text.text = "0"
-        text.name = "numText"
-        text.fontColor = .white
-        text.fontSize = 100
-        box.addChild(text)
-        
-        
-        let plus = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.1, height: HUDsize.width * 0.1))
-        plus.zPosition = 53
-        plus.position = CGPoint(x: number.position.x + HUDsize.width * 0.35, y: number.position.y)
-        plus.name = "plus"
-        box.addChild(plus)
-        
-        let minus = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.1, height: HUDsize.width * 0.1))
-        minus.zPosition = 53
-        minus.position = CGPoint(x: number.position.x - HUDsize.width * 0.35, y: number.position.y)
-        minus.name = "minus"
-        box.addChild(minus)
-        
-        let maxArea = SKSpriteNode(color: .black, size: CGSize(width: HUDsize.width * 0.35, height: HUDsize.width * 0.15))
-        maxArea.zPosition = 53
-        maxArea.position = CGPoint(x: 0, y: number.position.y - number.size.height)
-        maxArea.name = "maxArea"
-        box.addChild(maxArea)
-        
-        let max = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1))
-        max.zPosition = 53
-        max.position = CGPoint(x: plus.position.x, y: maxArea.position.y)
-        max.name = "MAX"
-        box.addChild(max)
-        
-        let clear = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1))
-        clear.zPosition = 53
-        clear.position = CGPoint(x: minus.position.x, y: maxArea.position.y)
-        clear.name = "CLEAR"
-        box.addChild(clear)
-        
-        let mText = SKLabelNode(fontNamed: "Arial")
-        mText.zPosition = 54
-        mText.verticalAlignmentMode = .center
-        mText.position = maxArea.position
-        mText.text = "$0"
-        mText.name = "maxText"
-        mText.fontColor = .white
-        mText.fontSize = 35
-        box.addChild(mText)
-        
-        
-        
-        let okay = SKSpriteNode(color: .blue, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
-        box.addChild(okay)
-        okay.position = CGPoint(x: 0 - okay.size.width * 0.5, y: (0 - box.size.height * 0.5) + okay.size.height * 0.5)
-        okay.zPosition = 53
-        okay.name = "okay"
-        
-        let cancel = SKSpriteNode(color: .purple, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
-        box.addChild(cancel)
-        cancel.position = CGPoint(x: 0 + cancel.size.width * 0.5, y: (0 - box.size.height * 0.5) + cancel.size.height * 0.5)
-        cancel.zPosition = 53
-        cancel.name = "cancel"
-        
-        return box
-    }
     
-    
-    func createQuestBox(HUDsize: CGSize, QuestNumber: Int) -> SKSpriteNode {
-        let spaceStation = childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
-        
-        let bg = SKSpriteNode(color: .black, size: (scene?.size)!)
-        bg.alpha = 0.90
-        bg.zPosition = -10
-        bg.position = CGPoint.zero
-        bg.name = "bg"
-        
-        let box = SKSpriteNode(color: .white, size: CGSize(width: HUDsize.width, height: HUDsize.height * 0.5))
-        box.zPosition = 52
-        box.position = CGPoint.zero
-        box.name = "QuestPopup"
-        box.addChild(bg)
-
-        
-        let description = SKSpriteNode(color:.red, size: CGSize(width: box.size.width * 0.66, height: box.size.height * 0.66))
-        description.zPosition = 53
-        description.position = CGPoint(x: 0, y: 0 + description.size.height * 0.125)
-        description.name = "desc"
-        box.addChild(description)
-        
-        let descText = SKLabelNode(fontNamed: "Arial")
-        descText.position = description.position
-        descText.zPosition = 54
-        descText.fontColor = .black
-        descText.fontSize = 20
-        descText.horizontalAlignmentMode = .center
-        descText.name = "descT"
-        print("\(String(describing: spaceStation?.quests[QuestNumber].description!))")
-        descText.text = spaceStation?.quests[QuestNumber].description!
-        box.addChild(descText)
-        //TODO: Setup quest within the description box.
-        
-        let okay = SKSpriteNode(color: .blue, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
-        box.addChild(okay)
-        okay.position = CGPoint(x: 0 - okay.size.width * 0.5, y: (0 - box.size.height * 0.5) + okay.size.height * 0.5)
-        okay.zPosition = 53
-        okay.name = "okay\(QuestNumber)"
-        
-        let cancel = SKSpriteNode(color: .purple, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
-        box.addChild(cancel)
-        cancel.position = CGPoint(x: 0 + cancel.size.width * 0.5, y: (0 - box.size.height * 0.5) + cancel.size.height * 0.5)
-        cancel.zPosition = 53
-        cancel.name = "cancel\(QuestNumber)"
-        
-        
-        
-        return box
-    }
-    
-    
-    
-    
-    
+       
+ 
     // TODO:    Decide how large the solar system is.
     func checkBounds(pos: CGPoint) -> Bool {
         var retVal: Bool = true

@@ -42,7 +42,7 @@ class PlayersShip {
     
     init() {
         ShipStock = ShipUtilities(maxFuel: 100, maxHullSpace: 100, maxShields: 10)
-        currentMoney = 0.0
+        currentMoney = 500.0
         currentReputation = 0
         currentPosition = CGPoint.zero
         currentMinerals = 0

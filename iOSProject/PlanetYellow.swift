@@ -17,6 +17,7 @@ class PlanetYellow: planetBase {
     override func sceneLoaded() {
         name = PlanetList.yellow
         isUserInteractionEnabled = true
+        hasOil = true
     }
     
     override func interact() {
