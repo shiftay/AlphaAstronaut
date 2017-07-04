@@ -66,18 +66,18 @@ extension World {
                 if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
                     popup.removeFromParent()
                 }
-
-                
             case "okay1":
                 GameViewController.Player.currentQuest = spaceStation?.quests[1]
                 if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
                     popup.removeFromParent()
                 }
-
-
-            case "cancel":
+            case "cancel0":
                 if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
                     popup.removeFromParent()
+                }
+            case "cancel1":
+                    if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
+                        popup.removeFromParent()
                 }
             default:
                 break
@@ -287,7 +287,7 @@ extension World {
                 if GameViewController.Player.currentQuest == nil {
                     hud?.addChild(createQuestBox(HUDsize: hud!.size, QuestNumber: 0))
                 } else {
-                    print("you already have a quest")
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "You already have a quest"))
                 }
                 //TODO: Only allow if player doesnt have any quests.
 
@@ -295,7 +295,7 @@ extension World {
                 if GameViewController.Player.currentQuest == nil {
                     hud?.addChild(createQuestBox(HUDsize: hud!.size, QuestNumber: 1))
                 } else {
-                    print("you already have a quest")
+                    hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "You already have a quest"))
                 }
             
             case "Leave":

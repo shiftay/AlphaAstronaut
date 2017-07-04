@@ -92,7 +92,7 @@ class Timber: SKScene {
             
             enumerateChildNodes(withName: "//tree*", using: { node, _ in
                 if let node = node as? SKSpriteNode {
-                    let x = SKAction.moveTo(y: node.position.y - (node.size.height * 0.9), duration: 0)
+                    let x = SKAction.moveTo(y: node.position.y - (node.size.height), duration: 0)
                     node.run(x)
                 }
             })

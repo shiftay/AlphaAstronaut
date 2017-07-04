@@ -11,10 +11,9 @@ import SpriteKit
 class Tree {
     var treeLayout: [Int] = []
     var treeSize: Int = 15
-    let middle = SKSpriteNode(imageNamed: "Tree_middleB")
+    let middle = SKSpriteNode(imageNamed: "middle")
     
     init() {
-        middle.setScale(5)
         CreateTree()
     }
     
@@ -54,7 +53,7 @@ class Tree {
     }
     
     func setLeft(pos: Int, scene: SKScene, test: Int = 0) {
-        let left = SKSpriteNode(imageNamed: "Tree_leftB")
+        let left = SKSpriteNode(imageNamed: "left")
         
         if test == 0 {
             left.name = "tree\(pos)"
@@ -62,15 +61,14 @@ class Tree {
             left.name = "tree\(test)"
         }
 
-        left.anchorPoint = CGPoint(x: 0.74, y: 0.5)
-        left.setScale(5)
+        left.anchorPoint = CGPoint(x: 0.62, y: 0.5)
         left.position = CGPoint(x: scene.size.width * 0.5,
-                                y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)))
+                                y: middle.size.height * 0.5 + ((middle.size.height) * CGFloat(pos)))
         scene.addChild(left)
     }
     
     func setMiddle(pos: Int, scene: SKScene, test: Int = 0) {
-        let mid = SKSpriteNode(imageNamed: "Tree_middleB")
+        let mid = SKSpriteNode(imageNamed: "middle")
         
         if test == 0 {
             mid.name = "tree\(pos)"
@@ -78,14 +76,13 @@ class Tree {
             mid.name = "tree\(test)"
         }
         
-        mid.setScale(5)
         mid.position = CGPoint(x: scene.size.width * 0.5,
-                               y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)) )
+                               y: middle.size.height * 0.5 + ((middle.size.height) * CGFloat(pos)) )
         scene.addChild(mid)
     }
     
     func setRight(pos: Int, scene: SKScene, test: Int = 0) {
-        let right = SKSpriteNode(imageNamed: "Tree_rightB")
+        let right = SKSpriteNode(imageNamed: "right")
         
         if test == 0 {
             right.name = "tree\(pos)"
@@ -93,10 +90,9 @@ class Tree {
             right.name = "tree\(test)"
         }
         
-        right.anchorPoint = CGPoint(x: 0.26, y: 0.5)
-        right.setScale(5)
+        right.anchorPoint = CGPoint(x: 0.385, y: 0.5)
         right.position = CGPoint(x: scene.size.width * 0.5,
-                                 y: middle.size.height * 0.5 + ((middle.size.height * 0.9) * CGFloat(pos)))
+                                 y: middle.size.height * 0.5 + ((middle.size.height) * CGFloat(pos)))
         scene.addChild(right)
     }
     

@@ -10,8 +10,13 @@ import Foundation
 import SpriteKit
 
 enum SSDesc {
-    static let alpha = "Hello this is alpha"
+    static let alpha = "Hello this is alpha we are actually trying our best LOL"
     static let beta = "Hello this is beta"
+}
+
+enum SSList {
+    static let alpha = "SpaceStation Alpha"
+    static let beta = "SpaceStation Beta"
 }
 
 
@@ -31,8 +36,8 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
     
     
     var descOpen: Bool = false
-    
-
+    var ssDesc: SKSpriteNode!
+    var descText: String!
     func sceneLoaded() {}
     
     func interact() {}
@@ -42,23 +47,28 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             return
         }
         
-        let testPic = SKSpriteNode(color: .green, size: CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66))
+        let testPic = SKSpriteNode(imageNamed: "Overlay")
+        testPic.size = CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66)
         testPic.position = World.cameraPos!
         testPic.zPosition = 10
         testPic.name = "HUD"
         // yes / no == quest / shop
-        let yes = SKSpriteNode(color: .blue, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height / 8))
-        yes.position = CGPoint(x: 0 - yes.size.width * 0.5, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.5)
+        
+        let yes = SKSpriteNode(imageNamed: "Shop")
+        yes.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
+        yes.position = CGPoint(x: 0 - yes.size.width * 0.5, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.7)
         yes.zPosition = 11
         yes.name = "Shop"
         
-        let no = SKSpriteNode(color: .purple, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height / 8))
-        no.position = CGPoint(x: 0 + yes.size.width * 0.5, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.5)
+        let no = SKSpriteNode(imageNamed: "Quest")
+        no.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
+        no.position = CGPoint(x: 0 + yes.size.width * 0.5, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.7)
         no.zPosition = 11
         no.name = "Quest"
         
         
-        let leave = SKSpriteNode(color: .white, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.1))
+        let leave = SKSpriteNode(imageNamed: "Explore")
+        leave.size = CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.1)
         leave.zPosition = 11
         leave.position = CGPoint(x: 0, y: (0 - testPic.size.height * 0.5) + leave.size.height * 0.5)
         leave.name = "Leave"
@@ -78,19 +88,32 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         
         descOpen = true
         
-        let testPic = SKSpriteNode(color: .green, size: CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66))
+        let testPic = SKSpriteNode(imageNamed: "Overlay")
+        testPic.size = CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66)
         
         testPic.position = World.cameraPos!
         testPic.zPosition = 10
         testPic.name = "HUD"
         
-        let yes = SKSpriteNode(color: .blue, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.25))
-        yes.position = CGPoint(x: 0 - yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.5)
+        
+        ssDesc.size = CGSize(width: testPic.size.width * 0.87, height:  testPic.size.height * 0.4)
+        ssDesc.position = CGPoint(x: 0 - 2.5 , y: (0 + ssDesc.size.height * 0.5) + ssDesc.size.height * 0.15)
+        ssDesc.name = "SSDesc"
+        ssDesc.zPosition = 11
+        testPic.addChild(ssDesc)
+        
+        testPic.addChild(World.createStringOL(string: descText, characterCount: 25))
+
+        let yes = SKSpriteNode(imageNamed: "Land")
+        yes.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
+        yes.position = CGPoint(x: 0 - yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.7)
         yes.zPosition = 11
         yes.name = "yes"
         
-        let no = SKSpriteNode(color: .purple, size: CGSize(width: testPic.size.width * 0.5, height: testPic.size.height * 0.25))
-        no.position = CGPoint(x: 0 + yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.5)
+
+        let no = SKSpriteNode(imageNamed: "Explore")
+        no.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
+        no.position = CGPoint(x: 0 + yes.size.width * 0.5, y: (0 - testPic.size.height * 0.5) + yes.size.height * 0.7)
         no.zPosition = 11
         no.name = "no"
         

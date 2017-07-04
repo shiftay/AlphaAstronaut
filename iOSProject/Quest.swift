@@ -67,8 +67,8 @@ class Quest {
         
         switch questType {
         case "collect":
-            description = "You must go to \(planetName) and collect\n \(resourceAmount) \(resourceType). Upon returning \nto \(questGiver) you will recieve your reward."
-            questName = "Collect \(resourceType) from \(planetName!)"
+            description = "You must go to \(planetName!) and collect\n \(resourceAmount!) \(resourceType!). Upon returning \nto \(questGiver) you will recieve your reward."
+            questName = "Collect \(resourceType!) from \(planetName!)"
         case "deliverSS":
             description = "You must go to \(planetName!) and deliver this package.\n It will take up your inventory space,\n however they will pay you on arrival."
             questName = "Deliver a package to \(planetName!)"

@@ -10,13 +10,12 @@ import Foundation
 import SpriteKit
 
 class PlanetRing: planetBase {
-    //let descOverlay = SKSpriteNode(imageNamed: "overlay")
-    //let planetPic = SKSpriteNode(imageNamed: "____planet")
-    //    var descOpen: Bool = false
     
     override func sceneLoaded() {
         name = PlanetList.ring
         isUserInteractionEnabled = true
+        planetDesc = SKSpriteNode(imageNamed: "ringDesc")
+        descText = PlanetDescriptions.ring
     }
     
     override func interact() {

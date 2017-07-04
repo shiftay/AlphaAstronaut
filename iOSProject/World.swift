@@ -69,7 +69,7 @@ class World: SKScene {
         
         cameraNode = childNode(withName: "camera") as? SKCameraNode
         World.cameraPos = cameraNode?.position
-        GameViewController.Player.ShipStock.currentFuel = 10
+        GameViewController.Player.ShipStock.currentFuel = 100
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         addChild(GameViewController.Player.image)

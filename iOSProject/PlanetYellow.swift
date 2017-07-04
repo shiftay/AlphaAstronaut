@@ -10,14 +10,14 @@ import Foundation
 import SpriteKit
 
 class PlanetYellow: planetBase {
-    //let descOverlay = SKSpriteNode(imageNamed: "overlay")
-    //let planetPic = SKSpriteNode(imageNamed: "____planet")
-    //    var descOpen: Bool = false
+
     
     override func sceneLoaded() {
         name = PlanetList.yellow
         isUserInteractionEnabled = true
         hasOil = true
+        planetDesc = SKSpriteNode(imageNamed: "yellowDesc")
+        descText = PlanetDescriptions.yellow
     }
     
     override func interact() {

@@ -144,4 +144,53 @@ extension World {
         
         return retVal
     }
+    
+    public static func createStringOL(string: String, characterCount: Int, pos: CGPoint = CGPoint.zero) -> SKSpriteNode {
+        let retVal = SKSpriteNode()
+        retVal.position = pos
+        retVal.zPosition = 15
+        var holderArray: [String] = []
+        let strArr = string.components(separatedBy: " ")
+        
+        if strArr.count > 5 {
+            var arrayCount = 0
+            var countChars = 0
+
+            holderArray.append("")
+
+            for i in 0...strArr.count-1 {
+                holderArray[arrayCount] += strArr[i]
+                holderArray[arrayCount] += " "
+                countChars += 1 // to account for the space
+                countChars += strArr[i].characters.count
+                if countChars >= characterCount {
+                    arrayCount += 1
+                    countChars = 0
+                    holderArray.append("")
+                }
+            }
+        } else {
+            holderArray.append("")
+            for x in 0...strArr.count - 1 {
+                holderArray[0] += strArr[x]
+                holderArray[0] += " "
+            }
+        }
+        
+        for x in 0...holderArray.count - 1 {
+            let text = SKLabelNode(fontNamed: "Arial")
+            text.fontColor = .white
+            text.fontSize = 25
+            text.zPosition = 50
+            text.position = CGPoint(x: retVal.position.x, y: 0 - text.fontSize * CGFloat(x))
+            //(retVal.position.y + 50.0) - CGFloat(50 * x)
+            text.text = holderArray[x]
+            text.horizontalAlignmentMode = .center
+            retVal.addChild(text)
+        }
+
+
+        return retVal
+    }
+    
 }

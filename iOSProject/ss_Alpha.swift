@@ -24,8 +24,10 @@ class SSAlpha: SpaceStation {
     }
     
     override func sceneLoaded() {
-        name = "SpaceStation Alpha"
+        name = SSList.alpha
         isUserInteractionEnabled = true
+        ssDesc = SKSpriteNode(imageNamed: "alphaDesc")
+        descText = SSDesc.alpha
         randomizeRates()
         randomizeSell()
         quests.insert(Quest(questGiver: self.name!), at: 0)

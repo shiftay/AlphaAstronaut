@@ -83,14 +83,15 @@ extension World {
         box.name = "InvenFull"
         box.addChild(bg)
         
+        box.addChild(World.createStringOL(string: Message, characterCount: 10))
         
-        let label = SKLabelNode(fontNamed: "Arial")
-        label.position = CGPoint.zero
-        label.text = Message
-        label.zPosition = 53
-        label.fontColor = .black
-        label.fontSize = 50
-        box.addChild(label)
+//        let label = SKLabelNode(fontNamed: "Arial")
+//        label.position = CGPoint.zero
+//        label.text = Message
+//        label.zPosition = 53
+//        label.fontColor = .black
+//        label.fontSize = 50
+//        box.addChild(label)
         
         let okayInv = SKSpriteNode(imageNamed: "Okay")
         okayInv.size = CGSize(width: box.size.width * 0.66, height: box.size.height * 0.25)
@@ -197,29 +198,28 @@ extension World {
         bg.position = CGPoint.zero
         bg.name = "bg"
         
-        let box = SKSpriteNode(color: .white, size: CGSize(width: HUDsize.width, height: HUDsize.height * 0.5))
+        let box = SKSpriteNode(imageNamed: "Overlay")
+        box.size = CGSize(width: HUDsize.width, height: HUDsize.height * 0.5)
         box.zPosition = 52
         box.position = CGPoint.zero
         box.name = "QuestPopup"
         box.addChild(bg)
         
         
-        let description = SKSpriteNode(color:.red, size: CGSize(width: box.size.width * 0.66, height: box.size.height * 0.66))
-        description.zPosition = 53
-        description.position = CGPoint(x: 0, y: 0 + description.size.height * 0.125)
-        description.name = "desc"
-        box.addChild(description)
+//        let descText = SKLabelNode(fontNamed: "Arial")
+//        descText.position = description.position
+//        descText.zPosition = 54
+//        descText.fontColor = .black
+//        descText.fontSize = 20
+//        descText.horizontalAlignmentMode = .center
+//        descText.name = "descT"
+//        print("\(String(describing: spaceStation?.quests[QuestNumber].description!))")
+//        descText.text = spaceStation?.quests[QuestNumber].description!
+//        box.addChild(descText)
         
-        let descText = SKLabelNode(fontNamed: "Arial")
-        descText.position = description.position
-        descText.zPosition = 54
-        descText.fontColor = .black
-        descText.fontSize = 20
-        descText.horizontalAlignmentMode = .center
-        descText.name = "descT"
-        print("\(String(describing: spaceStation?.quests[QuestNumber].description!))")
-        descText.text = spaceStation?.quests[QuestNumber].description!
-        box.addChild(descText)
+        box.addChild(World.createStringOL(string: (spaceStation?.quests[QuestNumber].description!)!, characterCount: 20, pos: CGPoint(x: 0, y: 0 + box.size.height * 0.25)))
+        
+        
         //TODO: Setup quest within the description box.
         
         let okay = SKSpriteNode(color: .blue, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))

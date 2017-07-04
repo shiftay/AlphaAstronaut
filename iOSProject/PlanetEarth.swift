@@ -10,13 +10,12 @@ import Foundation
 import SpriteKit
 
 class PlanetEarth: planetBase {
-    //let descOverlay = SKSpriteNode(imageNamed: "overlay")
-    //let planetPic = SKSpriteNode(imageNamed: "____planet")
-    //    var descOpen: Bool = false
     
     override func sceneLoaded() {
         name = PlanetList.earth
         isUserInteractionEnabled = true
+        planetDesc = SKSpriteNode(imageNamed: "earthDesc")
+        descText = PlanetDescriptions.earth
     }
     
     override func interact() {
