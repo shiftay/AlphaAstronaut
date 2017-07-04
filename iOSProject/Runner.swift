@@ -11,6 +11,7 @@ import SpriteKit
 
 class Runner: SKScene
 {
+    static let scale = "scale"
     static let movedCamera = "moved"
     static var cameraPos: CGPoint?
     static var fullHP: Bool = true
@@ -29,6 +30,7 @@ class Runner: SKScene
     }
     let player = SKSpriteNode(imageNamed: "Spaceship")
     let cameraMovePointsPerSec = 200.0
+    let maxCollected: Int = 100
     let cameraNode = SKCameraNode()
     var dt: TimeInterval = 0
     var lastUpdateTime: TimeInterval = 0
@@ -56,6 +58,8 @@ class Runner: SKScene
     
     override func didMove(to view: SKView)
     {
+        GameViewController.Player.notOnWorldScene = true
+        
         for i in 0...1
         {
             let background = backgroundNode()
@@ -71,13 +75,12 @@ class Runner: SKScene
         
         addChild(player)
         addChild(cameraNode)
-        
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
         playableRect = CGRect(x: 0, y: cameraRect.minY, width: size.width, height: size.height)
         
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnEnemy()}, SKAction.wait(forDuration: 2.0)])))
-        run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnStaticObjs()}, SKAction.wait(forDuration: 5.0)])))
+        run(SKAction.repeatForever(SKAction.sequence([SKAction.run() {[weak self] in self?.spawnStaticObjs()}, SKAction.wait(forDuration: 2.0)])))
         
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
@@ -242,8 +245,7 @@ class Runner: SKScene
     
     func spawnStaticObjs()
     {
-        let string = "object\(Int.random(min: 1,max: 3))"
-        let obj = SKSpriteNode(imageNamed: string)
+        let obj = SKSpriteNode(imageNamed: GameViewController.Player.planetResources)
         obj.setScale(2)
         obj.name = "object"
         obj.position = CGPoint(x: CGFloat.random(min: cameraRect.minX + obj.size.width * 0.5,
@@ -261,7 +263,23 @@ class Runner: SKScene
     
     func playerHit(obj: SKSpriteNode)
     {
-        resourceCollected += 1
+        if GameViewController.Player.ShipStock.spaceLeft() > 0
+        {
+            switch GameViewController.Player.planetResources
+            {
+            case "Oil":
+                GameViewController.Player.currentOil += 1
+            case "Metal":
+                GameViewController.Player.currentMetalParts += 1
+            case "Minerals":
+                GameViewController.Player.currentMinerals += 1
+            default:
+                break
+            }
+            
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(Runner.scale), object: nil))
+        }
+        
         obj.removeFromParent()
     }
     
@@ -395,7 +413,7 @@ class Runner: SKScene
         yes.zPosition = 11
         yes.name = "return"
         
-        let no = SKSpriteNode(imageNamed: "Explore")
+        let no = SKSpriteNode(imageNamed: "PlayAgain")
         no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         no.position = CGPoint(x: 0, y: 0)
         no.zPosition = 11
@@ -477,10 +495,14 @@ class Runner: SKScene
     func returnToShip()
     {
         print("return to ship")
-//        let returnShip = Runner()
-//        
-//        let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
-//        view?.presentScene(returnShip, transition: reveal)
+        if let scene = SKScene(fileNamed: "WorldView")
+        {
+            // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFit
+            
+            // Present the scene
+            view?.presentScene(scene)
+        }
     }
     
     func movePlayerLeft()

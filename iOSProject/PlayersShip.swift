@@ -11,10 +11,12 @@ import SpriteKit
 
 class PlayersShip {
     let name = "Player"
-    let image = SKSpriteNode(imageNamed: "Spaceship")
+    var image = SKSpriteNode(imageNamed: "Spaceship")
     var ShipStock: ShipUtilities!
 //    var ShipRoster
     var currentPosition: CGPoint!
+    var planetResources: String!
+    var notOnWorldScene: Bool
     var currentMoney: CGFloat
     var currentReputation: Int
     var currentQuest: Quest!
@@ -40,6 +42,16 @@ class PlayersShip {
         }
     }
     
+    func resetImage()
+    {
+        image = SKSpriteNode(imageNamed: "Spaceship")
+        image.position = currentPosition
+        image.setScale(0.8)
+        image.yScale *= -1
+        image.zPosition = 6
+        image.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    }
+    
     init() {
         ShipStock = ShipUtilities(maxFuel: 100, maxHullSpace: 100, maxShields: 10)
         currentMoney = 500.0
@@ -48,6 +60,7 @@ class PlayersShip {
         currentMinerals = 0
         currentOil = 0
         currentMetalParts = 0
+        notOnWorldScene = false
         image.position = currentPosition
         image.setScale(0.8)
         image.yScale *= -1

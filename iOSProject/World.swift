@@ -64,12 +64,13 @@ class World: SKScene {
             return
         }
         
-        maxWidth -= scene.size.width * 0.5
-        maxHeight -= scene.size.height * 0.5
+        print("\(GameViewController.Player.currentPosition)")
         
         cameraNode = childNode(withName: "camera") as? SKCameraNode
-        World.cameraPos = cameraNode?.position
-        GameViewController.Player.ShipStock.currentFuel = 100
+        maxWidth -= scene.size.width * 0.5
+        maxHeight -= scene.size.height * 0.5
+        GameViewController.Player.resetImage()
+        
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         addChild(GameViewController.Player.image)
@@ -81,6 +82,37 @@ class World: SKScene {
         })
 
         NotificationCenter.default.addObserver(self, selector: #selector(setbool), name: Notification.Name(PlanetUtils.touched), object: nil)
+        
+        if GameViewController.Player.notOnWorldScene
+        {
+            cameraNode?.position = GameViewController.Player.currentPosition
+            GameViewController.Player.image.position = GameViewController.Player.currentPosition
+        }
+        
+        World.cameraPos = cameraNode?.position
+        
+    }
+    
+    func setupScene()
+    {
+        if GameViewController.Player.currentPlanetSelected.contains("SpaceStation")
+        {
+            visitingSpaceStation = true
+            spaceStationTouched = true
+            if let node = childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
+            {
+                node.openInventory(name: GameViewController.Player.currentPlanetSelected)
+            }
+        }
+        else
+        {
+            visitingPlanet = true
+            planetTouched = true
+            if let node = childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetBase
+            {
+                node.openPlanetQuest()
+            }
+        }
     }
     
     func setbool() {
@@ -291,6 +323,7 @@ class World: SKScene {
                                                                     {
                                                                         planet.openPlanetQuest()
                                                                     }
+                                                                    GameViewController.Player.currentPosition = GameViewController.Player.image.position
                 }]))
                 }
             }

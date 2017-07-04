@@ -176,14 +176,33 @@ extension World {
                     node.removeFromParent()
                 }
             case "Oil":
-                print("oil")
+                if let scene = SKScene(fileNamed: "RunnerScene") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFit
+                    
+                    GameViewController.Player.planetResources = "Oil"
+                    GameViewController.Player.image.removeFromParent()
+                    // Present the scene
+                    view?.presentScene(scene)
+                }
             case "Fuel":
                 print("fuel")
             case "Minerals":
-                print("minerals")
+                if let scene = SKScene(fileNamed: "RunnerScene") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFit
+                    
+                    // Present the scene
+                    view?.presentScene(scene)
+                }
             case "Metal":
-                break
-                
+                if let scene = SKScene(fileNamed: "RunnerScene") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFit
+                    
+                    // Present the scene
+                    view?.presentScene(scene)
+                }
             default:
                 break
             }
