@@ -227,9 +227,9 @@ class Runner: SKScene
     
     func spawnEnemy()
     {
-        let enemy = SKSpriteNode(imageNamed: "PauseBtn")
+        let enemy = SKSpriteNode(imageNamed: "Enemy")
         enemy.name = "enemy"
-        enemy.setScale(0.2)
+        enemy.setScale(0.75)
         enemy.position = CGPoint(x: CGFloat.random(min: cameraRect.minX + enemy.size.width * 0.5,
                                                    max: cameraRect.maxX - enemy.size.width * 0.5),
                                  y: cameraRect.maxY + enemy.size.height * 0.5)
