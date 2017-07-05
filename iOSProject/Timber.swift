@@ -125,7 +125,6 @@ class Timber: SKScene {
             checkGameOver()
             
         } else {
-            print("You Win")
             playable = false
             gameOverScene()
         }
@@ -138,11 +137,7 @@ class Timber: SKScene {
             gameOverScene()
         }
     }
-    
-    func pauseGame() {
-        
-    }
-    
+
     func updateTree() {
         switch tree.treeLayout[tree.treeLayout.count - 1] {
         case -1:

@@ -9,13 +9,6 @@
 import Foundation
 import SpriteKit
 
-//enum GradientDirection {
-//    case Up
-//    case Left
-//    case UpLeft
-//    case UpRight
-//}
-
 public extension SKTexture {
     
     convenience init(size: CGSize, color1: CIColor, color2: CIColor, direction: Int = 0) {

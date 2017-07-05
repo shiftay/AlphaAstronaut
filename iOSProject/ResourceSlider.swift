@@ -20,13 +20,18 @@ class ResourceSlider: SKSpriteNode, InteractiveNode
         
         scene.addToCamera(node: self)
         zPosition = 3
-        //yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft()) / 10)
+        
+        if let node = childNode(withName: "Slider") as? SKSpriteNode {
+            node.yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft())) / 10.0
+        }      
         
         NotificationCenter.default.addObserver(self, selector: #selector(scaleSlider), name: Notification.Name(Runner.scale), object: nil)
     }
     func scaleSlider()
     {
-        yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft())) / 10.0
+        if let node = childNode(withName: "Slider") as? SKSpriteNode {
+            node.yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft())) / 10.0
+        }
     }
     
     func interact()

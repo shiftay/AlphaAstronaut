@@ -156,7 +156,7 @@ extension World {
         return retVal
     }
     
-    public static func createStringOL(string: String, characterCount: Int, pos: CGPoint = CGPoint.zero) -> SKSpriteNode {
+    public static func createStringOL(string: String, characterCount: Int, pos: CGPoint = CGPoint.zero, zPos: CGFloat = 50.0) -> SKSpriteNode {
         let retVal = SKSpriteNode()
         retVal.position = pos
         retVal.zPosition = 15
@@ -191,8 +191,8 @@ extension World {
         for x in 0...holderArray.count - 1 {
             let text = SKLabelNode(fontNamed: "Arial")
             text.fontColor = .white
-            text.fontSize = 25
-            text.zPosition = 50
+            text.fontSize = 35
+            text.zPosition = zPos
             text.position = CGPoint(x: retVal.position.x, y: 0 - text.fontSize * CGFloat(x))
             //(retVal.position.y + 50.0) - CGFloat(50 * x)
             text.text = holderArray[x]

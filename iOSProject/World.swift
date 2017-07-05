@@ -208,7 +208,6 @@ class World: SKScene {
                 let fuelSpent = hyp / fuelUsageUnit
                 
                 if GameViewController.Player.ShipStock.currentFuel - Int(fuelSpent) <= 0 {
-                    print("not enough fuel")
                     
                     let hud = childNode(withName: "HUD") as? SKSpriteNode
                     hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Not enough fuel. Land at a closer Planet."))

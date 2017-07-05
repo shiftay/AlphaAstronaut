@@ -60,9 +60,9 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         testPic.name = "HUD"
         // yes / no == quest / shop
         let yes = SKSpriteNode(color: .blue, size: CGSize(width: testPic.size.width, height: testPic.size.height / 8))
-        yes.position = CGPoint(x: 0, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.6)
-        yes.zPosition = 11
-        yes.name = "\(name!)"
+//        yes.position = CGPoint(x: 0, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.6)
+//        yes.zPosition = 11
+//        yes.name = "\(name!)"
         
         let no = SKSpriteNode(imageNamed: "Explore")
         no.size = CGSize(width: testPic.size.width * 0.75, height: testPic.size.height * 0.15)
@@ -72,7 +72,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         
         testPic.addChild(createOL(HUDSize: testPic.size, halfSize: yes.size))
         testPic.addChild(no)
-        testPic.addChild(yes)
+//        testPic.addChild(yes)
         scene.addChild(testPic)
     }
     
@@ -93,7 +93,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         planetDesc.zPosition = 11
         
         
-        testPic.addChild(World.createStringOL(string: descText, characterCount: 25))
+        testPic.addChild(World.createStringOL(string: descText, characterCount: 25, zPos: 15))
         
         let yes = SKSpriteNode(imageNamed: "Land")
         yes.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
@@ -120,7 +120,8 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         planetOL.zPosition = 19
         
         
-        let gather = SKSpriteNode(color: .red, size: CGSize(width: HUDSize.width * 0.75, height: HUDSize.height * 0.15))
+        let gather = SKSpriteNode(imageNamed: "Gather")
+        gather.size = CGSize(width: HUDSize.width * 0.75, height: HUDSize.height * 0.15)
         gather.zPosition = 20
         gather.position = CGPoint(x: 0, y: 0)
         gather.name = "Gather"
@@ -129,7 +130,8 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         
         if GameViewController.Player.currentQuest != nil {
             if GameViewController.Player.currentQuest.planetName == name {
-                let quest = SKSpriteNode(color: .red, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height * 0.15))
+                let quest = SKSpriteNode(imageNamed: "Quest")
+                quest.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height * 0.15)
                 quest.zPosition = 20
                 quest.position = CGPoint(x: 0, y: gather.position.y - quest.size.height - 20)
                 quest.name = "Quest"

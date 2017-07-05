@@ -26,7 +26,7 @@ extension World {
         box.name = "GatherPopup"
         box.addChild(bg)
         
-        
+        // TODO: change.
         let quit = SKSpriteNode(color: .white, size: CGSize(width: box.size.width * 0.1, height: box.size.width * 0.1))
         quit.zPosition = 53
         quit.name = "Quit"
@@ -47,23 +47,38 @@ extension World {
         
         
         for i in 0...(test.count - 1) {
-            let resource = SKSpriteNode(color: .white, size: CGSize(width: box.size.width * 0.66, height: box.size.height * 0.15))
+            var resource = SKSpriteNode()
+            
+            switch test[i] {
+            case "Oil":
+                resource = SKSpriteNode(imageNamed: "OilBtn")
+            case "Metal":
+                resource = SKSpriteNode(imageNamed: "MetalBtn")
+            case "Minerals":
+                resource = SKSpriteNode(imageNamed: "MineralsBtn")
+            case "Fuel":
+                resource = SKSpriteNode(imageNamed: "Fuel")
+            default:
+                break
+            }
+
+//            let resource = SKSpriteNode(imageNamed: 
+            resource.size = CGSize(width: box.size.width * 0.66, height: box.size.height * 0.15)
             resource.zPosition = 53
             resource.position = CGPoint(x: 0, y: (0 + box.size.height * 0.25) - ((resource.size.height + 15) * CGFloat(i)))
             resource.name = test[i]
             
-            let resText = SKLabelNode(fontNamed: "Arial")
-            resText.position = resource.position
-            resText.zPosition = 54
-            resText.text = test[i]
-            resText.fontColor = .black
-            resText.fontSize = 25
-            resText.name = test[i]
-            resText.verticalAlignmentMode = .center
-            resText.horizontalAlignmentMode = .center
+//            let resText = SKLabelNode(fontNamed: "Arial")
+//            resText.position = resource.position
+//            resText.zPosition = 54
+//            resText.text = test[i]
+//            resText.fontColor = .black
+//            resText.fontSize = 25
+//            resText.name = test[i]
+//            resText.verticalAlignmentMode = .center
+//            resText.horizontalAlignmentMode = .center
             
             box.addChild(resource)
-            box.addChild(resText)
         }
         
         return box
@@ -83,7 +98,7 @@ extension World {
         box.name = "InvenFull"
         box.addChild(bg)
         
-        box.addChild(World.createStringOL(string: Message, characterCount: 10))
+        box.addChild(World.createStringOL(string: Message, characterCount: 10, pos: CGPoint(x: 0, y: 0 + HUDsize.height * 0.1)))
         
 //        let label = SKLabelNode(fontNamed: "Arial")
 //        label.position = CGPoint.zero
@@ -116,7 +131,8 @@ extension World {
         box.name = "ShopPopup"
         box.addChild(bg)
         
-        let number = SKSpriteNode(color: .red, size: CGSize(width: HUDsize.width * 0.33, height: HUDsize.width * 0.33))
+        let number = SKSpriteNode(imageNamed: "Box")
+        number.size = CGSize(width: HUDsize.width * 0.33, height: HUDsize.width * 0.33)
         number.zPosition = 53
         number.position = CGPoint(x: 0, y: 0 + number.size.height * 0.5)
         number.name = "number"
@@ -128,7 +144,7 @@ extension World {
         text.position = number.position
         text.text = "0"
         text.name = "numText"
-        text.fontColor = .white
+        text.fontColor = .black
         text.fontSize = 100
         box.addChild(text)
         
@@ -147,19 +163,22 @@ extension World {
         minus.name = "minus"
         box.addChild(minus)
         
-        let maxArea = SKSpriteNode(color: .black, size: CGSize(width: HUDsize.width * 0.35, height: HUDsize.width * 0.15))
+        let maxArea = SKSpriteNode(imageNamed: "Box")
+        maxArea.size = CGSize(width: HUDsize.width * 0.35, height: HUDsize.width * 0.15)
         maxArea.zPosition = 53
         maxArea.position = CGPoint(x: 0, y: number.position.y - number.size.height)
         maxArea.name = "maxArea"
         box.addChild(maxArea)
         
-        let max = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1))
+        let max = SKSpriteNode(imageNamed: "MAX")
+        max.size = CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1)
         max.zPosition = 53
         max.position = CGPoint(x: plus.position.x, y: maxArea.position.y)
         max.name = "MAX"
         box.addChild(max)
         
-        let clear = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1))
+        let clear = SKSpriteNode(imageNamed: "Clear")
+        clear.size = CGSize(width: HUDsize.width * 0.15, height: HUDsize.width * 0.1)
         clear.zPosition = 53
         clear.position = CGPoint(x: minus.position.x, y: maxArea.position.y)
         clear.name = "CLEAR"
@@ -171,7 +190,7 @@ extension World {
         mText.position = maxArea.position
         mText.text = "$0"
         mText.name = "maxText"
-        mText.fontColor = .white
+        mText.fontColor = .black
         mText.fontSize = 35
         box.addChild(mText)
 
@@ -225,13 +244,15 @@ extension World {
         
         //TODO: Setup quest within the description box.
         
-        let okay = SKSpriteNode(color: .blue, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
+        let okay = SKSpriteNode(imageNamed: "Okay")
+        okay.size = CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15)
         box.addChild(okay)
         okay.position = CGPoint(x: 0 - okay.size.width * 0.5, y: (0 - box.size.height * 0.5) + okay.size.height * 0.5)
         okay.zPosition = 53
         okay.name = "okay\(QuestNumber)"
         
-        let cancel = SKSpriteNode(color: .purple, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
+        let cancel = SKSpriteNode(imageNamed: "Cancel")
+        cancel.size = CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15)
         box.addChild(cancel)
         cancel.position = CGPoint(x: 0 + cancel.size.width * 0.5, y: (0 - box.size.height * 0.5) + cancel.size.height * 0.5)
         cancel.zPosition = 53
