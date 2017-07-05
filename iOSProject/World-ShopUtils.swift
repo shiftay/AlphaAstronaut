@@ -68,22 +68,28 @@ extension World {
     
     func buyItem() {
         let test = GameViewController.Player
+        let spaceStation = scene?.childNode(withName: (test?.currentPlanetSelected)!) as? SpaceStation
+        let hud = childNode(withName: "HUD") as? SKSpriteNode
         
         if !enoughMoney() {
             print("not enough money")
-            // TODO: Open pop up saying you dont have enough money.
+            hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Not enough money!"))
             return
         }
         
         switch shopItem {
         case "fuel" :
-            test?.ShipStock.currentFuel += amountToSell
+            GameViewController.Player.ShipStock.currentFuel += amountToSell
+            GameViewController.Player.currentMoney -= (spaceStation?.fuelRate)! * CGFloat(amountToSell)
         case "minerals":
-            test?.currentMinerals += amountToSell
+            GameViewController.Player.currentMinerals += amountToSell
+            GameViewController.Player.currentMoney -= (spaceStation?.mineralRate)! * CGFloat(amountToSell)
         case "oil":
-            test?.currentOil += amountToSell
+            GameViewController.Player.currentOil += amountToSell
+            GameViewController.Player.currentMoney -= (spaceStation?.oilRate)! * CGFloat(amountToSell)
         case "metal" :
-            test?.currentMetalParts += amountToSell
+            GameViewController.Player.currentMetalParts += amountToSell
+            GameViewController.Player.currentMoney -= (spaceStation?.metalRate)! * CGFloat(amountToSell)
         default:
             break
         }

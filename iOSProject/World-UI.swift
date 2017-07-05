@@ -109,7 +109,8 @@ extension World {
         bg.position = CGPoint.zero
         bg.name = "bg"
         
-        let box = SKSpriteNode(color: .white, size: CGSize(width: HUDsize.width, height: HUDsize.height * 0.5))
+        let box = SKSpriteNode(imageNamed: "Overlay")
+        box.size = CGSize(width: HUDsize.width * 1.25, height: HUDsize.height * 0.6)
         box.zPosition = 52
         box.position = CGPoint.zero
         box.name = "ShopPopup"
@@ -132,13 +133,15 @@ extension World {
         box.addChild(text)
         
         
-        let plus = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.1, height: HUDsize.width * 0.1))
+        let plus = SKSpriteNode(imageNamed: "Plus")
+        plus.size = CGSize(width: HUDsize.width * 0.2, height: HUDsize.width * 0.2)
         plus.zPosition = 53
         plus.position = CGPoint(x: number.position.x + HUDsize.width * 0.35, y: number.position.y)
         plus.name = "plus"
         box.addChild(plus)
         
-        let minus = SKSpriteNode(color: .blue, size: CGSize(width: HUDsize.width * 0.1, height: HUDsize.width * 0.1))
+        let minus = SKSpriteNode(imageNamed: "Minus")
+        minus.size = CGSize(width: HUDsize.width * 0.2, height: HUDsize.width * 0.2)
         minus.zPosition = 53
         minus.position = CGPoint(x: number.position.x - HUDsize.width * 0.35, y: number.position.y)
         minus.name = "minus"
@@ -171,18 +174,18 @@ extension World {
         mText.fontColor = .white
         mText.fontSize = 35
         box.addChild(mText)
-        
-        
-        
-        let okay = SKSpriteNode(color: .blue, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
+
+        let okay = SKSpriteNode(imageNamed: "Okay")
+        okay.size = CGSize(width: box.size.width * 0.45, height: box.size.height * 0.2)
         box.addChild(okay)
-        okay.position = CGPoint(x: 0 - okay.size.width * 0.5, y: (0 - box.size.height * 0.5) + okay.size.height * 0.5)
+        okay.position = CGPoint(x: 0 - okay.size.width * 0.5, y: (0 - box.size.height * 0.5) + okay.size.height * 0.7)
         okay.zPosition = 53
         okay.name = "okay"
         
-        let cancel = SKSpriteNode(color: .purple, size: CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15))
+        let cancel = SKSpriteNode(imageNamed: "Cancel")
+        cancel.size = CGSize(width: box.size.width * 0.45, height: box.size.height * 0.2)
         box.addChild(cancel)
-        cancel.position = CGPoint(x: 0 + cancel.size.width * 0.5, y: (0 - box.size.height * 0.5) + cancel.size.height * 0.5)
+        cancel.position = CGPoint(x: 0 + cancel.size.width * 0.5, y: (0 - box.size.height * 0.5) + cancel.size.height * 0.7)
         cancel.zPosition = 53
         cancel.name = "cancel"
         

@@ -226,8 +226,6 @@ extension World {
         //      Player can only SELL the resources
         //      if other thing is open, okay, cancel, max, + / -
         //
-        GameViewController.Player.currentMetalParts = 100
-        
         
         if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKNode {
             switch touchedNode.name! {

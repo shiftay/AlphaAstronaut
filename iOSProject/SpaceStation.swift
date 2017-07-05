@@ -33,7 +33,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
     var oilSell: CGFloat = 300.0
     var mineralSell: CGFloat = 150.0
     var metalSell: CGFloat = 30.0
-    
+    var labelArray: [String] = ["FuelLabel", "MineralsLabel", "OilLabel", "MetalLabel"]
     
     var descOpen: Bool = false
     var ssDesc: SKSpriteNode!
@@ -146,8 +146,26 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         shopPage.name = "ShopPage"
         shopPage.zPosition = 11
         
+        
+        let buy = SKLabelNode(fontNamed: "Arial")
+        buy.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.25))
+        buy.text = "BUY"
+        buy.fontSize = 50
+        buy.fontColor = .white
+        buy.zPosition = 12
+        shopPage.addChild(buy)
+        
+        let sell = SKLabelNode(fontNamed: "Arial")
+        sell.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.25))
+        sell.text = "SELL"
+        sell.fontSize = 50
+        sell.fontColor = .white
+        sell.zPosition = 12
+        shopPage.addChild(sell)
+        
+        
         for i in 1...4 {
-            
+
             let color: UIColor!
             if i == 1 {
                 color = .red
@@ -155,6 +173,8 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
                 color = .yellow
             }
             
+//            let buy2 = SKSpriteNode(imageNamed: labelArray[i - 1])
+//            buy2.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8)
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
             buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
@@ -175,6 +195,8 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
                 color = .yellow
             }
             
+            //            let buy2 = SKSpriteNode(imageNamed: labelArray[i])
+            //            buy2.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8)
             
             let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
             buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
@@ -196,15 +218,8 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         
         for i in 1...2 {
             
-            let color: UIColor!
-            if i == 1 {
-                color = .cyan
-            } else {
-                color = .orange
-            }
-            
-            
-            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.66, height: HUDSize.height / 8))
+            let buy2 = SKSpriteNode(imageNamed: "RawBtn")
+            buy2.size = CGSize(width: HUDSize.width * 0.66, height: HUDSize.height / 8)
             buy2.position = CGPoint(x: 0, y: ((0 + HUDSize.height * 0.1 )) - ((buy2.size.height + 25) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "quest\(i)"

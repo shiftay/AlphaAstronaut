@@ -20,7 +20,7 @@ class World: SKScene {
     static let updateGauge = "updateGauge"
     let fuelUsageUnit: CGFloat = 32.5
     let distanceUnit: CGFloat = 400.0
-    
+    var money: SKLabelNode!
     var background: SKSpriteNode!
     var cameraNode: SKCameraNode?
     var maxWidth: CGFloat = 2500.0
@@ -70,7 +70,8 @@ class World: SKScene {
         maxWidth -= scene.size.width * 0.5
         maxHeight -= scene.size.height * 0.5
         GameViewController.Player.resetImage()
-        
+        money = cameraNode?.childNode(withName: "money") as? SKLabelNode
+        money.text = GameViewController.Player.currentMoney
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         addChild(GameViewController.Player.image)
