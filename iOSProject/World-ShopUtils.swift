@@ -50,20 +50,23 @@ extension World {
     }
     
     func sellItem() {
-        let test = GameViewController.Player
-        
+        let spaceStation = scene?.childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
+
         switch shopItem {
-        case "fuel" :
-            test?.ShipStock.currentFuel -= amountToSell
         case "minerals":
-            test?.currentMinerals -= amountToSell
+            GameViewController.Player.currentMinerals -= amountToSell
+            GameViewController.Player.currentMoney += CGFloat(amountToSell) * (spaceStation?.mineralSell)!
         case "oil":
-            test?.currentOil -= amountToSell
+            GameViewController.Player.currentOil -= amountToSell
+            GameViewController.Player.currentMoney += CGFloat(amountToSell) * (spaceStation?.oilSell)!
         case "metal" :
-            test?.currentMetalParts -= amountToSell
+            GameViewController.Player.currentMetalParts -= amountToSell
+            GameViewController.Player.currentMoney += CGFloat(amountToSell) * (spaceStation?.metalSell)!
         default:
             break
         }
+        
+        updateMoney()
     }
     
     func buyItem() {
@@ -93,6 +96,8 @@ extension World {
         default:
             break
         }
+        
+        updateMoney()
     }
     
     func enoughMoney() -> Bool {
@@ -197,6 +202,11 @@ extension World {
 
 
         return retVal
+    }
+    
+    func updateMoney() {
+        money.text = "$" + String(format: "%.2f", GameViewController.Player.currentMoney)
+        money.fontName = "Arial"
     }
     
 }

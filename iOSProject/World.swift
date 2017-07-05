@@ -63,15 +63,15 @@ class World: SKScene {
         guard let scene = scene else {
             return
         }
-        
-        print("\(GameViewController.Player.currentPosition)")
+  
         
         cameraNode = childNode(withName: "camera") as? SKCameraNode
         maxWidth -= scene.size.width * 0.5
         maxHeight -= scene.size.height * 0.5
         GameViewController.Player.resetImage()
         money = cameraNode?.childNode(withName: "money") as? SKLabelNode
-        money.text = GameViewController.Player.currentMoney
+        
+        updateMoney()
         //TODO: Add Background Sprite in the actual scene
         //      make limits based on sprite size +/- scene.size
         addChild(GameViewController.Player.image)
