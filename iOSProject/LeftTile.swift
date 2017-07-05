@@ -17,7 +17,7 @@ class LeftTile: SKSpriteNode, InteractiveNode {
             return
         }
         
-        zPosition = 1
+        zPosition = 3
         position = CGPoint(x: scene.size.width * 0.25,
                            y: scene.size.height * 0.5)
         size = CGSize(width: scene.size.width * 0.5,
@@ -29,7 +29,9 @@ class LeftTile: SKSpriteNode, InteractiveNode {
     }
     
     func interact() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(LeftTile.leftTapped), object: nil))
+        if !Timber.gamePaused {
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(LeftTile.leftTapped), object: nil))
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

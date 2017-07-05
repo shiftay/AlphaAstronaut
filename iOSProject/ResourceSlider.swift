@@ -22,11 +22,11 @@ class ResourceSlider: SKSpriteNode, InteractiveNode
         zPosition = 3
         //yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft()) / 10)
         
-         NotificationCenter.default.addObserver(self, selector: #selector(scaleSlider), name: Notification.Name(Runner.scale), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(scaleSlider), name: Notification.Name(Runner.scale), object: nil)
     }
     func scaleSlider()
     {
-        yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft()) / 10)
+        yScale = CGFloat((100 - GameViewController.Player.ShipStock.spaceLeft())) / 10.0
     }
     
     func interact()

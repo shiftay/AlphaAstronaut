@@ -53,6 +53,7 @@
 		EC3B0C241F04707D0073B40F /* BackBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C231F04707D0073B40F /* BackBtn.swift */; };
 		EC3B0C261F04708C0073B40F /* alphaBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B0C251F04708C0073B40F /* alphaBtn.swift */; };
 		EC4B01691EFDCA0D00FD1712 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */; };
+		ECDEFB231F0C9CD4007E6B6E /* SKTexture+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDEFB221F0C9CD4007E6B6E /* SKTexture+Extensions.swift */; };
 		F435663D1F05C0E500C6443B /* FireTrail1.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663C1F05C0E500C6443B /* FireTrail1.sks */; };
 		F435663F1F05C70200C6443B /* FireTrail2.sks in Resources */ = {isa = PBXBuildFile; fileRef = F435663E1F05C70200C6443B /* FireTrail2.sks */; };
 		F44153FA1EFC76FC009CA19F /* Runner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44153F91EFC76FC009CA19F /* Runner.swift */; };
@@ -114,6 +115,7 @@
 		EC3B0C231F04707D0073B40F /* BackBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackBtn.swift; sourceTree = "<group>"; };
 		EC3B0C251F04708C0073B40F /* alphaBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = alphaBtn.swift; sourceTree = "<group>"; };
 		EC4B01681EFDCA0D00FD1712 /* CustomSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		ECDEFB221F0C9CD4007E6B6E /* SKTexture+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKTexture+Extensions.swift"; sourceTree = "<group>"; };
 		F435663C1F05C0E500C6443B /* FireTrail1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail1.sks; sourceTree = "<group>"; };
 		F435663E1F05C70200C6443B /* FireTrail2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireTrail2.sks; sourceTree = "<group>"; };
 		F44153F91EFC76FC009CA19F /* Runner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Runner.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				EC02F79A1EFA25530063663C /* SKTEffects.swift */,
 				EC02F79B1EFA25530063663C /* SKTTimingFunctions.swift */,
 				EC02F79C1EFA25530063663C /* Vector3.swift */,
+				ECDEFB221F0C9CD4007E6B6E /* SKTexture+Extensions.swift */,
 			);
 			path = SKTUtils;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				EC3B0C221F0467B00073B40F /* SSButton.swift in Sources */,
 				EC3B0C261F04708C0073B40F /* alphaBtn.swift in Sources */,
 				EC2BE9C61F04A30100E1BF9B /* World-Touch.swift in Sources */,
+				ECDEFB231F0C9CD4007E6B6E /* SKTexture+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

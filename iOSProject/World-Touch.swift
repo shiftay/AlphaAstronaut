@@ -186,12 +186,20 @@ extension World {
                     view?.presentScene(scene)
                 }
             case "Fuel":
-                print("fuel")
+                if let scene = SKScene(fileNamed: "TimberScene") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFit
+                    
+                    GameViewController.Player.image.removeFromParent()
+                    // Present the scene
+                    view?.presentScene(scene)
+                }
             case "Minerals":
                 if let scene = SKScene(fileNamed: "RunnerScene") {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFit
                     
+                    GameViewController.Player.planetResources = "Minerals"
                     // Present the scene
                     view?.presentScene(scene)
                 }
@@ -200,6 +208,7 @@ extension World {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFit
                     
+                    GameViewController.Player.planetResources = "Metal"
                     // Present the scene
                     view?.presentScene(scene)
                 }

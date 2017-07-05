@@ -19,9 +19,9 @@ class PauseBtn: SKSpriteNode, InteractiveNode
         {
             return
         }
-        
+        print("hello")
         size = CGSize(width: scene.size.width / 6, height: scene.size.width / 6)
-        position = CGPoint(x: scene.size.width - (scene.size.width), y: scene.size.height * 0.5)
+        position = CGPoint(x: size.width * 0.5, y: scene.size.height - size.height * 0.5)
         isUserInteractionEnabled = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(positionBtn), name: Notification.Name(Runner.movedCamera), object: nil)
@@ -40,7 +40,7 @@ class PauseBtn: SKSpriteNode, InteractiveNode
     
     func interact()
     {
-        if !Runner.gameState
+        if !Runner.gameState || !Timber.gamePaused
         {
             NotificationCenter.default.post(Notification(name: NSNotification.Name(PauseBtn.pauseBtn), object: nil))
         
@@ -62,7 +62,14 @@ class PauseBtn: SKSpriteNode, InteractiveNode
         testPic.zPosition = 10
         
         let bg = SKSpriteNode(color: .black, size: CGSize(width: scene.size.width, height: scene.size.height))
-        bg.position =  Runner.cameraPos!
+        
+        if scene.name == "Runner" {
+            bg.position = Runner.cameraPos!
+        } else {
+            bg.position = CGPoint(x: scene.size.width * 0.5, y: 0 + scene.size.height * 0.5)
+        }
+        
+
         bg.zPosition = 4
         bg.alpha = 0.90
         bg.name = "HUD"

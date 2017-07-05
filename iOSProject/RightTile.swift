@@ -17,7 +17,7 @@ class RightTile: SKSpriteNode, InteractiveNode {
             return
         }
         
-        zPosition = 1
+        zPosition = 3
         position = CGPoint(x: scene.size.width * 0.75,
                            y: scene.size.height * 0.5)
         size = CGSize(width: scene.size.width * 0.5,
@@ -28,7 +28,9 @@ class RightTile: SKSpriteNode, InteractiveNode {
     }
     
     func interact() {
-        NotificationCenter.default.post(Notification(name: NSNotification.Name(RightTile.rightTapped), object: nil))
+        if !Timber.gamePaused {
+            NotificationCenter.default.post(Notification(name: NSNotification.Name(RightTile.rightTapped), object: nil))
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

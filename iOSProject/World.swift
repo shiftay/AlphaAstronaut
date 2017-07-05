@@ -88,6 +88,7 @@ class World: SKScene {
         {
             cameraNode?.position = GameViewController.Player.currentPosition
             GameViewController.Player.image.position = GameViewController.Player.currentPosition
+            GameViewController.Player.notOnWorldScene = false
         }
         
         World.cameraPos = cameraNode?.position

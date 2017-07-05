@@ -20,27 +20,16 @@ class CustomSlider: SKSpriteNode, InteractiveNode {
     }
     
     func sceneLoaded() {
-        guard let scene = scene else {
-            return
-        }
-
-        size = CGSize(width: 5, height: 30)
-        position = CGPoint(x: scene.size.width * 0.5, y: scene.size.height - size.height)
-        zPosition = 100
-//        anchorPoint = CGPoint(x: 0,y: 0.5)
-
-         NotificationCenter.default.addObserver(self, selector: #selector(resize), name: Notification.Name(Timber.resizeSlider), object: nil)
+        zPosition = 5
+        var float: CGFloat = 0.0
+        float = CGFloat(GameViewController.Player.ShipStock.currentFuel) / 10.0
+        xScale = float
+        NotificationCenter.default.addObserver(self, selector: #selector(resize), name: Notification.Name(Timber.resizeSlider), object: nil)
     }
     
     func resize() {
-        if maxSize == 0 {
-            maxSize = 5
-        }
-        
-        currentSize += 2
-
-        // TODO: Add Animations?
-        
-        xScale = CGFloat(currentSize)
+        var float: CGFloat = 0.0
+        float = CGFloat(GameViewController.Player.ShipStock.currentFuel) / 10.0
+        xScale = float
     }
 }

@@ -19,6 +19,7 @@ protocol InteractiveNode {
 class Timber: SKScene {
 
     var test: CustomSlider?
+    static var gamePaused: Bool = false
     static let resizeSlider = "Resize"
     var tree = Tree()
     var playerPosition: Int = 0 {
@@ -33,23 +34,33 @@ class Timber: SKScene {
     var resourcesNeeded: Int = 0
     var amountCut: Int = 0
     var playerSprite = SKSpriteNode(imageNamed: "Spaceship")
-    
+    var keepPlaying: Bool = false
     var leftPos = CGPoint.zero
     var rightPos = CGPoint.zero
     var playable: Bool = true
+    var grad: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        print("hello")
         leftPos = CGPoint(x: size.width * 0.25, y: playerSprite.size.height * 2)
         rightPos = CGPoint(x: size.width * 0.75, y: playerSprite.size.height * 2)
-
-        resourcesNeeded = 50
-        
+        GameViewController.Player.notOnWorldScene = true
+        resourcesNeeded = GameViewController.Player.ShipStock.maxFuel - GameViewController.Player.ShipStock.currentFuel
+        print("\(resourcesNeeded)")
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
                 eventListenerNode.sceneLoaded()
             }
         })
+        
+        grad = childNode(withName: "grad") as? SKSpriteNode
+        
+        let topColor = CIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        let bottomColor = CIColor(red: 255, green: 255, blue: 255, alpha: 0)
+        
+        let texture = SKTexture(size: grad.size, color1: topColor, color2: bottomColor, direction: 0)
+        texture.filteringMode = .nearest
+        grad.texture = texture
+        
         
         playerPosition = -1 // left
         addChild(playerSprite)
@@ -57,6 +68,7 @@ class Timber: SKScene {
         
         NotificationCenter.default.addObserver(self, selector: #selector(moveRight), name: Notification.Name(RightTile.rightTapped), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveLeft), name: Notification.Name(LeftTile.leftTapped), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pausedGame), name: Notification.Name(PauseBtn.pauseBtn), object: nil)
     }
     
     func moveRight() {
@@ -85,7 +97,7 @@ class Timber: SKScene {
     
     
     func cutTree() {
-        if (amountCut + 1) <= resourcesNeeded {
+        if (amountCut + 1) <= resourcesNeeded || keepPlaying{
             if let node = childNode(withName: "tree\(amountCut)") {
                 node.removeFromParent()
             }
@@ -104,23 +116,31 @@ class Timber: SKScene {
             updateTree()
 
             amountCut += 1
+            
+            if !keepPlaying {
+                GameViewController.Player.ShipStock.currentFuel += 1
+            }
+            
+            
             checkGameOver()
             
         } else {
             print("You Win")
             playable = false
+            gameOverScene()
         }
 
     }
     
     func checkGameOver() {
         if tree.treeLayout[0] == playerPosition {
-//            playable = false
-            print("You Lose")
-            // TODO:
-            // Player knocked out. Lose X Resources, dark out scene, put overlay to retry
+            playable = false
+            gameOverScene()
         }
- 
+    }
+    
+    func pauseGame() {
+        
     }
     
     func updateTree() {
@@ -133,6 +153,117 @@ class Timber: SKScene {
             tree.setRight(pos: tree.treeLayout.count - 1, scene: (scene)!, test: tree.treeLayout.count + (amountCut))
         default:
             break
+        }
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        super.touchesBegan(touches, with: event)
+        
+        if let touch = touches.first
+        {
+            if Timber.gamePaused
+            {
+                if let touchedNode = atPoint(touch.location(in: self)) as? SKSpriteNode
+                {
+                    switch touchedNode.name!
+                    {
+                    case "resume":
+                        if let hud = scene?.childNode(withName: "HUD")
+                        {
+                            hud.removeFromParent()
+                        }
+                        resumeGame()
+                        
+                    case "exit":
+                        print("pressed exit")
+                    case "play again":
+                        resetGame()
+                        if let hud = scene?.childNode(withName: "HUD")
+                        {
+                            hud.removeFromParent()
+                            
+                        }
+                    case "return":
+                        returnToShip()
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    func gameOverScene()
+    {
+        guard let scene = scene else
+        {
+            return
+        }
+        
+        let testPic = SKSpriteNode(imageNamed: "Overlay")
+        testPic.size = CGSize(width: scene.size.width * 0.75, height: scene.size.height * 0.66)
+        
+        testPic.position = CGPoint.zero
+        testPic.zPosition = 10
+        
+        let bg = SKSpriteNode(color: .black, size: CGSize(width: scene.size.width, height: scene.size.height))
+        bg.position = CGPoint(x: scene.size.width * 0.5, y: 0 + scene.size.height * 0.5)
+        bg.zPosition = 4
+        bg.alpha = 0.90
+        bg.name = "HUD"
+        
+        let yes = SKSpriteNode(imageNamed: "ReturnToShip")
+        yes.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
+        yes.position = CGPoint(x: 0, y: 0 - yes.size.height)
+        yes.zPosition = 11
+        yes.name = "return"
+        
+        let no = SKSpriteNode(imageNamed: "PlayAgain")
+        no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
+        no.position = CGPoint(x: 0, y: 0)
+        no.zPosition = 11
+        no.name = "play again"
+        
+        let exit = SKSpriteNode(imageNamed: "Quit")
+        exit.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
+        exit.position = CGPoint(x: 0, y: yes.position.y - exit.size.height)
+        exit.zPosition = 11
+        exit.name = "exit"
+        
+        bg.addChild(no)
+        bg.addChild(yes)
+        bg.addChild(exit)
+        bg.addChild(testPic)
+        scene.addChild(bg)
+    }
+    
+    func resetGame()
+    {
+
+    }
+    
+    func resumeGame()
+    {
+        Timber.gamePaused = false
+    }
+    
+    func pausedGame()
+    {
+        Timber.gamePaused = true
+    }
+    
+    func returnToShip()
+    {
+        print("return to ship")
+        if let scene = SKScene(fileNamed: "WorldView")
+        {
+            // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFit
+            
+            // Present the scene
+            view?.presentScene(scene)
         }
     }
     
