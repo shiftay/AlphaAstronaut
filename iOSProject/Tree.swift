@@ -108,4 +108,9 @@ class Tree {
             break
         }
     }
+    
+    func reset() {
+        treeLayout.removeAll()
+    }
+    
 }

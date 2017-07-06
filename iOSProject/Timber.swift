@@ -100,7 +100,7 @@ class Timber: SKScene {
     
     
     func cutTree() {
-        if (amountCut + 1) <= resourcesNeeded || keepPlaying{
+        if playable {
             if let node = childNode(withName: "tree\(amountCut)") {
                 node.removeFromParent()
             }
@@ -120,19 +120,21 @@ class Timber: SKScene {
 
             amountCut += 1
             
-            if !keepPlaying {
-                GameViewController.Player.ShipStock.currentFuel += 1
-            }
-            
-            
+            addToFuel()
             checkGameOver()
             
         } else {
-            playable = false
             gameOverScene()
         }
 
     }
+    
+    func addToFuel() {
+        if GameViewController.Player.ShipStock.currentFuel < GameViewController.Player.ShipStock.maxFuel {
+            GameViewController.Player.ShipStock.currentFuel += 1
+        }
+    }
+    
     
     func checkGameOver() {
         if tree.treeLayout[0] == playerPosition {
@@ -176,6 +178,15 @@ class Timber: SKScene {
                         
                     case "exit":
                         print("pressed exit")
+                        
+                    case "play again":
+                        resetGame()
+                        if let hud = scene?.childNode(withName: "HUD")
+                        {
+                            hud.removeFromParent()
+                            
+                        }
+                        
                     case "play again":
                         resetGame()
                         if let hud = scene?.childNode(withName: "HUD")
@@ -212,6 +223,12 @@ class Timber: SKScene {
         bg.alpha = 0.90
         bg.name = "HUD"
         
+        let no = SKSpriteNode(imageNamed: "PlayAgain")
+        no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
+        no.position = CGPoint(x: 0, y: 0)
+        no.zPosition = 11
+        no.name = "play again"
+        
         let yes = SKSpriteNode(imageNamed: "ReturnToShip")
         yes.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         yes.position = CGPoint(x: 0, y: 0 - yes.size.height)
@@ -224,6 +241,7 @@ class Timber: SKScene {
         exit.zPosition = 11
         exit.name = "exit"
         
+        bg.addChild(no)
         bg.addChild(yes)
         bg.addChild(exit)
         bg.addChild(testPic)
@@ -232,7 +250,16 @@ class Timber: SKScene {
     
     func resetGame()
     {
-
+        enumerateChildNodes(withName: "//tree*", using: { node, _ in
+            if let node = node as? SKSpriteNode {
+                node.removeFromParent()
+            }
+        })
+        amountCut = 0
+        tree.reset()
+        tree.CreateTree()
+        tree.BuildTree(scene: scene!)
+        playable = true
     }
     
     func resumeGame()
