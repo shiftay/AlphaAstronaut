@@ -26,14 +26,16 @@ class Timber: SKScene {
         didSet {
             if playerPosition == -1 {
                 playerSprite.position = leftPos
+                playerSprite.xScale = abs(playerSprite.xScale)
             } else {
                 playerSprite.position = rightPos
+                playerSprite.xScale *= -1.0
             }
         }
     }
     var resourcesNeeded: Int = 0
     var amountCut: Int = 0
-    var playerSprite = SKSpriteNode(imageNamed: "Spaceship")
+    var playerSprite = SKSpriteNode(imageNamed: "Astronaut_0")
     var keepPlaying: Bool = false
     var leftPos = CGPoint.zero
     var rightPos = CGPoint.zero
@@ -63,6 +65,7 @@ class Timber: SKScene {
         
         
         playerPosition = -1 // left
+        playerSprite.setScale(3.0)
         addChild(playerSprite)
         tree.BuildTree(scene: scene!)
         
@@ -158,7 +161,7 @@ class Timber: SKScene {
         
         if let touch = touches.first
         {
-            if Timber.gamePaused
+            if Timber.gamePaused || !playable
             {
                 if let touchedNode = atPoint(touch.location(in: self)) as? SKSpriteNode
                 {
@@ -215,19 +218,12 @@ class Timber: SKScene {
         yes.zPosition = 11
         yes.name = "return"
         
-        let no = SKSpriteNode(imageNamed: "PlayAgain")
-        no.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
-        no.position = CGPoint(x: 0, y: 0)
-        no.zPosition = 11
-        no.name = "play again"
-        
         let exit = SKSpriteNode(imageNamed: "Quit")
         exit.size = CGSize(width: testPic.size.width * 0.6 ,height: testPic.size.height / 6)
         exit.position = CGPoint(x: 0, y: yes.position.y - exit.size.height)
         exit.zPosition = 11
         exit.name = "exit"
         
-        bg.addChild(no)
         bg.addChild(yes)
         bg.addChild(exit)
         bg.addChild(testPic)
