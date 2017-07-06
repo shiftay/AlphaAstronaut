@@ -19,7 +19,7 @@ class PauseBtn: SKSpriteNode, InteractiveNode
         {
             return
         }
-        print("hello")
+
         size = CGSize(width: scene.size.width / 6, height: scene.size.width / 6)
         position = CGPoint(x: size.width * 0.5, y: scene.size.height - size.height * 0.5)
         isUserInteractionEnabled = true

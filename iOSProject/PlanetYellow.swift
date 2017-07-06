@@ -16,8 +16,6 @@ class PlanetYellow: planetBase {
         name = PlanetList.yellow
         isUserInteractionEnabled = true
         hasOil = true
-        hasMinerals = true
-        hasMetal = true
         planetDesc = SKSpriteNode(imageNamed: "yellowDesc")
         descText = PlanetDescriptions.yellow
     }

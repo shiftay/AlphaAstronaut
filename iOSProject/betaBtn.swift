@@ -1,26 +1,26 @@
 //
-//  alphaBtn.swift
+//  betaBtn.swift
 //  iOSProject
 //
-//  Created by Stephen Roebuck on 2017-06-28.
+//  Created by Stephen Roebuck on 2017-07-05.
 //  Copyright © 2017 See No Evil. All rights reserved.
 //
 
 import Foundation
 import SpriteKit
 
-class alphaBtn: SKSpriteNode, InteractiveNode {
+class betaBtn: SKSpriteNode, InteractiveNode {
     
     func interact() {
         guard let scene = scene as? World else {
             return
         }
-        let alphaSS = scene.childNode(withName: SSList.alpha) as? SpaceStation
+        let alphaSS = scene.childNode(withName: SSList.beta) as? SpaceStation
         
         scene.camera?.run(SKAction.sequence([SKAction.move(to: (alphaSS?.position)!, duration: 2.0),
                                              SKAction.run {
                                                 World.cameraPos = scene.camera?.position
-                                                GameViewController.Player.currentPlanetSelected = SSList.alpha
+                                                GameViewController.Player.currentPlanetSelected = SSList.beta
                                                 scene.spaceStationTouched = true
                                                 alphaSS?.openDesc(name: (alphaSS?.name)!)
             }]))
@@ -36,7 +36,7 @@ class alphaBtn: SKSpriteNode, InteractiveNode {
     
     
     func sceneLoaded() {
-
+        
         isUserInteractionEnabled = true
     }
     

@@ -124,7 +124,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
     
     func randomizeRates() {
         let multiplier = CGFloat.random(min: 0.75, max: 1.5)
-        print("\(multiplier)")
+  
         
         oilRate *= multiplier
         mineralRate *= multiplier
@@ -133,7 +133,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
     
     func randomizeSell() {
         let multiplier = CGFloat.random(min: 0.5, max: 1)
-        print("\(multiplier)")
+    
         
         oilSell *= multiplier
         mineralSell *= multiplier

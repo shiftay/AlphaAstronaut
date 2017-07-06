@@ -123,7 +123,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         let gather = SKSpriteNode(imageNamed: "Gather")
         gather.size = CGSize(width: HUDSize.width * 0.75, height: HUDSize.height * 0.15)
         gather.zPosition = 20
-        gather.position = CGPoint(x: 0, y: 0)
+        gather.position = CGPoint(x: 0, y: 0 + HUDSize.height * 0.25)
         gather.name = "Gather"
         planetOL.addChild(gather)
         
@@ -131,7 +131,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         if GameViewController.Player.currentQuest != nil {
             if GameViewController.Player.currentQuest.planetName == name {
                 let quest = SKSpriteNode(imageNamed: "Quest")
-                quest.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height * 0.15)
+                quest.size = CGSize(width: HUDSize.width * 0.75, height: HUDSize.height * 0.15)
                 quest.zPosition = 20
                 quest.position = CGPoint(x: 0, y: gather.position.y - quest.size.height - 20)
                 quest.name = "Quest"

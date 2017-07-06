@@ -14,6 +14,8 @@ class PlanetEarth: planetBase {
     override func sceneLoaded() {
         name = PlanetList.earth
         isUserInteractionEnabled = true
+        hasMinerals = true
+        hasMetal = true
         planetDesc = SKSpriteNode(imageNamed: "earthDesc")
         descText = PlanetDescriptions.earth
     }

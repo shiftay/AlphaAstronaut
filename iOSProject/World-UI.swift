@@ -228,17 +228,6 @@ extension World {
         box.addChild(bg)
         
         
-//        let descText = SKLabelNode(fontNamed: "Arial")
-//        descText.position = description.position
-//        descText.zPosition = 54
-//        descText.fontColor = .black
-//        descText.fontSize = 20
-//        descText.horizontalAlignmentMode = .center
-//        descText.name = "descT"
-//        print("\(String(describing: spaceStation?.quests[QuestNumber].description!))")
-//        descText.text = spaceStation?.quests[QuestNumber].description!
-//        box.addChild(descText)
-        
         box.addChild(World.createStringOL(string: (spaceStation?.quests[QuestNumber].description!)!, characterCount: 20, pos: CGPoint(x: 0, y: 0 + box.size.height * 0.25)))
         
         

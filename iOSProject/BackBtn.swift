@@ -12,8 +12,6 @@ import SpriteKit
 class BackBtn: SKSpriteNode, InteractiveNode {
     
     func interact() {
-        print("back")
-        
         
         guard let scene = scene else {
             return
@@ -29,7 +27,6 @@ class BackBtn: SKSpriteNode, InteractiveNode {
     
     
     func sceneLoaded() {
-        print("backbutton")
         isUserInteractionEnabled = true
     }
     

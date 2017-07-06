@@ -133,7 +133,7 @@ extension World {
                     //TODO: set stored values to none / 0
                     amountToSell = 0
                 }
-                print("okay")
+
             case "cancel":
                 if let popup = hud?.childNode(withName: "ShopPopup") as? SKSpriteNode {
                     popup.removeFromParent()
@@ -170,7 +170,17 @@ extension World {
             case "Gather":
                 hud?.addChild(createGatherBox(HUDsize: (hud?.size)!))
             case "Quest":
-                break
+                GameViewController.Player.currentMoney += CGFloat(GameViewController.Player.currentQuest.reward)
+                
+                hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Goods Delivered. Reward: $\(GameViewController.Player.currentQuest.reward!)"))
+                
+                updateMoney()
+                GameViewController.Player.currentQuest = nil
+                // TODO: fix???
+                touchedNode.removeFromParent()
+//                let questBtn = childNode(withName: "Quest") as? SKSpriteNode
+//                questBtn?.removeFromParent()
+
             case "Quit":
                 if let node = hud?.childNode(withName: "GatherPopup") as? SKSpriteNode {
                     node.removeFromParent()
@@ -211,6 +221,10 @@ extension World {
                     GameViewController.Player.planetResources = "Metal"
                     // Present the scene
                     view?.presentScene(scene)
+                }
+            case "leaveInv":
+                if let node = hud?.childNode(withName: "InvenFull") as? SKSpriteNode {
+                    node.removeFromParent()
                 }
             default:
                 break
@@ -254,7 +268,7 @@ extension World {
                 hud?.addChild(createSellBox(HUDsize: hud!.size))
                 shopItem = "fuel"
                 buy = true
-                print("buy fuel")
+
             case "buy2":
                 if (player?.ShipStock.spaceLeft())! <= 0 {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Inventory FULL"))
@@ -271,7 +285,7 @@ extension World {
                     shopItem = "oil"
                     buy = true
                 }
-                print("buy oil")
+
             case "buy4":
                 if (player?.ShipStock.spaceLeft())! <= 0 {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Inventory FULL"))
@@ -280,12 +294,12 @@ extension World {
                     shopItem = "metal"
                     buy = true
                 }
-                print("buy metal")
+
             case "sell1":
                 if ((player?.currentMinerals)! <= 0) {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
                 } else {
-                    print("sell minerals")
+
                     shopItem = "minerals"
                     hud?.addChild(createSellBox(HUDsize: hud!.size))
                     buy = false
@@ -295,7 +309,7 @@ extension World {
                 if ((player?.currentOil)! <= 0) {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
                 } else {
-                    print("sell oil")
+
                     shopItem = "oil"
                     hud?.addChild(createSellBox(HUDsize: hud!.size))
                     buy = false
@@ -304,7 +318,7 @@ extension World {
                 if ((player?.currentMetalParts)! <= 0) {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Nothing to Sell"))
                 } else {
-                    print("sell metal")
+
                     shopItem = "metal"
                     hud?.addChild(createSellBox(HUDsize: hud!.size))
                     buy = false

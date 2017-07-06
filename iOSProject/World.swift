@@ -37,22 +37,28 @@ class World: SKScene {
     var visitingSpaceStation: Bool = false
     var spaceStationTouched: Bool = false {
         didSet {
+            let questBtn = camera?.childNode(withName: "questButton") as? SKSpriteNode
             if let ssButton = camera?.childNode(withName: "ssButton") as? SKSpriteNode {
                 if spaceStationTouched {
                     ssButton.alpha = 0
+                    questBtn?.alpha = 0
                 } else {
                     ssButton.alpha = 1
+                    questBtn?.alpha = 1
                 }
             }
         }
     }
     var planetTouched: Bool = false {
         didSet {
+            let questBtn = camera?.childNode(withName: "questButton") as? SKSpriteNode
             if let ssButton = camera?.childNode(withName: "ssButton") as? SKSpriteNode {
                 if planetTouched {
                     ssButton.alpha = 0
+                    questBtn?.alpha = 0
                 } else {
                     ssButton.alpha = 1
+                    questBtn?.alpha = 1
                 }
             }
         }
@@ -212,8 +218,7 @@ class World: SKScene {
                     let hud = childNode(withName: "HUD") as? SKSpriteNode
                     hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Not enough fuel. Land at a closer Planet."))
                 } else {
-                print("fuelSpent: \(fuelSpent)")
-                print("duration: \(duration)")
+
                 GameViewController.Player.ShipStock.currentFuel -= Int(fuelSpent)
                   GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2) , duration: 0.5),
                                                                    SKAction.move(to: planet.position, duration: TimeInterval(duration)),
@@ -303,7 +308,7 @@ class World: SKScene {
                 let fuelSpent = hyp / fuelUsageUnit
 
                 if GameViewController.Player.ShipStock.currentFuel - Int(fuelSpent) <= 0 {
-                    print("not enough fuel")
+
                     
                     let hud = childNode(withName: "HUD") as? SKSpriteNode
                     hud?.addChild(createInventoryFull(HUDsize: (hud?.size)!, Message: "Not enough fuel. Land at a closer Planet."))

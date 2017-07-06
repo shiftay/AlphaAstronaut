@@ -494,7 +494,7 @@ class Runner: SKScene
     
     func returnToShip()
     {
-        print("return to ship")
+
         if let scene = SKScene(fileNamed: "WorldView")
         {
             // Set the scale mode to scale to fit the window

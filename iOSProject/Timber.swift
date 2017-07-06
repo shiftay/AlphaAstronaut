@@ -45,7 +45,7 @@ class Timber: SKScene {
         rightPos = CGPoint(x: size.width * 0.75, y: playerSprite.size.height * 2)
         GameViewController.Player.notOnWorldScene = true
         resourcesNeeded = GameViewController.Player.ShipStock.maxFuel - GameViewController.Player.ShipStock.currentFuel
-        print("\(resourcesNeeded)")
+
         enumerateChildNodes(withName: "//*", using: { node, _ in
             if let eventListenerNode = node as? InteractiveNode {
                 eventListenerNode.sceneLoaded()
@@ -251,7 +251,7 @@ class Timber: SKScene {
     
     func returnToShip()
     {
-        print("return to ship")
+
         if let scene = SKScene(fileNamed: "WorldView")
         {
             // Set the scale mode to scale to fit the window

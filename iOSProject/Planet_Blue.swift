@@ -12,6 +12,7 @@ class PlanetBlue: planetBase {
 
     override func sceneLoaded() {
         name = PlanetList.blue
+        hasMetal = true
         isUserInteractionEnabled = true
         planetDesc = SKSpriteNode(imageNamed: "blueDesc")
         descText = PlanetDescriptions.blue

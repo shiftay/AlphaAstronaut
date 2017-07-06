@@ -13,6 +13,8 @@ class PlanetRing: planetBase {
     
     override func sceneLoaded() {
         name = PlanetList.ring
+        hasMinerals = true
+        hasOil = true
         isUserInteractionEnabled = true
         planetDesc = SKSpriteNode(imageNamed: "ringDesc")
         descText = PlanetDescriptions.ring

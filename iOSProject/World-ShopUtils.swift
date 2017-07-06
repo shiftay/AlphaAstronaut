@@ -75,7 +75,7 @@ extension World {
         let hud = childNode(withName: "HUD") as? SKSpriteNode
         
         if !enoughMoney() {
-            print("not enough money")
+
             hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "Not enough money!"))
             return
         }

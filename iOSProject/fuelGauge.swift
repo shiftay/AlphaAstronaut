@@ -14,7 +14,6 @@ class FuelGauge: SKSpriteNode, InteractiveNode {
     func interact() {}
     
     func sceneLoaded() {
-        print("fuelGauge")
         name = "FuelGauge"
         xScale = CGFloat(GameViewController.Player.ShipStock.currentFuel) / 10
         NotificationCenter.default.addObserver(self, selector: #selector(setGauge), name: Notification.Name(World.updateGauge), object: nil)
