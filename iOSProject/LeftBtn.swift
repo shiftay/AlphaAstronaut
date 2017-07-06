@@ -11,7 +11,7 @@ import SpriteKit
 
 class LeftBtn: SKSpriteNode, InteractiveNode
 {
-    //change name for other lane
+
     static let leftLane = "LeftLane"
     
     func sceneLoaded()

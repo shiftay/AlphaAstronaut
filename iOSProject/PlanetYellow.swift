@@ -21,10 +21,7 @@ class PlanetYellow: planetBase {
     }
     
     override func interact() {
-        //TODO: load up a overlay for the planet in question.
-        //      overlay can be made as a sprite
-        //      the information for each planet/spacestation will be stored within a file like this.
-        //      and the overlay will be built using this information.
+
         if !descOpen {
             GameViewController.Player.currentPlanetSelected = name!
             openPlanetDesc(name: name!)

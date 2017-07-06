@@ -194,7 +194,6 @@ extension World {
             text.fontSize = 35
             text.zPosition = zPos
             text.position = CGPoint(x: retVal.position.x, y: 0 - text.fontSize * CGFloat(x))
-            //(retVal.position.y + 50.0) - CGFloat(50 * x)
             text.text = holderArray[x]
             text.horizontalAlignmentMode = .center
             retVal.addChild(text)

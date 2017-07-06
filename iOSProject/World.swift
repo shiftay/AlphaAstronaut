@@ -78,8 +78,7 @@ class World: SKScene {
         money = cameraNode?.childNode(withName: "money") as? SKLabelNode
         
         updateMoney()
-        //TODO: Add Background Sprite in the actual scene
-        //      make limits based on sprite size +/- scene.size
+
         addChild(GameViewController.Player.image)
         
         enumerateChildNodes(withName: "//*", using: { node, _ in
@@ -133,10 +132,6 @@ class World: SKScene {
         
         if let touch = touches.first {
             worldTouch(firstTouch: touch)
-            //TODO:
-            // create a gameState variable to base a switch off of.
-            
-
         }
     }
     
@@ -239,11 +234,6 @@ class World: SKScene {
 
     }
     
-    // 32.5 --- TO DECIDE FUEL (1%)
-    //
-    // 800  |  2800
-    
-    
     
     func flyShip() {
 
@@ -272,7 +262,6 @@ class World: SKScene {
                 
             } else {
                 point = CGPoint(x: planet.position.x, y: shipPos.y)
-                //                angle2 = 0
                 opp = point.distanceTo(planet.position)
                 
                 adj = sqrt(pow(hyp, 2) - pow(opp, 2))
@@ -315,7 +304,7 @@ class World: SKScene {
                 } else {
                 
                 GameViewController.Player.ShipStock.currentFuel -= Int(fuelSpent)
-            //TODO: run randomizer to see if event fires, either on planet or on flight.
+
             
                     GameViewController.Player.image.run(SKAction.sequence([SKAction.rotate(toAngle: (angle + angle2), duration: 0.5),
                                                                    SKAction.move(to: planet.position, duration: TimeInterval(duration)),

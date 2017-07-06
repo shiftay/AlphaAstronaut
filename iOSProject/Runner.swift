@@ -340,7 +340,7 @@ class Runner: SKScene
             node?.position = CGPoint(x: (scene.size.width - ((node?.size.width)! * 0.5)) - (node?.size.width)! * CGFloat(i - 1),
                                      y: ((scene.camera?.position.y)! + (scene.size.height / 2)) - (node?.size.height)!)
             node?.zPosition = 3
-            //TODO: Align top-right based of i and their width
+
         }
         
     }

@@ -14,25 +14,24 @@ enum PlanetUtils {
 }
 
 enum PlanetList {
-    static let ring = "ring"
-    static let blue = "blue"
-    static let red = "red"
-    static let earth = "earth"
-    static let yellow = "yellow"
+    static let ring = "Helios"
+    static let blue = "Aquarius"
+    static let red = "Okeanos"
+    static let earth = "Terra Nova"
+    static let yellow = "Helios IV"
 }
 
 enum PlanetDescriptions {
-    static let ring = "Ring planet"
-    static let earth = "Earth planet"
-    static let yellow = "Yellow planet"
-    static let red = "Red planet"
-    static let blue = "Blue planet"
+    static let ring = "Helios, Population: 1,750,000,000. Homeworld of the Federation."
+    static let earth = "Terra Nova, Population: 1,300,000,000. Rich environment. Homeworld of the Legion"
+    static let yellow = "Helios IV, Population: 2,500,000. Highly toxic atmosphere, rich in oil. Protected by the Federation."
+    static let red = "Okeanos, Population Unknown. Barren wastelands of dry, rocky dirt. Protected by the Federation. "
+    static let blue = "Aquarius, Population Unknown. Covered almost entirely with water. Protected by the Legion."
 }
 
 
 class planetBase: SKSpriteNode, InteractiveNode, Planet {
-    //let descOverlay = SKSpriteNode(imageNamed: "overlay")
-    //let planetPic = SKSpriteNode(imageNamed: "____planet")
+
     var descOpen: Bool = false
     var hasMinerals: Bool = false
     var hasMetal: Bool = false
@@ -58,11 +57,9 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         testPic.position = World.cameraPos!
         testPic.zPosition = 10
         testPic.name = "HUD"
-        // yes / no == quest / shop
+
         let yes = SKSpriteNode(color: .blue, size: CGSize(width: testPic.size.width, height: testPic.size.height / 8))
-//        yes.position = CGPoint(x: 0, y: (0 + testPic.size.height * 0.5) - yes.size.height * 0.6)
-//        yes.zPosition = 11
-//        yes.name = "\(name!)"
+
         
         let no = SKSpriteNode(imageNamed: "Explore")
         no.size = CGSize(width: testPic.size.width * 0.75, height: testPic.size.height * 0.15)
@@ -72,7 +69,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         
         testPic.addChild(createOL(HUDSize: testPic.size, halfSize: yes.size))
         testPic.addChild(no)
-//        testPic.addChild(yes)
+
         scene.addChild(testPic)
     }
     
@@ -93,7 +90,7 @@ class planetBase: SKSpriteNode, InteractiveNode, Planet {
         planetDesc.zPosition = 11
         
         
-        testPic.addChild(World.createStringOL(string: descText, characterCount: 25, zPos: 15))
+        testPic.addChild(World.createStringOL(string: descText, characterCount: 17, zPos: 15))
         
         let yes = SKSpriteNode(imageNamed: "Land")
         yes.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)

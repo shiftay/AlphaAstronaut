@@ -11,7 +11,7 @@ import SpriteKit
 
 class Skills: SKSpriteNode, InteractiveNode
 {
-    //change name for other lane
+
     static let skilllayout = "bar"
     
     func sceneLoaded()

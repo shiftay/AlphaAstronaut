@@ -13,9 +13,7 @@
 		EC0019C91F03320400F04461 /* PlanetYellow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0019C81F03320400F04461 /* PlanetYellow.swift */; };
 		EC0019CC1F03357900F04461 /* Planet_Blue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0019CB1F03357900F04461 /* Planet_Blue.swift */; };
 		EC02F7681EFA16C90063663C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F7671EFA16C90063663C /* AppDelegate.swift */; };
-		EC02F76A1EFA16CA0063663C /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC02F7691EFA16CA0063663C /* GameScene.sks */; };
 		EC02F76C1EFA16CA0063663C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EC02F76B1EFA16CA0063663C /* Actions.sks */; };
-		EC02F76E1EFA16CA0063663C /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F76D1EFA16CA0063663C /* GameScene.swift */; };
 		EC02F7701EFA16CA0063663C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC02F76F1EFA16CA0063663C /* GameViewController.swift */; };
 		EC02F7731EFA16CA0063663C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC02F7711EFA16CA0063663C /* Main.storyboard */; };
 		EC02F7751EFA16CA0063663C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC02F7741EFA16CA0063663C /* Assets.xcassets */; };
@@ -78,9 +76,7 @@
 		EC0019CB1F03357900F04461 /* Planet_Blue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planet_Blue.swift; sourceTree = "<group>"; };
 		EC02F7641EFA16C90063663C /* iOSProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC02F7671EFA16C90063663C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EC02F7691EFA16CA0063663C /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EC02F76B1EFA16CA0063663C /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		EC02F76D1EFA16CA0063663C /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EC02F76F1EFA16CA0063663C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EC02F7721EFA16CA0063663C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EC02F7741EFA16CA0063663C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,9 +194,7 @@
 				EC02F78C1EFA25530063663C /* SKTUtils */,
 				EC02F77F1EFA16D80063663C /* Timber */,
 				EC02F7671EFA16C90063663C /* AppDelegate.swift */,
-				EC02F7691EFA16CA0063663C /* GameScene.sks */,
 				EC02F76B1EFA16CA0063663C /* Actions.sks */,
-				EC02F76D1EFA16CA0063663C /* GameScene.swift */,
 				EC02F76F1EFA16CA0063663C /* GameViewController.swift */,
 				EC02F7711EFA16CA0063663C /* Main.storyboard */,
 				EC02F7741EFA16CA0063663C /* Assets.xcassets */,
@@ -367,7 +361,6 @@
 				F44153FC1EFC770B009CA19F /* RunnerScene.sks in Resources */,
 				F435663D1F05C0E500C6443B /* FireTrail1.sks in Resources */,
 				EC02F7731EFA16CA0063663C /* Main.storyboard in Resources */,
-				EC02F76A1EFA16CA0063663C /* GameScene.sks in Resources */,
 				EC02F7751EFA16CA0063663C /* Assets.xcassets in Resources */,
 				EC02F7781EFA16CA0063663C /* LaunchScreen.storyboard in Resources */,
 				EC02F76C1EFA16CA0063663C /* Actions.sks in Resources */,
@@ -398,7 +391,6 @@
 				EC02F7A51EFA25530063663C /* SKAction+Extensions.swift in Sources */,
 				EC0019C61F0331AC00F04461 /* PlanetEarth.swift in Sources */,
 				F44EFAF51EFDBE230046BB7B /* PauseBtn.swift in Sources */,
-				EC02F76E1EFA16CA0063663C /* GameScene.swift in Sources */,
 				EC0019C21F03310C00F04461 /* Planet_Red.swift in Sources */,
 				EC02F7831EFA17280063663C /* Timber.swift in Sources */,
 				EC02F79F1EFA25530063663C /* CGPoint+Extensions.swift in Sources */,

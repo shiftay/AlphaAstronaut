@@ -26,11 +26,11 @@ extension World {
                 handleDescBox(firstTouch: firstTouch, isSpaceStation: true)
             }
             
-            if planetTouched || spaceStationTouched {
-                if eventPoppedUp {
-                    handleREvent()
-                }
-            }
+//            if planetTouched || spaceStationTouched {
+//                if eventPoppedUp {
+//                    handleREvent()
+//                }
+//            }
         
             if visitingSpaceStation {
                 let hud = childNode(withName: "HUD") as? SKSpriteNode
@@ -50,10 +50,16 @@ extension World {
     }
     
     
-    func handleREvent() {
-        //TODO handle random event
+    func resetQuest(spaceStation: SpaceStation, HUD: SKSpriteNode) {
+        
+        spaceStation.createQuests()
+        
+        if let quest = HUD.childNode(withName: "QuestPage") as? SKSpriteNode {
+            quest.removeFromParent()
+            let half = HUD.childNode(withName: "Shop") as? SKSpriteNode
+            HUD.addChild((spaceStation.generateQuestPage(HUDSize: HUD.size, halfSize: half!.size)))
+        }
     }
-    
     
     func handleQuestPopup(firstTouch: UITouch) {
         let spaceStation = childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
@@ -63,11 +69,17 @@ extension World {
             switch touchedNode.name! {
             case "okay0":
                 GameViewController.Player.currentQuest = spaceStation?.quests[0]
+                
+                resetQuest(spaceStation: spaceStation!, HUD: hud!)
+                
                 if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
                     popup.removeFromParent()
                 }
             case "okay1":
                 GameViewController.Player.currentQuest = spaceStation?.quests[1]
+                
+                resetQuest(spaceStation: spaceStation!, HUD: hud!)
+                
                 if let popup = hud?.childNode(withName: "QuestPopup") as? SKSpriteNode {
                     popup.removeFromParent()
                 }
@@ -96,7 +108,7 @@ extension World {
             
             switch touchedNode.name! {
             case "plus":
-                //TODO: Logic preventing above max amount
+
                 if amountToSell + 1 >= returnMax() {
                     amountToSell = returnMax()
                 } else {
@@ -121,7 +133,7 @@ extension World {
                 sellText?.text = "$0"
                 text?.text = "\(amountToSell)"
             case "okay":
-                //TODO: sell / buy
+
                 if buy {
                     buyItem()
                 } else {
@@ -130,7 +142,7 @@ extension World {
                 
                 if let popup = hud?.childNode(withName: "ShopPopup") as? SKSpriteNode {
                     popup.removeFromParent()
-                    //TODO: set stored values to none / 0
+              
                     amountToSell = 0
                 }
 
@@ -138,7 +150,7 @@ extension World {
                 if let popup = hud?.childNode(withName: "ShopPopup") as? SKSpriteNode {
                     popup.removeFromParent()
                     amountToSell = 0
-                    //TODO: set stored values to none / 0
+
                 }
             default:
                 break
@@ -155,7 +167,8 @@ extension World {
         let planet = childNode(withName: GameViewController.Player.currentPlanetSelected) as? planetBase
         
         
-        if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKNode {
+        let touchedNode = atPoint(firstTouch.location(in: self))
+        
             switch touchedNode.name! {
             case "Leave":
                 hud?.removeFromParent()
@@ -178,8 +191,7 @@ extension World {
                 GameViewController.Player.currentQuest = nil
                 // TODO: fix???
                 touchedNode.removeFromParent()
-//                let questBtn = childNode(withName: "Quest") as? SKSpriteNode
-//                questBtn?.removeFromParent()
+
 
             case "Quit":
                 if let node = hud?.childNode(withName: "GatherPopup") as? SKSpriteNode {
@@ -229,12 +241,7 @@ extension World {
             default:
                 break
             }
-        }
-    
-        //TODO: Gather: Fuel -> Loads other scene
-        //              Materials -> Loads other scene
-        //      Leave:  Closes the HUD
-        //      Quest:  Hand in quest or accept cargo
+
     }
     
     
@@ -245,12 +252,10 @@ extension World {
         let hud = childNode(withName: "HUD") as? SKSpriteNode
         let spaceStation = childNode(withName: GameViewController.Player.currentPlanetSelected) as? SpaceStation
         let player = GameViewController.Player
-        //TODO: In order for touch to work with inventory, each space station needs the same amount of things to sell
-        //      Player can only SELL the resources
-        //      if other thing is open, okay, cancel, max, + / -
-        //
+
         
-        if let touchedNode = atPoint(firstTouch.location(in: self)) as? SKNode {
+        let touchedNode = atPoint(firstTouch.location(in: self))
+        
             switch touchedNode.name! {
             case "Shop":
                 if let quest = hud?.childNode(withName: "QuestPage") as? SKSpriteNode {
@@ -329,7 +334,6 @@ extension World {
                 } else {
                     hud?.addChild(createInventoryFull(HUDsize: hud!.size, Message: "You already have a quest"))
                 }
-                //TODO: Only allow if player doesnt have any quests.
 
             case "quest2":
                 if GameViewController.Player.currentQuest == nil {
@@ -356,8 +360,7 @@ extension World {
             default:
                 break
             }
-            
-        }
+
     }
     
         
@@ -427,7 +430,7 @@ extension World {
     
        
  
-    // TODO:    Decide how large the solar system is.
+
     func checkBounds(pos: CGPoint) -> Bool {
         var retVal: Bool = true
         

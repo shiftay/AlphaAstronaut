@@ -13,7 +13,7 @@ class PlayersShip {
     let name = "Player"
     var image = SKSpriteNode(imageNamed: "Spaceship")
     var ShipStock: ShipUtilities!
-//    var ShipRoster
+
     var currentPosition: CGPoint!
     var planetResources: String!
     var notOnWorldScene: Bool

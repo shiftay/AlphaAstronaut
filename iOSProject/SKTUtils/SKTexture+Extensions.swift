@@ -19,23 +19,10 @@ public extension SKTexture {
         var endVector: CIVector
         
         filter!.setDefaults()
-//        
-//        switch direction {
-//        case 0:
-            endVector = CIVector(x: size.width * 0.5, y: 0)
-            startVector = CIVector(x: size.width * 0.5, y: size.height)
-//        case 1:
-//            startVector = CIVector(x: size.width, y: size.height * 0.5)
-//            endVector = CIVector(x: 0, y: size.height * 0.5)
-//        case 2:
-//            startVector = CIVector(x: size.width, y: 0)
-//            endVector = CIVector(x: 0, y: size.height)
-//        case 3:
-//            startVector = CIVector(x: 0, y: 0)
-//            endVector = CIVector(x: size.width, y: size.height)
-//        default:
-//            break
-//        }
+
+        endVector = CIVector(x: size.width * 0.5, y: 0)
+        startVector = CIVector(x: size.width * 0.5, y: size.height)
+
         
         filter!.setValue(startVector, forKey: "inputPoint0")
         filter!.setValue(endVector, forKey: "inputPoint1")

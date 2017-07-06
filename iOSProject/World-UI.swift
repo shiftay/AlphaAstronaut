@@ -26,8 +26,9 @@ extension World {
         box.name = "GatherPopup"
         box.addChild(bg)
         
-        // TODO: change.
-        let quit = SKSpriteNode(color: .white, size: CGSize(width: box.size.width * 0.1, height: box.size.width * 0.1))
+
+        let quit = SKSpriteNode(imageNamed: "XBtn")
+        quit.size = CGSize(width: box.size.width * 0.1, height: box.size.width * 0.1)
         quit.zPosition = 53
         quit.name = "Quit"
         quit.position = CGPoint(x: (0 - box.size.width * 0.5) + quit.size.width,y: (0 + box.size.height * 0.5) - quit.size.height * 0.75)
@@ -62,21 +63,11 @@ extension World {
                 break
             }
 
-//            let resource = SKSpriteNode(imageNamed: 
             resource.size = CGSize(width: box.size.width * 0.66, height: box.size.height * 0.15)
             resource.zPosition = 53
             resource.position = CGPoint(x: 0, y: (0 + box.size.height * 0.25) - ((resource.size.height + 15) * CGFloat(i)))
             resource.name = test[i]
             
-//            let resText = SKLabelNode(fontNamed: "Arial")
-//            resText.position = resource.position
-//            resText.zPosition = 54
-//            resText.text = test[i]
-//            resText.fontColor = .black
-//            resText.fontSize = 25
-//            resText.name = test[i]
-//            resText.verticalAlignmentMode = .center
-//            resText.horizontalAlignmentMode = .center
             
             box.addChild(resource)
         }
@@ -100,13 +91,6 @@ extension World {
         
         box.addChild(World.createStringOL(string: Message, characterCount: 10, pos: CGPoint(x: 0, y: 0 + HUDsize.height * 0.1)))
         
-//        let label = SKLabelNode(fontNamed: "Arial")
-//        label.position = CGPoint.zero
-//        label.text = Message
-//        label.zPosition = 53
-//        label.fontColor = .black
-//        label.fontSize = 50
-//        box.addChild(label)
         
         let okayInv = SKSpriteNode(imageNamed: "Okay")
         okayInv.size = CGSize(width: box.size.width * 0.66, height: box.size.height * 0.25)
@@ -231,7 +215,7 @@ extension World {
         box.addChild(World.createStringOL(string: (spaceStation?.quests[QuestNumber].description!)!, characterCount: 20, pos: CGPoint(x: 0, y: 0 + box.size.height * 0.25)))
         
         
-        //TODO: Setup quest within the description box.
+
         
         let okay = SKSpriteNode(imageNamed: "Okay")
         okay.size = CGSize(width: box.size.width * 0.5, height: box.size.height * 0.15)

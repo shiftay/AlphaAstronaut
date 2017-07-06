@@ -10,8 +10,8 @@ import Foundation
 import SpriteKit
 
 enum SSDesc {
-    static let alpha = "Hello this is alpha we are actually trying our best LOL"
-    static let beta = "Hello this is beta"
+    static let alpha = "Welcome to SpaceStation Alpha. Shop at your leisure."
+    static let beta = "Welcome to SpaceStation Beta. Shop at your leisure."
 }
 
 enum SSList {
@@ -52,7 +52,6 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
         testPic.position = World.cameraPos!
         testPic.zPosition = 10
         testPic.name = "HUD"
-        // yes / no == quest / shop
         
         let yes = SKSpriteNode(imageNamed: "Shop")
         yes.size = CGSize(width: testPic.size.width * 0.45, height: testPic.size.height * 0.15)
@@ -169,8 +168,7 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
 
             let buy2 = SKSpriteNode(imageNamed: labelArray[i - 1])
             buy2.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8)
-            
-//            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
+        
             buy2.position = CGPoint(x: 0 - halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "buy\(i)"
@@ -185,7 +183,6 @@ class SpaceStation: SKSpriteNode, InteractiveNode {
             let buy2 = SKSpriteNode(imageNamed: labelArray[i])
             buy2.size = CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8)
             
-//            let buy2 = SKSpriteNode(color: color, size: CGSize(width: HUDSize.width * 0.33, height: HUDSize.height / 8))
             buy2.position = CGPoint(x: 0 + halfSize.width * 0.5, y: (0 + HUDSize.height * 0.15) - ((buy2.size.height + 10) * CGFloat(i-1)))
             buy2.zPosition = 11
             buy2.name = "sell\(i)"

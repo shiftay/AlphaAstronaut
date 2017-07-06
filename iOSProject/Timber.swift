@@ -80,7 +80,7 @@ class Timber: SKScene {
         }
 
         if playerPosition == -1 {
-            // move player object.
+
             playerPosition = 1
         }
         cutTree()
@@ -92,7 +92,7 @@ class Timber: SKScene {
         }
 
         if playerPosition == 1 {
-            // move player object.
+
             playerPosition = -1
         }
         cutTree()

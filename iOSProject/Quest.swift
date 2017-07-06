@@ -14,13 +14,13 @@ import Foundation
 class Quest {
     var questTypes: [String] = ["deliverPlanet"]
     var resourceTypes: [String] = ["Oil", "Minerals", "Metal Parts"]
-    //["Oil", "Minerals", "Metal Parts"]
+
     var planetNames: [String] = [PlanetList.blue, PlanetList.earth, PlanetList.red, PlanetList.yellow, PlanetList.ring]
     var spaceStationName: [String] = ["Spacestation Alpha", "Beta"]
     var description: String!
     var reward: Int!
     var reputationGain: Int!
-//    var faction
+
     var resourceAmount: Int!
     var resourceType: String!
     var planetName: String!
@@ -57,8 +57,7 @@ class Quest {
         
         resourceAmount = 25
         resourceType = resourceTypes[Int.random(min: 0, max: resourceTypes.count - 1)]
-        //TODO: Add the resourceType switch so only certain planets will contain certain resources.
-        //      Maybe place them like the planet will know which resources are possible
+
         
         switch questType {
         case "collect":
